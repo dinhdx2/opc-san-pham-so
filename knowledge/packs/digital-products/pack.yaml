@@ -1,0 +1,21 @@
+name: Digital Products Pack
+code: digital-products
+version: 0.1.0
+description: "Cho DN bán sản phẩm số B2C tại VN (khóa học, ebook, template, asset, membership, mini-tool)"
+target_industries: ["digital-products", "san-pham-so", "creator-economy", "info-product", "online-course", "khoa-hoc-online", "digital-download", "ebook", "template-store", "membership"]
+adds_departments:
+  - 13-content-ip
+extends_departments: []
+brain_template: brain-template/
+compliance_refs:
+  - "Thông tư 40/2021/TT-BTC — SP số là dịch-vụ: thuế khoán GTGT 5% + TNCN 2% (ngưỡng miễn 200tr/năm từ 01/01/2026)"
+  - "Nghị định 117/2025/NĐ-CP (09/06/2025) — sàn/nền-tảng số khấu-trừ & nộp thay thuế người bán"
+  - "Nghị định 70/2025/NĐ-CP (20/03/2025) — mở rộng hóa-đơn điện-tử cho hoạt-động TMĐT (sửa NĐ 123/2020)"
+  - "Nghị định 52/2013/NĐ-CP + 85/2021/NĐ-CP — thương-mại điện-tử"
+  - "Nghị định 13/2023/NĐ-CP — bảo vệ dữ-liệu cá-nhân"
+  - "Luật Sở hữu trí tuệ sửa-đổi 07/2022/QH15 + NĐ 17/2023/NĐ-CP — quyền tác-giả"
+  - "Luật An ninh mạng 24/2018/QH14"
+
+# Tên-kép tầng phòng-ngành (luồng generic v3, spec 04 §4.3/§7)
+dept_maps_to:
+  13-content-ip: "K4/dept-09"   # Sản-phẩm & Công-nghệ (nội-dung số CHÍNH LÀ sản-phẩm)

@@ -1,0 +1,17 @@
+{
+  "name": "opc-san-pham-so",
+  "owner": { "name": "L'MAK Group" },
+  "metadata": {
+    "description": "AI Operating System cho DN Việt Nam — 12 phòng ban AI debate → quyết định → kế hoạch → THỰC THI tự động, chạy bằng Claude Code subscription (không API key).",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "opc-san-pham-so",
+      "source": "./",
+      "description": "AI OS cho DN Việt — 12 phòng ban debate → quyết định → kế hoạch → thực thi tự động, tài liệu tuân thủ luật VN. Lệnh: /vn-onboard, /vn-run, /vn-execute, /vn-status, /vn-meeting.",
+      "version": "0.1.0",
+      "author": { "name": "L'MAK Group" }
+    }
+  ]
+}

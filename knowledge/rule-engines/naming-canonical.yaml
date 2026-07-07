@@ -1,0 +1,40 @@
+# NAMING_CANONICAL — từ-điển tên-năng-lực chuẩn (spec 06 §3.6, SoT §6.6)
+# naming_dict(ten_nganh) → ten_nang_luc_chuan (slug kebab-case) = KHÓA so-khớp xuyên-ngành.
+# INV-6.6: không có ánh-xạ ⇒ KHÔNG được ghi _index.md (raise NEED_MAPPING).
+# `aliases` = các tên-ngành (skin) trỏ về cùng năng-lực canonical; so-khớp đã chuẩn-hoá (hạ-chữ).
+- canonical: san-xuat-chuan-hoa-mon
+  ten_nang_luc: "Sản-xuất & Chuẩn-hoá món"
+  maps_to: [K4/dept-09, K5/dept-05]
+  aliases: ["bếp trung-tâm", "commissary", "central kitchen", "bếp trung-tâm (commissary)", "sản-xuất & chuẩn-hoá món"]
+- canonical: thu-mua-cung-ung
+  ten_nang_luc: "Thu-mua & Cung-ứng"
+  maps_to: [K5/dept-05]
+  aliases: ["thu-mua nl bếp", "thu-mua", "thu-mua & cung-ứng", "đàm-phán ncc", "chuỗi-cung", "vendor", "procurement"]
+- canonical: kiem-soat-gia-von
+  ten_nang_luc: "Kiểm-soát giá-vốn"
+  maps_to: [K2/dept-03]
+  aliases: ["kiểm-soát giá-vốn", "cogs tracker", "theo-dõi giá-vốn", "giá-vốn", "cogs"]
+- canonical: bi-bao-cao
+  ten_nang_luc: "BI & Báo-cáo"
+  maps_to: [K7/dept-11]
+  aliases: ["bi/báo-cáo quán", "bi báo-cáo", "bi & báo-cáo", "dashboard", "báo-cáo", "đo realtime"]
+- canonical: an-toan-thuc-pham
+  ten_nang_luc: "An-toàn thực-phẩm"
+  maps_to: [K1/dept-01]
+  aliases: ["vsattp", "an-toàn thực-phẩm", "food safety", "atvstp"]
+- canonical: thu-tien-quoc-te
+  ten_nang_luc: "Thu tiền xuyên-biên"
+  maps_to: [K2/dept-03]
+  aliases: ["cổng thanh-toán", "paypal", "payoneer", "thu tiền quốc-tế", "thanh-toán xuyên-biên"]
+- canonical: van-hanh-don-hang
+  ten_nang_luc: "Vận-hành đơn-hàng"
+  maps_to: [K5/dept-05]
+  aliases: ["xử-lý đơn", "fulfillment", "vận-hành đơn-hàng", "order ops"]
+- canonical: cam-nang-mo-quan
+  ten_nang_luc: "Cẩm-nang mở-điểm chuẩn"
+  maps_to: [K5/dept-05]
+  aliases: ["cẩm-nang mở-quán chuẩn", "cẩm-nang mở-quán", "cẩm-nang mở-điểm chuẩn", "playbook mở quán", "sop mở điểm"]
+- canonical: bang-dinh-muc
+  ten_nang_luc: "Bảng định-mức"
+  maps_to: [K5/dept-05]
+  aliases: ["bảng định-mức", "định-mức", "bom", "bảng định-mức nguyên-liệu"]

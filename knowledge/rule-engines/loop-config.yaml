@@ -1,0 +1,7 @@
+# LOOP_CONFIG — tham-số khép-vòng PHA 3 (spec 03d, SoT §3/§6.2)
+# Bảng tĩnh (config-as-data, bất-biến C4): driver cho lib/loop.js#khepVong.
+# K_max_don_vong: số vòng ĐƠN-VÒNG (vá tại-chỗ trong khuôn cũ) tối-đa trước khi
+#   buộc leo SONG-VÒNG / đưa Cổng CEO.
+# INV-1 (spec 03d §6): chưa hết K → đơn-vòng (tang_leo=null, KHÔNG leo tầng);
+#   hết K mà còn fail → leo tầng (có số thật) hoặc Cổng CEO (chưa có số thật).
+K_max_don_vong: 3

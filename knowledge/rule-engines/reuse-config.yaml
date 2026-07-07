@@ -1,0 +1,11 @@
+# REUSE_CONFIG — trọng-số tra-kho + ngưỡng reuse-grade (spec 05 §4.2 · 06 §3.5; bất-biến C4)
+# Bảng tĩnh (config-as-data): trước đây hardcode trong lib/kho.js#tra + lib/rule-engines.js#reuseDecision.
+# Sửa ngưỡng ⇒ sửa Ở ĐÂY (1 nơi), KHÔNG rải-rác trong code.
+#
+# tra(ctx): điểm-khớp = w_khia_canh·sKhia + w_gd·sGd + w_io·sIo  (tên-năng-lực canonical là khóa CỨNG).
+w_khia_canh: 0.34
+w_gd: 0.33
+w_io: 0.33
+# reuse_decision: diem_khop ≥ cutoff_A ⇒ grade A (REUSE); ≥ cutoff_B ⇒ B (ADAPT); còn lại C (NEW).
+cutoff_A: 0.8
+cutoff_B: 0.5

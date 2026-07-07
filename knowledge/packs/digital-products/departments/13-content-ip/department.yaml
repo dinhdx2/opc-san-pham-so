@@ -1,0 +1,16 @@
+code: 13-content-ip
+name_vn: Sản xuất Nội dung số & Bản quyền
+tier: 4
+description: Phòng Sản xuất Nội dung số & Bản quyền — pipeline làm/đóng-gói SP số (khóa, ebook, template, asset), quản trị quyền tác-giả, chống vi-phạm bản-quyền & tải lậu
+agents:
+- content-ip-lead
+default_speaker: content-ip-lead
+refs_folder: refs/
+depends_on:
+- 09-product-tech
+- 01-governance
+- 07-marketing
+aliases_vn:
+- Phòng Nội dung số & Bản quyền
+- Content & IP
+- Sản xuất nội dung số

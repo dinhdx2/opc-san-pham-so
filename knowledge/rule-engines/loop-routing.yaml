@@ -1,0 +1,44 @@
+# LOOP_ROUTING — định-tuyến song-vòng + NEO BRAIN (spec 06 §3.2, SoT §6.2)
+# route_song_vong(tin_hieu) khớp triệu-chứng → tầng leo + file Brain neo.
+# Hàng `nen` (id=nen) là BẰNG-CHỨNG NỀN luôn đọc, KHÔNG phải tầng leo (INV-6.5).
+# Ưu-tiên tầng THẤP nhất khớp: cau_truc < moat < dinh_vi < telos (INV-6.4).
+- id: cau-truc
+  rank: 1
+  tin_hieu: "quy-trình tắc · vai quá-tải"
+  keywords: ["quy-trình tắc", "vai quá-tải", "tắc", "quá-tải", "nghẽn quy-trình", "founder ôm hết"]
+  tang_leo: cau_truc
+  file_neo: [structure.md, headcount.md]
+  nhip: nhanh
+  claim: LG-6.2-cau-truc
+- id: moat
+  rank: 2
+  tin_hieu: "moat xói · kinh-tế-đơn-vị xấu"
+  keywords: ["moat xói", "kinh-tế-đơn-vị xấu", "biên xấu", "unit-econ xấu", "lãi đơn-vị giảm", "đối-thủ sao-chép"]
+  tang_leo: moat
+  file_neo: [positioning.md, products.md, budget.md]
+  nhip: vừa
+  claim: LG-6.2-moat
+- id: dinh-vi
+  rank: 3
+  tin_hieu: "đầu-cầu cạn · sai ngách"
+  keywords: ["đầu-cầu cạn", "sai ngách", "sai đầu-cầu", "mặt-bằng sai", "ngách cạn", "ICP sai"]
+  tang_leo: dinh_vi
+  file_neo: [positioning.md, strategy.md]
+  nhip: vừa-chậm
+  claim: LG-6.2-dinh-vi
+- id: telos
+  rank: 4
+  tin_hieu: "chạy đúng mọi thứ vẫn èo-uột"
+  keywords: ["chạy đúng vẫn èo-uột", "đúng mọi thứ vẫn", "èo-uột", "vô-nghĩa", "mất lý-do"]
+  tang_leo: telos
+  file_neo: [telos.md, curves.md]
+  nhip: rất-chậm
+  claim: LG-6.2-telos
+- id: nen
+  rank: 0
+  tin_hieu: "luôn đọc để biết tầng nào vỡ"
+  keywords: []
+  tang_leo: nen
+  file_neo: [state.md, budget.md]
+  nhip: "—"
+  claim: LG-6.2-nen

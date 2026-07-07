@@ -1,0 +1,28 @@
+# TASKGEN_GRID — lưới sinh nhiệm-vụ-chính (spec 06 §3.4 = dạng-bảng của §1.4, SoT §6.4)
+# task_gen_grid() trả 5 hàng cố-định để driver sinh_nhiem_vu_chinh (lib/tier.js) tham-chiếu.
+# INV-6.7: bảng KHÔNG tự sinh việc — chỉ là danh-mục bước.
+- lop: "1 · Sinh"
+  cau_hoi: "State đúng khi NHỮNG điều-kiện nào đồng-thời thành-lập?"
+  cho_ra: "mỗi điều-kiện chưa-đạt → 1 nhiệm-vụ-chính (động-từ)"
+  test: "gap hiện-trạng→đích"
+  claim: LG-6.4-L1
+- lop: "2 · Soi 3 chiều"
+  cau_hoi: "🗡 LÀM gì tạo state? · 🛡 state hỏng kiểu gì? · 📦 cần CẤP gì để chạy?"
+  cho_ra: "bổ-sung việc thủ/hậu hay bị quên"
+  test: "đủ cả 3 chiều"
+  claim: LG-6.4-L2
+- lop: "3 · Quét ngang"
+  cau_hoi: "Đạt state này đụng khía-cạnh nào khác chưa có việc?"
+  cho_ra: "việc sót xuyên 11 khía-cạnh"
+  test: "không sót khía-cạnh"
+  claim: LG-6.4-L3
+- lop: "Cổng nghiệm"
+  cau_hoi: "mọi việc done → state tự-động đúng? · bỏ 1 việc còn đạt? · 2 việc chồng?"
+  cho_ra: "chốt tập nhiệm-vụ-chính"
+  test: "đủ · tối-thiểu · không-trùng"
+  claim: LG-6.4-gate
+- lop: "Neo đo"
+  cau_hoi: "việc này đóng điều-kiện nào? đo bằng gì?"
+  cho_ra: "OKR (tấn) / KPI-ngưỡng (thủ·hậu)"
+  test: "không neo được = cắt"
+  claim: LG-6.4-neo

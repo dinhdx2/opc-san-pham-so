@@ -1,0 +1,23 @@
+name: Tech/SaaS Pack
+code: tech-saas
+version: 0.1.0
+description: "Cho startup phần mềm, SaaS, API platform VN"
+target_industries: ["b2b-saas", "b2c-app", "dev-tool", "api-platform"]
+adds_departments:
+  - 13-engineering
+  - 14-product-design
+  - 15-data
+extends_departments:
+  - target: 06-sales
+    add_agents: ["enterprise-sales", "sales-engineer", "customer-success-manager"]
+  - target: 07-marketing
+    add_agents: ["growth-hacker", "content-marketer-tech", "seo-tech"]
+  - target: 12-growth
+    add_agents: ["pitch-deck-builder", "vc-relations"]
+brain_template: brain-template/
+
+# Tên-kép tầng phòng-ngành (luồng generic v3, spec 04 §4.3/§7).
+dept_maps_to:
+  13-engineering: "K4/dept-09"             # Sản-phẩm & Công-nghệ
+  14-product-design: "K4/dept-09"          # Sản-phẩm (thiết-kế)
+  15-data: "K7/dept-11"                    # Dữ-liệu & Đo-lường

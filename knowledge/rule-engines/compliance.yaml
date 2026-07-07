@@ -1,0 +1,111 @@
+# COMPLIANCE — bảng giám-sát tuân thủ PHA 0→4 (SPEC docs/design/giam-sat-tuan-thu/SPEC.md).
+# Bảng tĩnh (config-as-data, bất-biến C4: 1 nơi). Driver cho lib/compliance.js.
+# CHỈ THÊM (C6): không sửa engine debate/router/executor/HITL/grounding.
+# Loader lib/yaml.js: dùng block-map/seq + flow-list [..]; KHÔNG dùng flow-map {..}.
+
+# ── Định-nghĩa-hoàn-thành (DoD) mỗi pha: output bắt-buộc + cổng + bất-biến áp ──
+pha_dod:
+  PHA0:
+    outputs: ["telos.md", ".vncoderc"]
+    cong: ["G0"]
+    invariants: ["E8"]
+  PHA1:
+    outputs: ["06-structure.md", "08-execution-plan.md"]
+    cong: ["A", "B"]
+    invariants: ["E5", "E7"]
+  PHA2:
+    outputs: ["10-run-state.md"]
+    cong: ["ranh-gioi-cung"]
+    invariants: ["E1", "E2", "E4", "E5", "E6", "E7", "E8"]
+  PHA3:
+    outputs: ["lessons.md", "decisions-log.md"]
+    cong: ["PASS", "PROMOTE", "GIAI-DOAN"]
+    invariants: []
+  PHA4:
+    outputs: ["curves.md"]
+    cong: ["3-phep-thu"]
+    invariants: []
+
+# ── Phân-loại bước thực-thi (execution-type) — thứ-tự ưu-tiên khi khớp ──
+# HUMAN_HANDOFF > TOOL_EXEC > SOP_SUPPORT > DELIVERABLE (mặc-định DELIVERABLE)
+exec_classify:
+  HUMAN_HANDOFF:
+    keywords: ["kyc", "định-danh", "ký ", "nộp ", "chuyển tiền", "chuyển-tiền", "sinh-trắc", "đăng-ký", "đăng ký"]
+    evidence_ok: ["CHECKLIST_HUMAN"]
+  TOOL_EXEC:
+    verbs: ["deploy", "dựng", "chạy", "tra ", "tra-", "quét", "gọi api", "browser", "search", "fetch", "render", "tải", "cào", "build", "ráp", "tích-hợp", "kiểm thử", "kiểm-thử", "đo "]
+    evidence_ok: ["FILE", "URL", "IMAGE", "CITATION", "TXN"]
+  SOP_SUPPORT:
+    markers: ["khung", "checklist", "spec", "sop", "brief", "quy-tắc", "quy tắc", "kịch-bản", "shortlist", "rà ", "rà-", "outline", "phác"]
+    evidence_ok: ["FILE_TASKS"]
+  DELIVERABLE:
+    markers: ["policy", "chính-sách", "ad copy", "content", "kit", "landing", "chuỗi email", "email", "mẫu", "bộ mẫu", "watermark", "sheet", "dashboard"]
+    evidence_ok: ["FILE"]
+
+# ── Kind bằng-chứng → phép resolve (IO cấp resolvedOK, engine chỉ phán) ──
+evidence_kind:
+  FILE: "file_exists"
+  URL: "url_resolves"
+  IMAGE: "is_image_file"
+  CITATION: "has_source_url"
+  TXN: "txn_verified"
+  PROSE: "never_for_tool_exec"
+
+# ── Đặt đúng chỗ: deliverable→03-Outputs · process→02-Tasks ──
+placement:
+  outputs_cho: ["DELIVERABLE"]
+  tasks_cho: ["SOP_SUPPORT"]
+  # gồm cả biến-thể KHÔNG DẤU vì tên file slugify không dấu (norm() chỉ hạ-chữ, không bỏ dấu).
+  # LƯU Ý loader: flow-list [..] phải NẰM TRÊN 1 DÒNG; danh-sách dài → dùng block-seq "- item".
+  process_markers:
+    - "khung"
+    - "checklist"
+    - "spec"
+    - "sop"
+    - "brief"
+    - "shortlist"
+    - "onboarding"
+    - "quy-tắc"
+    - "kịch-bản"
+    - "rà-soát"
+    - "hướng-dẫn"
+    - "quy-trình"
+    - "mô-phỏng"
+    - "quy-tac"
+    - "kich-ban"
+    - "ra-soat"
+    - "huong-dan"
+    - "quy-trinh"
+    - "mo-phong"
+    - "nghien-cuu"
+
+# ── Tier theo router: đánh-đổi tốc-độ/độ-chặt (cổng CỨNG luôn bật) ──
+tiers:
+  STRATEGIC:
+    audit_agent: true
+    resolve: "full"
+  COMPLEX:
+    audit_agent: true
+    resolve: "sample"
+  SIMPLE:
+    audit_agent: false
+    resolve: "light"
+always_on: ["ranh-gioi-cung", "G0", "evidence-real-tool-exec", "fail-closed"]
+
+# ── Taxonomy lỗi (mã cố định) ──
+taxonomy:
+  F1: "mo-ta-thay-thuc-thi"
+  F2: "done-gia"
+  F3: "sai-cho"
+  F4: "bo-sot"
+  F5: "so-bia"
+  F6: "qua-cong"
+  F7: "nen-tang"
+  F8: "mat-dau"
+
+# ── Chính-sách hook (CEO chốt 2026-07-06) ──
+hook_policy:
+  F1: "DENY"
+  F2: "DENY"
+  F6: "DENY"
+  F3: "WARN"

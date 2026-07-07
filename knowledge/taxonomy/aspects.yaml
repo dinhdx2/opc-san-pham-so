@@ -1,0 +1,81 @@
+# ASPECTS[11] — 11 khía-cạnh generic (spec 04 §3(a), SoT §4.1)
+# Bảng CỐ-ĐỊNH viết-một-lần-dùng-mọi-ngành. `nhom` ∈ 4 nhóm MECE.
+# `phong_phu_trach` = quan-hệ nhiều-nhiều tới 12 phòng canonical (dept-01..dept-12).
+# INV-NO-NEW-DEPT: khía-cạnh 10/11 map vào 12 phòng nền, KHÔNG đẻ phòng thứ-13.
+- id: asp-san-pham
+  num: 1
+  nhom: "GIÁ-TRỊ"
+  ten: "Sản-phẩm"
+  phong_phu_trach: [dept-09]
+  moi: false
+  claim: LG-4.1-asp1
+- id: asp-thi-truong
+  num: 2
+  nhom: "GIÁ-TRỊ"
+  ten: "Thị-trường"
+  phong_phu_trach: [dept-02, dept-07]
+  moi: false
+  claim: LG-4.1-asp2
+- id: asp-khach-hang
+  num: 3
+  nhom: "GIÁ-TRỊ"
+  ten: "Khách-hàng"
+  phong_phu_trach: [dept-06, dept-08]
+  moi: false
+  claim: LG-4.1-asp3
+- id: asp-tien
+  num: 4
+  nhom: "NGUỒN-LỰC"
+  ten: "Tiền"
+  phong_phu_trach: [dept-03, dept-12]
+  moi: false
+  claim: LG-4.1-asp4
+- id: asp-con-nguoi
+  num: 5
+  nhom: "NGUỒN-LỰC"
+  ten: "Con-người"
+  phong_phu_trach: [dept-04, dept-10]
+  moi: false
+  claim: LG-4.1-asp5
+- id: asp-hau-can
+  num: 6
+  nhom: "NGUỒN-LỰC"
+  ten: "Hậu-cần (chuỗi-cung/hạ-tầng)"
+  phong_phu_trach: [dept-05, dept-03]
+  moi: false
+  claim: LG-4.1-asp6
+- id: asp-van-hanh
+  num: 7
+  nhom: "VẬN-HÀNH&TRI-THỨC"
+  ten: "Vận-hành"
+  phong_phu_trach: [dept-05]
+  moi: false
+  claim: LG-4.1-asp7
+- id: asp-du-lieu
+  num: 8
+  nhom: "VẬN-HÀNH&TRI-THỨC"
+  ten: "Dữ-liệu (đo-lường/thông-tin)"
+  phong_phu_trach: [dept-11, dept-09]
+  moi: false
+  claim: LG-4.1-asp8
+- id: asp-rui-ro
+  num: 9
+  nhom: "BẢO-VỆ&QUAN-HỆ"
+  ten: "Rủi-ro"
+  phong_phu_trach: [dept-01]
+  moi: false
+  claim: LG-4.1-asp9
+- id: asp-doi-tac
+  num: 10
+  nhom: "BẢO-VỆ&QUAN-HỆ"
+  ten: "Đối-tác & Hệ-sinh-thái"
+  phong_phu_trach: [dept-02, dept-06, dept-12, dept-05]
+  moi: true
+  claim: LG-4.1-asp10
+- id: asp-ben-vung
+  num: 11
+  nhom: "BẢO-VỆ&QUAN-HỆ"
+  ten: "Bền-vững & Stakeholder"
+  phong_phu_trach: [dept-01, dept-02, dept-11]
+  moi: true
+  claim: LG-4.1-asp11

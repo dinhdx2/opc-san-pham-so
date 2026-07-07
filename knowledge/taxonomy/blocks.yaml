@@ -1,0 +1,39 @@
+# KHOI[7] — 7 khối canonical (spec 04 §3(b), SoT §4.2)
+# Tầng trên của cấu-trúc, để gom NGƯỢC-LÊN (PHA 1C) + cho KHO một cấp ổn-định.
+# INV-MECE-KHOI: hợp các `depts` = đúng {dept-01..dept-12}, đôi-một rời nhau,
+#                mỗi phòng thuộc ĐÚNG 1 khối.
+- ma: K1
+  ten: "Quản-trị & Chiến-lược"
+  depts: [dept-01, dept-02, dept-12]
+  khia_canh_chinh: [asp-rui-ro, asp-thi-truong, asp-ben-vung, asp-doi-tac, asp-tien]
+  claim: LG-4.2-K1
+- ma: K2
+  ten: "Tài-chính"
+  depts: [dept-03]
+  khia_canh_chinh: [asp-tien, asp-hau-can]
+  claim: LG-4.2-K2
+- ma: K3
+  ten: "Thị-trường & Khách-hàng"
+  depts: [dept-06, dept-07, dept-08]
+  khia_canh_chinh: [asp-khach-hang, asp-thi-truong, asp-doi-tac]
+  claim: LG-4.2-K3
+- ma: K4
+  ten: "Sản-phẩm & Công-nghệ"
+  depts: [dept-09]
+  khia_canh_chinh: [asp-san-pham, asp-du-lieu]
+  claim: LG-4.2-K4
+- ma: K5
+  ten: "Vận-hành & Chuỗi-cung"
+  depts: [dept-05]
+  khia_canh_chinh: [asp-van-hanh, asp-hau-can]
+  claim: LG-4.2-K5
+- ma: K6
+  ten: "Con-người"
+  depts: [dept-04, dept-10]
+  khia_canh_chinh: [asp-con-nguoi]
+  claim: LG-4.2-K6
+- ma: K7
+  ten: "Dữ-liệu & Đo-lường"
+  depts: [dept-11]
+  khia_canh_chinh: [asp-du-lieu]
+  claim: LG-4.2-K7

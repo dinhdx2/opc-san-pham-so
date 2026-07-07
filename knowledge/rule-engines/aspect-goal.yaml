@@ -1,0 +1,69 @@
+# ASPECT_GOAL_TEMPLATE — sinh mục-tiêu theo 11 khía-cạnh (spec 06 §3.3, SoT §6.3)
+# goal_by_aspect(aspect, stage): mẫu mục-tiêu LUÔN ở dạng TRẠNG-THÁI (INV-6.2, chống nén tầng).
+# `ngu_neu_stage` = danh-sách GĐ mà khía-cạnh mặc-định NGỦ (active=false) trừ khi cổng lọc CÓ.
+- aspect: 1
+  id: asp-san-pham
+  hoi: "GĐ này có lý-do lo sản-phẩm?"
+  mau_muc_tieu: "Chất-lượng/định-nghĩa sản-phẩm đạt chuẩn X"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp1
+- aspect: 2
+  id: asp-thi-truong
+  hoi: "…lo ngách/định-vị?"
+  mau_muc_tieu: "Đầu-cầu & thông-điệp được xác-nhận"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp2
+- aspect: 3
+  id: asp-khach-hang
+  hoi: "…lo khách?"
+  mau_muc_tieu: "Tỷ-lệ khách quay-lại ≥ Y%"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp3
+- aspect: 4
+  id: asp-tien
+  hoi: "…lo tiền/vốn?"
+  mau_muc_tieu: "Hạ-tầng thu tiền sẵn-sàng / Biên lãi/đv ≥ Z%"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp4
+- aspect: 5
+  id: asp-con-nguoi
+  hoi: "…lo năng-lực/đội-ngũ?"
+  mau_muc_tieu: "Vai then-chốt có người thay được founder"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp5
+- aspect: 6
+  id: asp-hau-can
+  hoi: "…lo chuỗi-cung/hạ-tầng đầu-vào?"
+  mau_muc_tieu: "Nguồn-cung & hạ-tầng ổn giá, đủ, đúng hạn"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp6
+- aspect: 7
+  id: asp-van-hanh
+  hoi: "…lo quy-trình giao/chạy?"
+  mau_muc_tieu: "Quy-trình lõi chạy ổn-định, lặp được"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp7
+- aspect: 8
+  id: asp-du-lieu
+  hoi: "…lo đo-lường/thông-tin?"
+  mau_muc_tieu: "Số then-chốt được đo & tin-cậy (1 nguồn-sự-thật)"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp8
+- aspect: 9
+  id: asp-rui-ro
+  hoi: "…có gì có-thể giết DN?"
+  mau_muc_tieu: "Rủi-ro pháp-lý/IP được chặn (cổng kiểm)"
+  ngu_neu_stage: []
+  claim: LG-6.3-asp9
+- aspect: 10
+  id: asp-doi-tac
+  hoi: "…cần kênh/liên-minh/nền-tảng?"
+  mau_muc_tieu: "Kênh/đối-tác then-chốt đã chốt & ràng-buộc rõ"
+  ngu_neu_stage: [GD1, GD2]
+  claim: LG-6.3-asp10
+- aspect: 11
+  id: asp-ben-vung
+  hoi: "…có nghĩa-vụ xã-hội/quản-chế đáng lo?"
+  mau_muc_tieu: "Giấy-phép-xã-hội & tuân-thủ ESG được duy-trì"
+  ngu_neu_stage: [GD1, GD2, GD3, GD4]
+  claim: LG-6.3-asp11

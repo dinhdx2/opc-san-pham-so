@@ -1,0 +1,18 @@
+# REUSE_RUBRIC — rubric tra-kho từng tầng (spec 06 §3.5, SoT §6.5)
+# reuse_decision(ung_vien, ngu_canh) → REUSE / ADAPT / NEW.
+# `grade` ánh-xạ reuse-grade A/B/C ⇒ quyết-định; null ung_vien ⇒ NEW.
+- grade: A
+  dieu_kien: "Khớp cao (reuse-grade A, hợp-đồng ngữ-cảnh trùng)"
+  quyet_dinh: REUSE
+  hanh_dong: "dùng-luôn tài-sản KHO; structure.md ghi reused_from"
+  claim: LG-6.5-reuse
+- grade: B
+  dieu_kien: "Gần đúng (lệch tham-số/quy-mô, reuse-grade B)"
+  quyet_dinh: ADAPT
+  hanh_dong: "tinh-chỉnh cho khớp ngữ-cảnh; ghi delta để PROMOTE bản-mới sau"
+  claim: LG-6.5-adapt
+- grade: C
+  dieu_kien: "Không có / khác hẳn ngữ-cảnh"
+  quyet_dinh: NEW
+  hanh_dong: "đẻ mới; nếu chạy tốt → ứng-viên PROMOTE (cổng §3 PHA 3)"
+  claim: LG-6.5-new

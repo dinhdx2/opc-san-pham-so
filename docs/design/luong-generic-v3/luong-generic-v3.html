@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<!--HO-CHIEU
+id: LUONG-GEN-v3.3
+ten: Luồng Generic vn-opc — Sinh-thành & Khép-vòng
+loai: THIẾT-KẾ (design-doc)
+nguon: tổng-hợp 6 lượt thảo-luận CEO ↔ Claude (2026-06-29) + tinh-chỉnh v3.2–v3.3
+goc: dựa trên "Khung-Sườn Tổng — Trục Hãng" (khuôn-OS) + codebase opc-san-pham-so
+trang-thai: BẢN-THẢO để CEO chốt — CHƯA implement
+phien-ban: 3.3
+ghi-chu: |
+  Trục dọc (sinh-thành: telos→cấu-trúc) ghép vào trục ngang (debate 12 phòng) của vn-opc.
+  Phân biệt rõ GENERIC (khung) vs PHÂN-RÃ (nội-dung).
+  v3.2 — ba tinh-chỉnh: (1) tách Dữ-liệu & Hậu-cần thành 2 khía-cạnh + CEO-review nâng lên 11 khía-cạnh
+  (thêm Đối-tác/Hệ-sinh-thái và Bền-vững/Stakeholder); (2) chuẩn-hoá KHO chỉ-mục theo ngành
+  (khối→phòng→bộ-phận) ở knowledge/playbook/<ngành>/_index.md; (3) suy cấu-trúc NGƯỢC-LÊN 3 tầng
+  (bộ-phận→phòng→khối) với TRA-KHO tái-dùng ở mỗi tầng.
+  v3.3 — bổ-sung CƠ-CHẾ sinh nhiệm-vụ-chính không-sót (mục 1.4 + bảng 6.4): bẻ trạng-thái-đích
+  thành CHUỖI ĐIỀU-KIỆN-ĐỦ → soi lưới 3 chiều (tấn/thủ/hậu) → đối-chiếu chéo 11 khía-cạnh →
+  cổng back-test "đủ & tối-thiểu & không-trùng" + neo OKR/KPI. Giữ nguyên mọi phần đã thống-nhất.
+-->
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luồng Generic vn-opc · Sinh-thành & Khép-vòng · v3.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#E7EBEF; --sheet:#FCFCFB;
+    --ink:#1B1F24; --ink-soft:#5B636C; --ink-faint:#8A929B; --hair:#D4D9DF;
+    --oak:#B0701F;
+    --c01:#2F6B4F;  --c01b:#E2EFE8;   /* telos / generic-spine */
+    --c2:#B0701F;   --c2b:#F6ECDC;    /* vòng đời / phân-rã */
+    --c3:#3A49A0;   --c3b:#E1E5F4;    /* cấu trúc */
+    --c4:#147F84;   --c4b:#DBEEEF;    /* GĐ5 / thực-thi */
+    --c5:#A8423A;   --c5b:#F4E1DE;    /* cổng / cảnh-báo */
+    --ctrl:#7E3F9E; --ctrlb:#EEDEF3;  /* khép-vòng / mở-rộng */
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --disp:'Be Vietnam Pro',system-ui,sans-serif;
+    --tech:'Space Grotesk','Be Vietnam Pro',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{background:var(--ground);color:var(--ink);font-family:var(--disp);font-size:15px;line-height:1.55;padding:0 0 60px;-webkit-font-smoothing:antialiased}
+  .sheet{max-width:1180px;margin:0 auto;background:var(--sheet);border:1px solid var(--hair);border-top:4px solid var(--oak);box-shadow:0 18px 44px -28px rgba(20,25,35,.35)}
+  .pad{padding:34px clamp(18px,3.6vw,50px)}
+
+  .eyebrow{font-family:var(--tech);font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:7px 13px;align-items:center}
+  .eyebrow b{color:var(--oak);font-weight:700}
+  h1.title{font-family:var(--disp);font-weight:800;font-size:clamp(26px,5vw,46px);line-height:1.05;letter-spacing:-.02em;margin:13px 0 0}
+  .thesis{margin:14px 0 0;max-width:84ch;font-size:clamp(13.5px,1.5vw,16px);color:var(--ink-soft)}
+  .thesis em{color:var(--ink);font-style:normal;font-weight:600}
+  .levels{margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:5px;overflow:hidden}
+  .lv{background:var(--sheet);padding:14px 16px}
+  .lv .t{font-family:var(--tech);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+  .lv.dn .t{color:var(--c01)} .lv.up .t{color:var(--ctrl)}
+  .lv p{font-size:12.8px;color:var(--ink-soft);margin-top:5px;line-height:1.5}
+  .lv p b{color:var(--ink);font-weight:600}
+
+  nav.jump{position:sticky;top:0;z-index:20;background:rgba(252,252,251,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--hair);padding:9px clamp(18px,3.6vw,50px);display:flex;flex-wrap:wrap;gap:6px}
+  nav.jump a{font-family:var(--tech);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border:1px solid var(--hair);border-radius:999px;padding:4px 11px;white-space:nowrap}
+  nav.jump a:hover{border-color:var(--ink);color:var(--ink)}
+
+  .seg{border-top:1px solid var(--hair)}
+  .seg-head{display:flex;gap:14px;align-items:flex-start;padding-top:4px}
+  .badge{flex:none;width:46px;height:46px;border-radius:11px;background:var(--accent);color:#fff;font-family:var(--tech);font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+  .seg-head .h{flex:1;min-width:0}
+  .seg-head h2{font-family:var(--disp);font-weight:800;font-size:clamp(19px,2.4vw,26px);letter-spacing:-.01em;line-height:1.14}
+  .modpill{display:inline-block;font-family:var(--tech);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-bg);border-radius:999px;padding:3px 10px;margin-top:7px}
+  .role{margin-top:10px;font-size:13.6px;color:var(--ink-soft);max-width:92ch;line-height:1.56}
+  .role b{color:var(--ink);font-weight:600}
+
+  p.tx{margin-top:12px;font-size:13.8px;color:var(--ink-soft);max-width:94ch;line-height:1.62}
+  p.tx b{color:var(--ink);font-weight:600}
+  ul.li{margin:10px 0 0 2px;max-width:94ch;list-style:none}
+  ul.li li{position:relative;padding-left:18px;margin-top:7px;font-size:13.4px;color:var(--ink-soft);line-height:1.55}
+  ul.li li:before{content:"▸";position:absolute;left:0;color:var(--oak);font-size:11px;top:1px}
+  ul.li li b{color:var(--ink);font-weight:600}
+  code{font-family:var(--mono);font-size:.88em;background:#F1EFE8;border:1px solid #E4E0D4;border-radius:4px;padding:1px 5px;color:var(--ink)}
+
+  .pre{margin-top:14px;border:1px solid var(--hair);border-radius:9px;background:#fff;padding:14px 14px;overflow-x:auto}
+  .pre pre{font-family:var(--mono);font-size:11.4px;line-height:1.5;color:var(--ink);white-space:pre;min-width:540px}
+  .cap{font-family:var(--tech);font-weight:700;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+
+  .tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:12.2px}
+  .tbl th,.tbl td{border:1px solid var(--hair);padding:8px 10px;text-align:left;vertical-align:top}
+  .tbl thead th{background:var(--accent,var(--ink));color:#fff;font-family:var(--tech);font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase}
+  .tbl td{color:var(--ink-soft);line-height:1.46}
+  .tbl td b{color:var(--ink);font-weight:600}
+  .tbl td .mono,.tbl td code{font-family:var(--mono);font-size:11px;color:var(--ink)}
+  .tag{font-family:var(--mono);font-size:9.6px;font-weight:600;padding:1px 6px;border-radius:4px;white-space:nowrap;display:inline-block}
+  .tag.gen{background:var(--c01b);color:var(--c01)} .tag.pr{background:var(--c2b);color:var(--c2)}
+  .tag.g5{background:var(--c4b);color:var(--c4)} .tag.g6{background:var(--ctrlb);color:var(--ctrl)} .tag.nw{background:var(--c5b);color:var(--c5)}
+
+  .note{margin-top:18px;border:1px solid var(--hair);border-left:4px solid var(--ink);border-radius:6px;background:#FAFAF8;padding:15px 18px}
+  .note h3{font-family:var(--disp);font-weight:800;font-size:14.5px}
+  .note p{font-size:12.9px;color:var(--ink);margin-top:7px;line-height:1.55;max-width:94ch}
+  .note p b{font-weight:700}
+  .note.warn{border-left-color:var(--c5);background:var(--c5b)} .note.warn h3{color:var(--c5)}
+  .note.up{border-left-color:var(--ctrl);background:var(--ctrlb)} .note.up h3{color:var(--ctrl)}
+  .note.ok{border-left-color:var(--c01);background:var(--c01b)} .note.ok h3{color:var(--c01)}
+
+  .sub{margin-top:24px;font-family:var(--tech);font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+  .sub s{flex:1;height:1px;background:var(--hair);text-decoration:none}
+
+  .ex{margin-top:13px;font-size:12.8px;color:var(--ink);background:#FAF6EC;border:1px solid #EFE3CB;border-radius:7px;padding:11px 14px;line-height:1.58}
+  .ex b{color:var(--oak);font-weight:700}
+  .ex .lbl{font-family:var(--tech);font-weight:700;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--oak);display:block;margin-bottom:4px}
+  .ex.pod{background:#EEF1FA;border-color:#CFD6EF} .ex.pod .lbl{color:var(--c3)} .ex.pod b{color:var(--c3)}
+
+  .gate{display:flex;align-items:center;gap:10px;margin:16px 0;padding:11px 15px;border:2px solid var(--c5);border-radius:7px;background:var(--c5b)}
+  .gate .ic{font-family:var(--tech);font-weight:700;color:var(--c5);font-size:13px;flex:none}
+  .gate p{font-size:12.4px;color:var(--ink);line-height:1.46}
+  .gate p b{color:var(--c5);font-weight:700}
+
+  .cards{display:grid;gap:11px;margin-top:13px;grid-template-columns:repeat(2,1fr)}
+  .mini{border:1px solid var(--hair);border-top:3px solid var(--accent,var(--ink));border-radius:7px;background:#fff;padding:12px 14px}
+  .mini .k{font-family:var(--tech);font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,var(--ink))}
+  .mini .ttl{font-family:var(--disp);font-weight:700;font-size:13px;margin-top:3px;line-height:1.3}
+  .mini p{font-size:12px;color:var(--ink-soft);margin-top:5px;line-height:1.5}
+  .mini p b{color:var(--ink);font-weight:600}
+
+  .gloss{font-size:12.4px;color:var(--ink-soft);line-height:1.95;max-width:98ch;margin-top:14px}
+  .gloss b{font-family:var(--mono);font-weight:600;color:var(--ink);font-size:11.4px}
+  .foot{padding:22px clamp(18px,3.6vw,50px);text-align:right;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);border-top:1px solid var(--hair)}
+
+  @media (max-width:880px){
+    .levels{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .tbl{font-size:11px}
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <!-- ===================== MASTHEAD ===================== -->
+  <div class="pad">
+    <div class="eyebrow"><b>opc-san-pham-so</b><span>· thiết-kế</span><span>· luồng generic</span><span>· BẢN-THẢO · v3.3</span><span>· 2026-06-29</span></div>
+    <h1 class="title">Luồng Generic vn-opc — Sinh-thành &amp; Khép-vòng</h1>
+    <p class="thesis">Tổng-hợp 6 lượt thảo-luận. Ghép <em>trục dọc sinh-thành</em> của khuôn-OS (telos → định-vị → đường-cong → vòng-đời → cấu-trúc) vào <em>trục ngang tranh-luận</em> của vn-opc (12 phòng debate → quyết → thực-thi). Cốt-lõi: <em>cấu-trúc được SUY RA từ việc, NGƯỢC-LÊN ba tầng</em> (bộ-phận → phòng → khối), không vẽ-sẵn; <em>tra KHO tái-dùng ở mỗi tầng</em> trước khi đẻ mới; <em>kế-hoạch cuộn-sóng theo giai-đoạn</em>, không waterfall; <em>khép-vòng có tầng</em>, vá tại-chỗ trước, leo tầng sau. Luôn phân-biệt <em>GENERIC (khung)</em> với <em>PHÂN-RÃ (nội-dung)</em>.</p>
+    <p class="thesis" style="margin-top:9px">v3.2 tinh-chỉnh 3 điểm: <em>① tách Dữ-liệu &amp; Hậu-cần</em> + CEO-review nâng khung lên <em>11 khía-cạnh</em> (thêm Đối-tác/Hệ-sinh-thái &amp; Bền-vững/Stakeholder); <em>② chuẩn-hoá KHO chỉ-mục theo ngành</em> (khối→phòng→bộ-phận) để dễ tra &amp; dọn; <em>③ suy cấu-trúc ngược-lên với tra-kho tái-dùng từng tầng.</em> <b style="color:var(--oak)">v3.3</b> thêm điểm <em>④ cơ-chế sinh nhiệm-vụ-chính KHÔNG-SÓT</em>: bẻ trạng-thái-đích → chuỗi điều-kiện-đủ, soi lưới 3 chiều, đối-chiếu chéo 11 khía-cạnh, chốt bằng cổng back-test (xem §1.4).</p>
+    <div class="levels">
+      <div class="lv dn"><div class="t">↓ Chiều-sinh (suy-ra)</div><p>telos → định-vị &amp; cỗ-máy → đường-cong → vòng-đời GĐ1-6 → <b>việc</b> → gom NGƯỢC-LÊN: bộ-phận → phòng → khối. <b>Cấu-trúc là KẾT-QUẢ gom việc; mỗi tầng TRA KHO trước khi đẻ mới.</b></p></div>
+      <div class="lv up"><div class="t">↺ Khép-vòng (phản-hồi)</div><p>Chạy-thật → đo → <b>đơn-vòng</b> vá tại-chỗ → hết K vòng → <b>song-vòng</b> leo đúng tầng + <b>neo Brain</b> → hiếm lắm mới chạm telos. Việc/đơn-vị đạt chuẩn → <b>PROMOTE vào KHO</b>.</p></div>
+    </div>
+  </div>
+
+  <nav class="jump">
+    <a href="#boi-canh">0 · Bối-cảnh</a>
+    <a href="#nguyen-ly">1 · Nguyên-lý</a>
+    <a href="#brain">2 · Brain 2 lớp</a>
+    <a href="#luong">3 · Luồng PHA 0–4</a>
+    <a href="#phong">4 · Khối · 12 phòng · tên-kép</a>
+    <a href="#kho">5 · KHO chỉ-mục</a>
+    <a href="#bang">6 · Bảng tra</a>
+    <a href="#pho-ha">7 · Ví-dụ Phở Hà</a>
+    <a href="#artifact">8 · Artifact</a>
+    <a href="#codebase">9 · Ánh-xạ codebase</a>
+    <a href="#gloss">Chú-giải</a>
+  </nav>
+
+  <!-- ===================== 0 · BỐI CẢNH ===================== -->
+  <section class="seg" id="boi-canh"><div class="pad" style="--accent:var(--ink);--accent-bg:#EDEDEA">
+    <div class="seg-head"><div class="badge" style="background:var(--ink)">0</div><div class="h">
+      <h2>Bối-cảnh — hai hệ &amp; mảnh ghép còn thiếu</h2>
+      <span class="modpill" style="color:var(--ink);background:#EDEDEA">trục dọc gặp trục ngang</span>
+      <p class="role">File gốc "Khung-Sườn Tổng — Trục Hãng" là một <b>bộ-khung suy structure từ telos</b> (trục dọc / sinh-thành). Còn <b>opc-san-pham-so</b> hiện mạnh ở <b>trục ngang</b> (12 phòng tranh-luận 1 quyết-định rất tốt) nhưng gần như không có trục dọc — 12 phòng là <b>vẽ-sẵn rồi nhét việc</b>, đúng cái file cảnh-báo. Hai hệ bổ-trợ nhau: trục dọc đắp vào đúng chỗ mù lớn nhất của vn-opc.</p>
+    </div></div>
+
+    <div class="pre"><div class="cap">Hai trục — vì sao ghép</div><pre>      TRỤC DỌC (khuôn-OS · sinh-thành)              TRỤC NGANG (vn-opc · tranh-luận)
+      ─────────────────────────────────            ───────────────────────────────
+  T1  telos (vì-sao, bất-biến)         ─┐
+  T2  định-vị (ĐÂU) × cỗ-máy/moat (SAO) │ thiếu     Brain (strategy/products/budget/
+  T3  đường-cong (mỗi dòng KD = 1 S-cv) │ hẳn       state/headcount) — phẳng, 1 tầng
+  T4  vòng-đời GĐ1→GĐ6 (mỗi đường chạy) │ trong        │
+  T5  cấu-trúc (khối/phòng/bộ-phận)◄SUY┘ vn-opc    12 PHÒNG (vẽ-sẵn) → debate.js 4 pha:
+      ↺ khép-vòng: chạy-thật → sửa lên             Perspectives→Cross-exam→Red-team→Synthesize
+                                                    → quyết-định + kế-hoạch → vn-executor</pre></div>
+
+    <p class="tx"><b>Năm trụ cải-tiến cũ</b> (task <code>2026-06-26</code>, đã làm xong) đều nâng trục ngang: cross-examination, red-team, decisions-log, model-tiering, template-map. <b>Tài-liệu này là trục dọc</b> — lớp kế tiếp, không trùng cái cũ. Tinh-thần xuyên suốt: <b>GIỮ engine debate + 12 phòng + grounding + HITL đã tốt</b>; chỉ đắp thêm lớp sinh-thành phía trên + khép-vòng có tầng phía dưới + <b>KHO tái-dùng chuẩn-hoá</b> bên cạnh.</p>
+  </div></section>
+
+  <!-- ===================== 1 · NGUYÊN LÝ ===================== -->
+  <section class="seg" id="nguyen-ly"><div class="pad" style="--accent:var(--c01);--accent-bg:var(--c01b)">
+    <div class="seg-head"><div class="badge">1</div><div class="h">
+      <h2>Nguyên-lý nền</h2>
+      <span class="modpill">generic vs phân-rã · 2 chiều · phép-thử đúng-tầng</span>
+      <p class="role">Ba luật khung phải nắm trước khi đọc luồng. Quan-trọng nhất: <b>phân-biệt GENERIC với PHÂN-RÃ</b> — nhầm hai cái này là gốc của lỗi "nén tầng".</p>
+    </div></div>
+
+    <div class="sub" style="--accent:var(--c01)">1.1 · GENERIC vs PHÂN-RÃ — ranh-giới <s></s></div>
+    <p class="tx">Nguyên-tắc 1 câu: <b>cái viết-một-lần-dùng-mãi (khung / bảng-phân-loại / luật-nối) = GENERIC</b>; <b>cái suy-ra-mỗi-DN (nội-dung lấp vào ô) = PHÂN-RÃ</b>. Generic là "hệ-điều-hành"; phân-rã là "chương-trình chạy trên nó".</p>
+    <div class="pre"><div class="cap">Khung generic (trên) sinh ra nội-dung phân-rã (dưới)</div><pre> ┌─ GENERIC (cố-định — viết 1 lần, "khuôn") ────────────────────────────────────┐
+ │  [GĐ1-6]  [câu-sống-còn / GĐ]  [11 khía-cạnh]  [3 chiều: tấn/thủ/hậu]         │
+ │  [7 khối → 12 phòng canonical]  [4 ngả người/agent]  [luật TRA-KHO tái-dùng]  │
+ └──┬──────────────┬───────────────────┬──────────────┬───────────────┬─────────┘
+   chọn GĐ     duyệt 11 khía-cạnh   hỏi "việc gì    gom NGƯỢC-LÊN     tra KHO mỗi
+   hiện-tại    + lọc "có lý-do?"    để đạt?" ×3     bộ-phận→phòng→khối tầng: reuse?
+      ▼             ▼                   ▼              ▼                ▼
+ ┌─ PHÂN-RÃ (suy ra mỗi DN — "ruột") ───────────────────────────────────────────┐
+ │  telos → mục-đích → mục-tiêu → nhiệm-vụ-chính → nhiệm-vụ-con                   │
+ │        → (gom) bộ-phận → phòng → khối  [tái-dùng/tinh-chỉnh từ KHO]            │
+ └──────────────────────────────────────────────────────────────────────────────┘</pre></div>
+    <table class="tbl" style="--accent:var(--c01)">
+      <thead><tr><th>Mắt-xích</th><th>Bản-chất</th><th>Ghi-chú</th></tr></thead>
+      <tbody>
+        <tr><td>6 GĐ · 11 khía-cạnh · 3 chiều · 7 khối/12 phòng · 4 ngả · luật tra-kho</td><td><span class="tag gen">GENERIC</span></td><td>bảng + luật cố-định, mọi DN/ngành dùng chung</td></tr>
+        <tr><td>cổng lọc <i>"khía-cạnh X có lý-do tồn-tại ở GĐ này?"</i></td><td><span class="tag gen">câu hỏi</span> + <span class="tag pr">đáp-án</span></td><td>câu hỏi cố-định, câu trả-lời tùy DN</td></tr>
+        <tr><td>cổng tra-kho <i>"tầng này KHO đã có &amp; khớp ngữ-cảnh?"</i></td><td><span class="tag gen">luật</span> + <span class="tag pr">kết-quả</span></td><td>luật reuse/adapt/new cố-định; tài-sản trong kho tùy ngành</td></tr>
+        <tr><td><code>telos</code></td><td><span class="tag pr">PHÂN-RÃ</span></td><td>người quyết (AI không tự đặt)</td></tr>
+        <tr><td><code>mục-đích GĐ</code></td><td><span class="tag gen">GENERIC theo GĐ</span></td><td>= câu-hỏi-sống-còn của GĐ, chỉ khoác chữ cho DN</td></tr>
+        <tr><td><code>mục-tiêu</code></td><td><span class="tag pr">PHÂN-RÃ</span></td><td>outcome đo-được, suy theo khía-cạnh × DN</td></tr>
+        <tr><td><code>nhiệm-vụ-chính</code> · <code>nhiệm-vụ-con</code></td><td><span class="tag pr">PHÂN-RÃ</span></td><td>khung 3 chiều là generic; nội-dung phân-rã</td></tr>
+        <tr><td><code>bộ-phận · phòng · khối</code> (cấu-trúc)</td><td><span class="tag pr">PHÂN-RÃ</span></td><td>neo 7 khối/12 canonical là generic; gom ra cây nào tùy việc</td></tr>
+      </tbody>
+    </table>
+    <p class="tx" style="margin-top:10px"><b>Chốt:</b> chỉ khung + 6 bảng tra + 2 luật (lọc khía-cạnh, tra-kho) + <code>mục-đích-GĐ</code> là generic. <b><code>mục-tiêu</code> trở xuống đến tận cây khối/phòng/bộ-phận đều phân-rã.</b></p>
+
+    <div class="sub" style="--accent:var(--c01)">1.2 · Hai chiều của trục <s></s></div>
+    <div class="cards">
+      <div class="mini" style="--accent:var(--c01)"><div class="k">↓ Chiều-sinh (suy-ra)</div><div class="ttl">Đi xuống = telos đẻ mọi tầng</div><p>Mỗi tầng dưới <b>suy ra</b> từ tầng trên. Không tầng nào vẽ-sẵn rồi nhét việc. Cấu-trúc (bộ-phận→phòng→khối) là <b>kết-quả gom việc NGƯỢC-LÊN</b>, nằm ở CUỐI.</p></div>
+      <div class="mini" style="--accent:var(--ctrl)"><div class="k">↺ Khép-vòng (phản-hồi)</div><div class="ttl">Đi lên = chạy-thật sửa tầng trên</div><p>Đơn-vòng (vá tại-chỗ) trước; hết K vòng mới song-vòng leo tầng. Đổi tầng trên ⇒ <b>cascade</b> sinh-lại nhánh dưới. Tài-sản đạt chuẩn ⇒ <b>nhập KHO</b>.</p></div>
+    </div>
+
+    <div class="sub" style="--accent:var(--c01)">1.3 · Phép-thử "đúng-tầng" (chống nén tầng) <s></s></div>
+    <p class="tx">Lỗi hay gặp: nhét một <b>VIỆC</b> vào ô <b>mục-tiêu</b>. Quy-tắc vàng: <b>mở đầu bằng ĐỘNG-TỪ ⇒ là VIỆC (nhiệm-vụ), không phải mục-tiêu. Mục-tiêu là một TRẠNG-THÁI của thế-giới</b> ("X đã sẵn-sàng / đạt").</p>
+    <table class="tbl" style="--accent:var(--c01)">
+      <thead><tr><th>Ô</th><th>Định-nghĩa</th><th>Test đúng-tầng</th><th>Dạng ngôn-ngữ</th></tr></thead>
+      <tbody>
+        <tr><td><b>mục-đích</b></td><td>vì-sao GĐ tồn-tại</td><td>= câu-sống-còn, 1 câu</td><td>"Chứng-minh / Đạt được X"</td></tr>
+        <tr><td><b>mục-tiêu</b></td><td>cái-GÌ cần ĐẠT (đo được) cho khía-cạnh</td><td>là <b>TRẠNG-THÁI</b>, đo "đạt/chưa". KHÔNG mở đầu bằng động-từ</td><td>"Hạ-tầng thu tiền <b>sẵn-sàng</b>"</td></tr>
+        <tr><td><b>nhiệm-vụ-chính</b></td><td>khối VIỆC LỚN để đạt mục-tiêu</td><td>mở đầu bằng <b>ĐỘNG-TỪ</b></td><td>"<b>Thiết-lập</b> luồng thanh-toán"</td></tr>
+        <tr><td><b>nhiệm-vụ-con</b></td><td>bước cụ-thể (tấn/thủ/hậu)</td><td>nguyên-tử, kiểm-chứng được</td><td>"Mở PayPal + KYC"</td></tr>
+      </tbody>
+    </table>
+    <div class="ex pod"><span class="lbl">Ví-dụ POD · khía-cạnh "tiền" (đã sửa đúng tầng)</span>
+      🎯 <b>Mục-tiêu</b> (trạng-thái, đo có/chưa): "Hạ-tầng NHẬN thanh-toán từ khách Mỹ <b>sẵn-sàng &amp; hợp-lệ</b> — không bị chặn/giữ tiền." →
+      🔨 <b>Nhiệm-vụ-chính</b> (việc lớn): "Thiết-lập luồng thanh-toán xuyên-biên (PayPal Business + Payoneer)." →
+      ⚙️ <b>Nhiệm-vụ-con</b> 3 chiều: <b>tấn</b> mở PayPal + khai ĐKKD/KYC · <b>thủ</b> đọc policy tránh bị giữ payout · <b>hậu</b> giấy-tờ pháp-nhân, tài-khoản nhận.
+      <br><i>(Bản cũ để "thông luồng thanh-toán US" làm mục-tiêu là sai — đó là động-từ = nhiệm-vụ-chính.) Đây mới là MỘT nhiệm-vụ-chính; §1.4 sinh ĐỦ tập.</i>
+    </div>
+
+    <div class="sub" style="--accent:var(--c01)">1.4 · Cơ-chế sinh nhiệm-vụ-chính (3 lớp không-sót) <s></s></div>
+    <p class="tx">Một <b>mục-tiêu là một TRẠNG-THÁI</b> (state). Nhiệm-vụ-chính KHÔNG liệt tự-do mà sinh theo kỷ-luật để <b>bao-quát đủ, không sót, không trùng</b>. Nhắc tầng: 11 khía-cạnh chống-sót ở tầng <b>mục-tiêu</b> (§4.1); 3 chiều chống-sót ở tầng <b>nhiệm-vụ-con</b> (§1.3). Mục này lấp đúng tầng <b>mục-tiêu → tập nhiệm-vụ-chính</b>.</p>
+    <div class="cards">
+      <div class="mini" style="--accent:var(--c01)"><div class="k">Lớp 1 · SINH</div><div class="ttl">Bẻ state → chuỗi ĐIỀU-KIỆN-ĐỦ</div><p>Hỏi: "Trạng-thái này TỰ-ĐỘNG đúng khi NHỮNG điều-kiện nào ĐỒNG-THỜI thành-lập?" Mỗi điều-kiện <b>chưa đạt</b> (so hiện-trạng Brain) → <b>1 nhiệm-vụ-chính</b> (động-từ + đối-tượng). Sinh theo <b>khoảng-cách hiện-trạng→đích</b>, không cảm-tính.</p></div>
+      <div class="mini" style="--accent:var(--c2)"><div class="k">Lớp 2 · SOI</div><div class="ttl">Lưới 3 chiều tại tầng nhiệm-vụ-chính</div><p>Soi để bắt loại-việc bị quên: <b>🗡tấn</b> TẠO state · <b>🛡thủ</b> GIỮ state khỏi sụp (pre-mortem "hỏng kiểu gì?") · <b>📦hậu</b> CẤP nguồn-lực cho tấn+thủ chạy. Chiều nào trống → bổ-sung điều-kiện-đủ (vòng lại Lớp 1).</p></div>
+      <div class="mini" style="--accent:var(--c3)"><div class="k">Lớp 3 · QUÉT NGANG</div><div class="ttl">Đối-chiếu chéo 11 khía-cạnh</div><p>Đạt state này có <b>kéo theo khía-cạnh khác</b> mà chưa có việc? (mục-tiêu Tiền đụng Hậu-cần/Dữ-liệu/Người…). Bắt việc sót xuyên-khía-cạnh.</p></div>
+      <div class="mini" style="--accent:var(--c5)"><div class="k">Cổng nghiệm</div><div class="ttl">ĐỦ · TỐI-THIỂU · KHÔNG-TRÙNG</div><p><b>Đủ (back-test):</b> mọi nhiệm-vụ done → state TỰ-ĐỘNG đúng? Chưa → còn sót → Lớp 1. <b>Tối-thiểu:</b> bỏ 1 việc, state còn đạt → việc thừa. <b>Không-trùng:</b> 2 việc chồng → gộp.</p></div>
+    </div>
+    <p class="tx"><b>Neo đo-lường (chống việc-ma):</b> mỗi nhiệm-vụ-chính phải gắn (a) điều-kiện-đủ nó đóng + (b) 1 thước — <b>OKR</b> cho việc tấn-công, <b>KPI-ngưỡng</b> cho việc phòng-thủ/hậu-cần. Không gắn được điều-kiện nào = việc thừa hoặc sai-tầng → cắt.</p>
+    <div class="ex pod"><span class="lbl">Ví-dụ POD · mục-tiêu "tiền" → SINH ĐỦ tập nhiệm-vụ-chính</span>
+      🎯 <b>State:</b> "Hạ-tầng NHẬN thanh-toán từ khách Mỹ <b>sẵn-sàng &amp; hợp-lệ</b> — không bị chặn/giữ tiền." → bẻ thành 4 điều-kiện-đủ → 4 nhiệm-vụ-chính:
+      <br>① <i>(có cổng nhận tiền hoạt-động)</i> <b>Thiết-lập PayPal Biz + Payoneer</b> — 🗡tấn · <span class="tag pr">Tiền</span>
+      <br>② <i>(pháp-nhân/KYC hợp-lệ)</i> <b>Hoàn-tất pháp-nhân &amp; KYC xuyên-biên</b> — 🗡tấn · <span class="tag pr">Rủi-ro</span>
+      <br>③ <i>(tiền không bị freeze)</i> <b>Thiết-lập tuân-thủ policy chống giữ payout</b> — 🛡thủ · <span class="tag pr">Rủi-ro</span>
+      <br>④ <i>(rút &amp; đối-soát về VND được)</i> <b>Dựng luồng rút + đối-soát số</b> — 📦hậu · <span class="tag pr">Dữ-liệu·Hậu-cần</span>
+      <br><b>Back-test:</b> 4 việc done → nhận-được + hợp-lệ + không-kẹt + rút-được = state đúng ✓. Bỏ ④ → tiền kẹt trên cổng, state CHƯA đạt → giữ (không thừa). Đủ 3 chiều → không sót loại việc.
+    </div>
+  </div></section>
+
+  <!-- ===================== 2 · BRAIN ===================== -->
+  <section class="seg" id="brain"><div class="pad" style="--accent:var(--ctrl);--accent-bg:var(--ctrlb)">
+    <div class="seg-head"><div class="badge">2</div><div class="h">
+      <h2>Brain 2 lớp — phân tầng theo nhịp</h2>
+      <span class="modpill">bất-biến · định-vị · hiện-trạng · bộ-nhớ</span>
+      <p class="role">Brain cũ trộn mọi thứ vào 1 rổ phẳng. Bản mới <b>phân tầng theo nhịp-đổi</b>: telos đổi chậm nhất, cấu-trúc/hiện-trạng nhanh nhất. Nhãn <b>altitude</b> cho mỗi file giúp khép-vòng biết leo tới đâu.</p>
+    </div></div>
+    <table class="tbl" style="--accent:var(--ctrl)">
+      <thead><tr><th>Lớp (nhịp)</th><th>File</th><th>Giữ gì</th><th>Mới/Cũ</th></tr></thead>
+      <tbody>
+        <tr><td><b>Bất-biến</b> (chậm nhất)</td><td><code>00-Brain/telos.md</code></td><td>1 câu lý-do-tồn-tại + giá-trị + ranh-giới (cái DN KHÔNG làm)</td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td><b>Định-vị</b> (vừa)</td><td><code>00-Brain/positioning.md</code></td><td>đầu-cầu · điểm-xuất-phát · cỗ-máy/moat</td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td><b>Danh-mục</b> (vừa)</td><td><code>00-Brain/curves.md</code></td><td>sổ đường-cong: (định-vị × cỗ-máy, stage, sức-khoẻ) mỗi dòng KD</td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td rowspan="5"><b>Hiện-trạng</b> (nhanh)</td><td><code>strategy.md</code></td><td>vision/ICP/positioning + thị-trường/đối-thủ</td><td>cũ</td></tr>
+        <tr><td><code>products.md</code></td><td>catalog + unit-economics</td><td>cũ</td></tr>
+        <tr><td><code>budget.md</code></td><td>ngân-sách/dòng-tiền/chi-phí</td><td>cũ</td></tr>
+        <tr><td><code>state.md</code></td><td>hiện-trạng + KPI + rủi-ro + <b>trường <code>stage</code> (phát-hiện động)</b></td><td>cũ+</td></tr>
+        <tr><td><code>headcount.md</code></td><td>nhân-sự, cơ-cấu</td><td>cũ</td></tr>
+        <tr><td><b>Cấu-trúc</b> (nhanh nhất)</td><td><code>00-Brain/structure.md</code></td><td>cây <b>khối → phòng → bộ-phận</b> suy-ra + <b>tên-kép</b> + lịch kích-hoạt theo GĐ + <b>con-trỏ về KHO</b> (mỗi đơn-vị tái-dùng ghi rõ <code>reused_from</code>)</td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td rowspan="4"><b>Bộ-nhớ</b></td><td><code>decisions-log.md</code></td><td>quyết-định đã chốt + <b>nhãn altitude</b> (telos/định-vị/moat/cấu-trúc)</td><td>cũ+</td></tr>
+        <tr><td><code>calibration.md</code></td><td>phòng khuyến-nghị → kết-quả thực</td><td>cũ</td></tr>
+        <tr><td><code>knowledge/playbook/&lt;ngành&gt;/_index.md</code></td><td><b>CHỈ-MỤC KHO</b>: bảng chuẩn-hoá khối→phòng→bộ-phận của ngành (xem §5)</td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td><code>knowledge/playbook/&lt;ngành&gt;/&lt;asset&gt;</code></td><td><b>Kho tái-dùng</b>: tài-sản đạt-chuẩn reuse-grade (git-first, Drive tùy chọn)</td><td><span class="tag nw">MỚI</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note up"><h3>AI không tự đặt telos</h3><p>Telos do <b>AI đề-xuất, CEO quyết</b> (cái AI không có: ta thật-sự quan-tâm &amp; chịu-đựng vì gì). Cổng <b>G0</b> kiểm telos có <i>mạch-lạc</i> + cơ-hội có-<i>vẻ-thật</i> trước khi đổ công-sức xuống dưới.</p></div>
+  </div></section>
+
+  <!-- ===================== 3 · LUỒNG ===================== -->
+  <section class="seg" id="luong"><div class="pad" style="--accent:var(--c2);--accent-bg:var(--c2b)">
+    <div class="seg-head"><div class="badge">3</div><div class="h">
+      <h2>Luồng tổng — PHA 0 → PHA 4</h2>
+      <span class="modpill">sinh-thành đi xuống · khép-vòng đi lên</span>
+      <p class="role">Năm pha. Chiều-sinh chạy xuống (PHA 0→2), khép-vòng chạy lên (PHA 3), mở-rộng tái-nhập (PHA 4). Mỗi pha ghi rõ <b>Vào · Ra · Cổng</b>.</p>
+    </div></div>
+
+    <div class="pre"><div class="cap">Sơ-đồ tổng</div><pre>            ┌──────────────────────────────────────────────────────────────┐
+            │ PHA 0  KHỞI-TẠO → BRAIN 2 LỚP   (telos · định-vị · curves)     │
+            │        + PHÁT-HIỆN STAGE (khai-báo → bằng-chứng → reality-check)│
+            │        Cổng G0: telos mạch-lạc? cơ-hội có-vẻ-thật?              │
+            └───────────────────────────┬──────────────────────────────────┘
+                                        ▼
+  chiều-sinh│ PHA 1  PHÂN-RÃ SINH-THÀNH  (CHỈ GĐ hiện-tại chi-tiết)          │
+     ↓      │  telos→mục-đích→[duyệt 11 KHÍA-CẠNH: "lý-do tồn-tại nay?"]      │
+            │  →mục-tiêu→nhiệm-vụ-chính→nhiệm-vụ-con (tấn/thủ/hậu)            │
+            │  → GOM NGƯỢC-LÊN + TRA-KHO mỗi tầng:                            │
+            │     việc → bộ-phận → phòng → khối (reuse/adapt/new)             │
+            │  Cổng A: duyệt KHUNG   │   Cổng B: duyệt 08-plan + cấu-trúc      │
+            └───────────────────────────┬──────────────────────────────────┘
+                                        ▼
+            │ PHA 2  THỰC-THI ĐỆ-QUY từng hành-động                          │
+            │  mỗi hành-động = brief con → router(SIMPLE/CPLX/STRAT)          │
+            │  → hội-đồng quyết-nghị (debate.js) → kế-hoạch riêng             │
+            │  → vn-executor: bước nguyên-tử + cổng cứng NEED-APPROVAL        │
+            └───────────────────────────┬──────────────────────────────────┘
+                                        ▼
+  khép-vòng │ PHA 3  ĐO → ĐỊNH-TUYẾN PHẢN-HỒI                                 │
+     ↺      │  đơn-vòng (vá, ≤K) → song-vòng (leo tầng + NEO BRAIN) → CEO     │
+            │  Cổng PASS việc · Cổng PROMOTE tái-dùng → cập-nhật _index KHO   │
+            │  Cổng GIAI-ĐOẠN: đủ mục-tiêu → re-debate số-thật → GĐ kế        │
+            └───────────────────────────┬──────────────────────────────────┘
+                                        ▼ (khi GĐ5/6, lõi khỏe)
+            │ PHA 4  MỞ-RỘNG = ĐƯỜNG-CONG MỚI  (3-phép-thử)                   │
+            │  GĐ5-nới / GĐ6-đẻ / brand-mới → TÁI-NHẬP PHA 0/1               │
+            │  bootstrap từ KHO (tra _index trước) ─────────────┐             │
+            └──────────────────────────────────────────────────┼─────────────┘
+                                        ▲                       │
+                                        └───────────────────────┘</pre></div>
+
+    <!-- PHA 0 -->
+    <div class="sub" style="--accent:var(--c2)">PHA 0 · Khởi-tạo, Brain 2 lớp, phát-hiện stage <s></s></div>
+    <p class="tx"><b>Vào:</b> khai-báo CEO. <b>Ra:</b> Brain 2 lớp (mục §2). <b>Cổng:</b> G0. Điểm mới: <b>stage = giai-đoạn HIỆN-TẠI</b>, không mặc-định GĐ1 — DN cũ có thể vào ở GĐ4-6, và stage <b>theo từng đường-cong</b>.</p>
+    <table class="tbl" style="--accent:var(--c2)">
+      <thead><tr><th>Lớp phát-hiện stage</th><th>Làm gì</th><th>Vì sao cần</th></tr></thead>
+      <tbody>
+        <tr><td><b>Khai-báo</b></td><td>CEO nói "đã có 4 quán, DT 1.2 tỷ/tháng, muốn mở rộng"</td><td>DN cũ vào hệ ở GĐ giữa, không bắt khởi-động lại từ GĐ1</td></tr>
+        <tr><td><b>Đối-chiếu bằng-chứng</b></td><td>đọc <code>state/budget.md</code> → suy stage bằng rubric câu-sống-còn</td><td>số nói thật hơn nhãn</td></tr>
+        <tr><td><b>Reality-check</b></td><td>cross-exam stage khai-báo vs bằng-chứng + tiêu-chí cổng</td><td>người hay tưởng mình ở GĐ5 trong khi chưa qua PMF/tối-ưu → chặn mở-rộng-sớm NGAY từ intake</td></tr>
+      </tbody>
+    </table>
+
+    <!-- PHA 1 -->
+    <div class="sub" style="--accent:var(--c2)">PHA 1 · Phân-rã sinh-thành (chỉ GĐ hiện-tại chi-tiết) <s></s></div>
+    <p class="tx">Đây là trái tim trục dọc. Thứ-tự đúng nhân-quả: <b>cấu-trúc sinh SAU việc</b>, không trước — và sinh bằng cách <b>gom NGƯỢC-LÊN</b>, tra KHO ở mỗi tầng.</p>
+    <ul class="li">
+      <li><b>1A · Lăng-kính khởi-động:</b> dùng 7 khối / 12 phòng nền (+ pack ngành) làm <i>bộ kính để NGHĨ</i> — chưa phải org-chart.</li>
+      <li><b>1B · Sinh cây việc</b> (chỉ GĐ hiện-tại; GĐ sau cuộn-sóng): <code>telos → mục-đích GĐ (= câu-sống-còn)</code> → duyệt <b>checklist 11 KHÍA-CẠNH</b> (4 nhóm: GIÁ-TRỊ <i>sản-phẩm·thị-trường·khách</i> · NGUỒN-LỰC <i>tiền·người·hậu-cần</i> · VẬN-HÀNH&amp;TRI-THỨC <i>vận-hành·dữ-liệu</i> · BẢO-VỆ&amp;QUAN-HỆ <i>rủi-ro·đối-tác·bền-vững</i>), mỗi cái hỏi <b>"có lý-do tồn-tại ở GĐ này?"</b> (cổng cắt-tỉa) → nếu CÓ: <code>mục-tiêu</code> → <b>sinh <code>nhiệm-vụ-chính</code> bằng cơ-chế 3 lớp không-sót</b> (§1.4: điều-kiện-đủ → lưới 3 chiều → chéo 11 khía-cạnh → back-test) → <code>nhiệm-vụ-con</code> theo <b>tấn-công / phòng-thủ / hậu-cần</b> → đặt-tên-chuẩn.</li>
+      <li><b>1C · SUY cấu-trúc từ việc — NGƯỢC-LÊN + TRA-KHO (xem khung dưới):</b> từ danh-sách đầy-đủ nhiệm-vụ-con, gom dần lên 3 tầng <b>bộ-phận → phòng → khối</b>; <b>mỗi tầng tra <code>_index.md</code> KHO</b> xem đã có &amp; khớp ngữ-cảnh chưa → <b>tái-dùng / tinh-chỉnh / đẻ mới</b>. Gắn-nhãn mỗi phòng kích-hoạt ở GĐ nào (GĐ hiện-tại live, còn lại ngủ). <i>Chỉ đẻ đơn-vị khi việc lặp đủ nhiều.</i></li>
+      <li><b>1D · Thứ-tự ưu-tiên</b> cho action-list GĐ hiện-tại.</li>
+    </ul>
+    <div class="pre"><div class="cap">PHA 1C · Gom NGƯỢC-LÊN, tra KHO tái-dùng từng tầng</div><pre> ĐẦU VÀO: danh-sách ĐẦY-ĐỦ nhiệm-vụ-con (GĐ hiện-tại), mỗi việc có {đầu-vào, đầu-ra, ràng-buộc}
+
+ TẦNG 0 · nhiệm-vụ-con   ─ mỗi việc → tra _index KHO (theo khía-cạnh+GĐ+đầu-vào/ra)
+                            ├─ khớp ngữ-cảnh ≥ ngưỡng → REUSE (dùng luôn SOP/template)
+                            ├─ gần đúng             → ADAPT (tinh-chỉnh tham-số)
+                            └─ không có / khác hẳn  → NEW   (đẻ mới)
+        │ gom việc cùng năng-lực
+        ▼
+ TẦNG 1 · BỘ-PHẬN        ─ cụm việc → bộ-phận ứng-viên → tra KHO → reuse / adapt / new
+        │ gom bộ-phận cùng chức-năng
+        ▼
+ TẦNG 2 · PHÒNG          ─ tên-kép (neo canonical-12) → tra KHO → reuse / adapt / new
+        │ gom phòng cùng sứ-mệnh
+        ▼
+ TẦNG 3 · KHỐI           ─ neo 7 khối canonical → tra KHO → reuse / adapt / new
+        ▼
+ ĐẦU RA: cây CẤU-TRÚC 3 tầng (khối ▷ phòng ▷ bộ-phận) SUY-RA-TỪ-VIỆC, tái-dùng tối-đa.
+         Mỗi nút ghi: maps_to canonical · reused_from (đường-dẫn KHO) · GĐ kích-hoạt.</pre></div>
+    <div class="pre"><div class="cap">Vì sao sinh mục-tiêu từ KHÍA-CẠNH chứ không từ PHÒNG-BAN</div><pre> KHÍA-CẠNH = hỏi "cần đạt CÁI GÌ"   (thuộc về MỤC-TIÊU, đầu chuỗi)
+ PHÒNG-BAN = trả lời "AI có năng-lực làm" (thuộc THỰC-THI, cuối chuỗi — suy ra SAU)
+
+ → Sinh mục-tiêu từ phòng-ban = lấy cái-có-sau đẻ cái-có-trước = vòng luẩn-quẩn + "vẽ-sẵn".
+ → Phòng-ban map NHIỀU-NHIỀU với khía-cạnh (rủi-ro trải khắp pháp-chế+tài-chính+vận-hành)
+   nên là trục SINH lộn-xộn; khía-cạnh là trục sạch, BẤT-BIẾN, đảm-bảo KHÔNG-SÓT.</pre></div>
+    <div class="note"><h3>Vào · Ra · Cổng (PHA 1)</h3><p><b>Vào:</b> Brain + stage + <code>_index.md</code> KHO ngành. <b>Ra:</b> <code>06-structure.md</code> (cây khối→phòng→bộ-phận + lịch kích-hoạt + con-trỏ reuse) · <code>08-execution-plan.md</code> (GĐ hiện-tại chi-tiết + GĐ sau chỉ điều-kiện-cổng). <b>Cổng A</b> duyệt KHUNG (telos/định-vị/lăng-kính/stage) — sớm, rẻ, trước khi phân-rã tốn-kém. <b>Cổng B</b> duyệt <code>08-plan</code> + cây cấu-trúc-suy-ra (gồm <b>báo-cáo tra-kho</b>: cái nào reuse, cái nào new) CÙNG LÚC — cấu-trúc chính là "view gom nhóm" của cây việc, duyệt rời sẽ vô-nghĩa.</p></div>
+
+    <!-- PHA 2 -->
+    <div class="sub" style="--accent:var(--c2)">PHA 2 · Thực-thi đệ-quy từng hành-động <s></s></div>
+    <p class="tx">Ý <b>đệ-quy</b> (fractal): mỗi hành-động trong <code>08-plan</code> = một <b>brief con</b> → vào đúng máy cũ. Thêm <b>phanh chi-phí</b> để đệ-quy không nổ token.</p>
+    <ul class="li">
+      <li><b>Router phân-loại</b> SIMPLE/COMPLEX/STRATEGIC → escalation ladder: đa-số SIMPLE (1-2 lăng-kính, Sonnet, bỏ cross-exam/red-team) → rẻ; chỉ STRATEGIC mới bung full 4-pha + Opus.</li>
+      <li><b>Hội-đồng quyết-nghị</b> (<code>debate.js</code> 4-pha) đúng độ-sâu → ra <b>kế-hoạch-thực-thi-riêng</b> (<code>10-thuc-thi-&lt;hành-động&gt;.md</code>).</li>
+      <li><b>vn-executor</b>: phân-rã bước nguyên-tử (AI-AUTO / NEED-INFO / NEED-APPROVAL / HUMAN-ONLY) → chạy bằng tool/MCP thật → sổ <code>10-run-state.md</code>.</li>
+    </ul>
+    <div class="gate"><span class="ic">⛒</span><p><b>Cổng cứng (luôn NEED-APPROVAL, không bao giờ AI-AUTO):</b> chi tiền · ký/nộp hồ-sơ pháp-lý · công-bố ra ngoài · gửi email/tin · thao-tác không hoàn-tác. Bước nguyên-tử là <b>đáy</b> — không phân-rã vô-tận.</p></div>
+
+    <!-- PHA 3 -->
+    <div class="sub" style="--accent:var(--ctrl)">PHA 3 · Khép-vòng — đo, định-tuyến, nghiệm-thu <s></s></div>
+    <ul class="li">
+      <li><b>Đơn-vòng</b> (mặc-định, ≤ K vòng): vá tại-chỗ trong kế-hoạch hành-động + ghi <code>lessons.md</code>.</li>
+      <li>Hết K → <b>song-vòng</b>: leo đúng tầng (cấu-trúc→moat→định-vị→hiếm telos) <b>+ NEO vào file Brain của tầng đó</b> (bảng §6.2). Đổi tầng trên ⇒ <b>cascade</b> sinh-lại nhánh dưới. <i>Đây cũng là chỗ thêm/bớt/sửa bộ-phận/phòng/khối khi vận-hành thật.</i></li>
+      <li>Vẫn fail → <b>CEO quyết</b> (giết hành-động / đổi-hướng). Không lặp mù.</li>
+      <li><b>Hai cổng nghiệm-thu TÁCH BIỆT:</b> <span class="tag g5">PASS việc</span> (đạt KPI/OKR → xong) ≠ <span class="tag g6">PROMOTE tái-dùng</span> (đạt rubric reuse-grade → cất KHO <b>+ ghi 1 dòng vào <code>_index.md</code></b>).</li>
+      <li><b>Cổng GIAI-ĐOẠN:</b> đủ mục-tiêu GĐ hiện-tại ⇒ câu-sống-còn đã trả-lời ⇒ <b>re-debate SỐ THẬT</b> tại cổng (PMF / tối-ưu) ⇒ vào GĐ kế ⇒ PHA 1 mở chi-tiết GĐ đó.</li>
+    </ul>
+    <div class="note warn"><h3>Đừng vì một chiến-dịch lỗi mà đổi cả telos</h3><p>Đa-số phản-hồi <b>nên dừng ở đơn-vòng</b>. Chỉ khi vá tại-chỗ không nổi, dữ-liệu-thật mới leo song-vòng — và <b>phải có bằng-chứng từ file Brain tương-ứng</b>, không lý-luận trên không. Telos là tầng chậm nhất; chỉ biến-cố-thế-giới-đổi kéo dài mới được chạm (re-founding, không phải A/B-test).</p></div>
+
+    <!-- PHA 4 -->
+    <div class="sub" style="--accent:var(--ctrl)">PHA 4 · Mở-rộng = đường-cong mới tái-nhập <s></s></div>
+    <p class="tx">Vòng-đời GĐ1-6 chạy <b>trên mỗi đường-cong</b>. v1 = đường đầu. "Mở-rộng" = đẻ đường-cong-2 → chạy <b>3-phép-thử</b> → tái-nhập PHA 0/1 nhưng <b>bootstrap từ KHO</b> (tra <code>_index.md</code> trước, reuse cây khối/phòng/bộ-phận sẵn) — đây là lúc cổng PROMOTE "trả lãi": kho càng dày &amp; chỉ-mục càng chuẩn, đẻ đường sau càng rẻ. Khép vòng đầu ↔ cuối → hệ tự bồi-đắp.</p>
+    <table class="tbl" style="--accent:var(--ctrl)">
+      <thead><tr><th>Phép-thử (tài-sản độc-lập)</th><th>Hỏi</th><th>Quyết-định</th></tr></thead>
+      <tbody>
+        <tr><td>① Cỗ-máy/moat</td><td>chạy thẳng sang chỗ mới được?</td><td>chuyển được → <span class="tag g5">GĐ5 nới</span> · phải bồi mới → <span class="tag g6">GĐ6 đẻ</span></td></tr>
+        <tr><td>② Telos</td><td>có chung không?</td><td>chung → cùng nhà · khác → <span class="tag nw">brand mới</span></td></tr>
+        <tr><td>③ Uy-tín-tên (brand equity)</td><td>tên cũ giúp bán cái mới?</td><td>giúp → tên-mẹ · không → tên-phụ</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <!-- ===================== 4 · KHỐI · 12 PHÒNG · TÊN-KÉP ===================== -->
+  <section class="seg" id="phong"><div class="pad" style="--accent:var(--c3);--accent-bg:var(--c3b)">
+    <div class="seg-head"><div class="badge">4</div><div class="h">
+      <h2>7 khối · 12 phòng canonical &amp; cơ-chế tên-kép</h2>
+      <span class="modpill">neo cố-định + skin ngành · 11 khía-cạnh</span>
+      <p class="role">12 phòng nền = <b>neo canonical</b> (mọi ngành đều có), gom thành <b>7 khối canonical</b> để có tầng trên cho cấu-trúc. Cấu-trúc suy-ra mang <b>tên-kép</b>: tên-ngành (hiển-thị) + ánh-xạ về 1 trong 12. Giữ 12 ổn-định (đã wired vào 192 template + 33 persona + packs); xử 2 chỗ dư bằng <b>kích-hoạt-theo-GĐ</b>.</p>
+    </div></div>
+
+    <div class="sub" style="--accent:var(--c3)">4.1 · 11 khía-cạnh (sau CEO-review) → phòng phụ-trách <s></s></div>
+    <p class="tx">v3.2 <b>tách "Hậu-cần / Dữ-liệu" thành 2</b> (Dữ-liệu ≠ Hậu-cần) → 9 khía-cạnh, rồi <b>CEO-review</b> (đóng vai điều-hành tập-đoàn đa-tác-nhân) bổ-sung 2 dimension generic còn sót: <b>Đối-tác/Hệ-sinh-thái</b> &amp; <b>Bền-vững/Stakeholder</b> ⇒ <b>11 khía-cạnh</b>, gom 4 nhóm cho MECE.</p>
+    <table class="tbl" style="--accent:var(--c3)">
+      <thead><tr><th>Nhóm</th><th>#</th><th>Khía-cạnh (11)</th><th>Phòng canonical phụ-trách</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3"><b>GIÁ-TRỊ</b> (tạo &amp; bán giá-trị)</td><td>1</td><td>Sản-phẩm</td><td>09 Sản-phẩm &amp; Công-nghệ</td></tr>
+        <tr><td>2</td><td>Thị-trường</td><td>02 Chiến-lược · 07 Marketing</td></tr>
+        <tr><td>3</td><td>Khách-hàng</td><td>06 Bán-hàng · 08 Khách-hàng</td></tr>
+        <tr><td rowspan="3"><b>NGUỒN-LỰC</b> (chạy bằng gì)</td><td>4</td><td>Tiền</td><td>03 Tài-chính · 12 Tăng-trưởng (vốn)</td></tr>
+        <tr><td>5</td><td>Con-người</td><td>04 Nhân-sự · 10 Đào-tạo</td></tr>
+        <tr><td>6</td><td><b>Hậu-cần</b> (chuỗi-cung/hạ-tầng)</td><td>05 Vận-hành (mua/chuỗi-cung) · 03 (chi-phí mua)</td></tr>
+        <tr><td rowspan="2"><b>VẬN-HÀNH &amp; TRI-THỨC</b></td><td>7</td><td>Vận-hành</td><td>05 Vận-hành</td></tr>
+        <tr><td>8</td><td><b>Dữ-liệu</b> (đo-lường/thông-tin)</td><td>11 Báo-cáo · 09 (hạ-tầng dữ-liệu)</td></tr>
+        <tr><td rowspan="3"><b>BẢO-VỆ &amp; QUAN-HỆ</b></td><td>9</td><td>Rủi-ro</td><td>01 Quản-trị &amp; Pháp-lý (+ xuyên-suốt)</td></tr>
+        <tr><td>10</td><td><b>Đối-tác &amp; Hệ-sinh-thái</b> <span class="tag nw">MỚI</span></td><td>02 Chiến-lược · 06 Bán-hàng (kênh) · 12 (NĐT/JV) · 05 (NCC)</td></tr>
+        <tr><td>11</td><td><b>Bền-vững &amp; Stakeholder</b> <span class="tag nw">MỚI</span></td><td>01 Quản-trị · 02 Chiến-lược · 11 (báo-cáo ESG)</td></tr>
+      </tbody>
+    </table>
+    <div class="note ok"><h3>CEO-review: 9 → 11 khía-cạnh (đủ &amp; không-sót)</h3><p><b>Tách Dữ-liệu ↔ Hậu-cần (đúng):</b> Dữ-liệu = <i>tài-sản &amp; đo-lường</i> (instrument, analytics, privacy, IP-dữ-liệu); Hậu-cần = <i>chuỗi-cung &amp; hạ-tầng đầu-vào</i> (mua, kho, vận-chuyển, cloud). Hai trục khác hẳn. <b>Bổ-sung 2 dimension:</b> (10) <b>Đối-tác/Hệ-sinh-thái</b> — kênh, liên-minh, nền-tảng 2 phía, nhượng-quyền, dev/API, JV, NĐT-là-đối-tác; khác Khách-hàng (cầu) &amp; Hậu-cần (cung đầu-vào). (11) <b>Bền-vững/Stakeholder</b> — giấy-phép-xã-hội, niềm-tin cơ-quan-quản-lý ngoài tuân-thủ, môi-trường/cộng-đồng/ESG; khác Rủi-ro (phòng-thủ pháp-lý). <b>Hai cái mới NGỦ lâu nhất</b> (thường thức ở GĐ4-6, ngành quản-chế, DN lớn/đại-chúng) — đúng triết-lý cổng cắt-tỉa: khía-cạnh "chưa có lý-do ở GĐ này" thì bỏ qua, phòng tương-ứng ngủ. Vẫn <b>GIỮ 12 phòng làm neo</b>; khía-cạnh ≠ phòng (ánh-xạ nhiều-nhiều), không đẻ thêm phòng cho 2 khía-cạnh mới.</p></div>
+
+    <div class="sub" style="--accent:var(--c3)">4.2 · 7 KHỐI canonical (tầng trên của cấu-trúc) <s></s></div>
+    <p class="tx">Khối = tầng gom phòng, cho cây cấu-trúc có đỉnh để gom NGƯỢC-LÊN (PHA 1C) &amp; cho KHO chỉ-mục một cấp trên ổn-định. 7 khối phủ trọn 12 phòng (mỗi phòng thuộc đúng 1 khối — MECE).</p>
+    <table class="tbl" style="--accent:var(--c3)">
+      <thead><tr><th>Mã</th><th>Khối canonical</th><th>Phòng (dept) thuộc khối</th><th>Khía-cạnh chính phục-vụ</th></tr></thead>
+      <tbody>
+        <tr><td><code>K1</code></td><td>Quản-trị &amp; Chiến-lược</td><td>01 Quản-trị · 02 Chiến-lược · 12 Tăng-trưởng</td><td>Rủi-ro · Thị-trường · Bền-vững · Đối-tác · Tiền(vốn)</td></tr>
+        <tr><td><code>K2</code></td><td>Tài-chính</td><td>03 Tài-chính</td><td>Tiền · Hậu-cần(chi-phí)</td></tr>
+        <tr><td><code>K3</code></td><td>Thị-trường &amp; Khách-hàng</td><td>06 Bán-hàng · 07 Marketing · 08 Khách-hàng</td><td>Khách-hàng · Thị-trường · Đối-tác(kênh)</td></tr>
+        <tr><td><code>K4</code></td><td>Sản-phẩm &amp; Công-nghệ</td><td>09 Sản-phẩm &amp; Công-nghệ</td><td>Sản-phẩm · Dữ-liệu(hạ-tầng)</td></tr>
+        <tr><td><code>K5</code></td><td>Vận-hành &amp; Chuỗi-cung</td><td>05 Vận-hành</td><td>Vận-hành · Hậu-cần</td></tr>
+        <tr><td><code>K6</code></td><td>Con-người</td><td>04 Nhân-sự · 10 Đào-tạo</td><td>Con-người</td></tr>
+        <tr><td><code>K7</code></td><td>Dữ-liệu &amp; Đo-lường</td><td>11 Báo-cáo</td><td>Dữ-liệu</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub" style="--accent:var(--c3)">4.3 · Tên-kép (3 nhãn / đơn-vị, mọi tầng) <s></s></div>
+    <table class="tbl" style="--accent:var(--c3)">
+      <thead><tr><th>Nhãn</th><th>Ví-dụ (F&amp;B · bộ-phận)</th><th>Dùng để</th></tr></thead>
+      <tbody>
+        <tr><td><b>Tên-ngành</b> (hiển-thị)</td><td>"Bếp trung-tâm (commissary)"</td><td>người trong ngành đọc hiểu ngay</td></tr>
+        <tr><td><b>Tên-năng-lực chuẩn</b></td><td>"Sản-xuất &amp; Chuẩn-hoá món"</td><td>so-sánh xuyên ngành + làm KHÓA tra KHO</td></tr>
+        <tr><td><b>Ánh-xạ canonical</b></td><td><code>maps_to: K4/dept-09 (+K5/dept-05)</code></td><td>neo về 7 khối/12 phòng + tái-dùng template/persona</td></tr>
+      </tbody>
+    </table>
+    <p class="tx">Cắm vào trường <code>aliases_vn</code> (đã có trong <code>department.yaml</code>) + <code>extends_departments</code> của pack. Tên-kép áp cho <b>cả 3 tầng</b> (khối/phòng/bộ-phận); <b>tên-năng-lực-chuẩn</b> chính là khóa để PHA 1C tra KHO. Một số đơn-vị ngành là <i>chuyên-sâu</i> của 1 phòng canonical (map "trực-thuộc gần nhất", không 1-đối-1 cứng).</p>
+  </div></section>
+
+  <!-- ===================== 5 · KHO CHỈ-MỤC ===================== -->
+  <section class="seg" id="kho"><div class="pad" style="--accent:var(--c01);--accent-bg:var(--c01b)">
+    <div class="seg-head"><div class="badge">5</div><div class="h">
+      <h2>KHO chỉ-mục theo ngành — chuẩn-hoá để tra &amp; dọn</h2>
+      <span class="modpill">knowledge/playbook/&lt;ngành&gt;/_index.md</span>
+      <p class="role">Kho tái-dùng chỉ "trả lãi" nếu <b>tra được</b> &amp; <b>dọn được</b>. Mỗi ngành có một <b>bảng chỉ-mục chuẩn-hoá</b> theo cây <b>khối → phòng → bộ-phận</b>, là nơi PHA 1C tra reuse và PHA 3 ghi PROMOTE. Đây là "danh-bạ" của kho, tách khỏi nội-dung tài-sản.</p>
+    </div></div>
+
+    <div class="sub" style="--accent:var(--c01)">5.1 · Cây thư-mục KHO <s></s></div>
+    <div class="pre"><div class="cap">knowledge/playbook/&lt;ngành&gt;/</div><pre> knowledge/playbook/&lt;ngành&gt;/
+ ├── _index.md                ← CHỈ-MỤC chuẩn-hoá (bảng khối→phòng→bộ-phận + tài-sản)
+ ├── K1-quan-tri-chien-luoc/
+ │   └── dept-01-governance/
+ │       └── &lt;bo-phan-slug&gt;/  ← SOP.md · template/ · persona.md · rubric.md · meta.yaml
+ ├── K4-san-pham-cong-nghe/
+ │   └── dept-09-product-tech/
+ │       └── ...
+ └── ...                      ← chỉ tạo nhánh khi có tài-sản đạt reuse-grade</pre></div>
+
+    <div class="sub" style="--accent:var(--c01)">5.2 · Lược-đồ <code>_index.md</code> (chuẩn cột) <s></s></div>
+    <table class="tbl" style="--accent:var(--c01)">
+      <thead><tr><th>Cột</th><th>Ý-nghĩa</th><th>Ví-dụ</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>khóa chuẩn-hoá <code>&lt;ngành&gt;.&lt;khối&gt;.&lt;phòng&gt;.&lt;bộ-phận&gt;</code></td><td><code>fnb.K5.dept-05.thu-mua-cung-ung</code></td></tr>
+        <tr><td><code>tầng</code></td><td>khối / phòng / bộ-phận / tài-sản</td><td>bộ-phận</td></tr>
+        <tr><td><code>tên-năng-lực</code></td><td>tên-chuẩn (khóa so-khớp khi tra)</td><td>"Thu-mua &amp; Cung-ứng"</td></tr>
+        <tr><td><code>tên-ngành</code></td><td>alias hiển-thị</td><td>"Thu-mua NL bếp"</td></tr>
+        <tr><td><code>maps_to</code></td><td>neo canonical</td><td><code>K5 / dept-05</code></td></tr>
+        <tr><td><code>khía-cạnh</code></td><td>1 trong 11 (phục-vụ)</td><td>Hậu-cần</td></tr>
+        <tr><td><code>GĐ</code></td><td>GĐ thường kích-hoạt</td><td>GĐ3-5</td></tr>
+        <tr><td><code>đầu-vào / đầu-ra</code></td><td>hợp-đồng ngữ-cảnh (để so-khớp reuse)</td><td>vào: nhu-cầu NL · ra: hợp-đồng NCC + giá</td></tr>
+        <tr><td><code>tài-sản</code></td><td>file kèm (SOP/template/persona/rubric)</td><td><code>SOP.md, template/bang-gia.xlsx</code></td></tr>
+        <tr><td><code>reuse-grade</code></td><td>A (dùng-luôn) / B (cần tinh-chỉnh) / C (tham-khảo)</td><td>A</td></tr>
+        <tr><td><code>trạng-thái</code></td><td>live / ngủ / <b>deprecated</b> (để DỌN)</td><td>live</td></tr>
+        <tr><td><code>nguồn · phiên-bản</code></td><td>task gốc PROMOTE + version</td><td><code>2026-06-29-... v2</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub" style="--accent:var(--c01)">5.3 · Vòng-đời mục KHO (thêm · tra · dọn) <s></s></div>
+    <ul class="li">
+      <li><b>THÊM (PROMOTE):</b> cổng PROMOTE ở PHA 3 đạt rubric reuse-grade → ghi tài-sản + chèn 1 dòng <code>_index.md</code> (đủ cột, <code>id</code> chuẩn-hoá). <i>Không qua cổng = không vào index.</i></li>
+      <li><b>TRA (REUSE):</b> PHA 1C / PHA 4 so-khớp <code>tên-năng-lực + khía-cạnh + GĐ + đầu-vào/ra</code> → reuse / adapt / new (rubric §6.5).</li>
+      <li><b>DỌN:</b> tài-sản lỗi-thời/trùng → đặt <code>trạng-thái: deprecated</code> (giữ vết, không xóa cứng) + trỏ <code>superseded_by</code>; định-kỳ rà <code>_index.md</code> gộp trùng, hạ-cấp reuse-grade nếu calibration cho thấy dùng-lại hay hỏng.</li>
+      <li><b>CHUẨN tên:</b> slug không dấu-cách, kebab-case; <code>tên-năng-lực</code> theo từ-điển canonical (đồng-bộ với 12 phòng) để khóa tra ổn-định xuyên ngành.</li>
+    </ul>
+    <div class="note ok"><h3>Vì sao index tách khỏi tài-sản</h3><p>Index nhẹ → đọc nhanh khi tra (không phải mở từng file); chuẩn-hoá khóa → so-khớp được bằng máy; có cột <code>trạng-thái/phiên-bản</code> → <b>dọn kho có kỷ-luật</b> thay vì để rác chồng rác. Cây thư-mục theo khối/phòng/bộ-phận khớp đúng cây cấu-trúc PHA 1C ⇒ tra-kho &amp; sinh-cấu-trúc dùng chung một bản-đồ.</p></div>
+  </div></section>
+
+  <!-- ===================== 6 · BẢNG TRA ===================== -->
+  <section class="seg" id="bang"><div class="pad" style="--accent:var(--c5);--accent-bg:var(--c5b)">
+    <div class="seg-head"><div class="badge">6</div><div class="h">
+      <h2>Bảng tra tham-chiếu</h2>
+      <span class="modpill">6 bảng luật khung (generic)</span>
+      <p class="role">Sáu bảng generic dùng đi dùng lại cho mọi DN: phát-hiện stage, định-tuyến song-vòng có neo Brain, sinh mục-tiêu theo 11 khía-cạnh, lưới sinh nhiệm-vụ-chính không-sót, rubric reuse-decision tra-kho, đối-soát tên-năng-lực chuẩn.</p>
+    </div></div>
+
+    <div class="sub" style="--accent:var(--c5)">6.1 · Rubric phát-hiện stage <s></s></div>
+    <table class="tbl" style="--accent:var(--c5)">
+      <thead><tr><th>GĐ</th><th>Câu-hỏi-sống-còn</th><th>Dấu-hiệu nhận biết (đọc Brain)</th></tr></thead>
+      <tbody>
+        <tr><td>GĐ1</td><td>khả-thi? có bài-toán đáng giải?</td><td>chưa rõ vấn-đề / chưa có sản-phẩm</td></tr>
+        <tr><td>GĐ2</td><td>kéo &amp; trả? (PMF)</td><td>có sản-phẩm, đang tìm khách tự quay-lại &amp; trả tiền</td></tr>
+        <tr><td>GĐ3</td><td>giao thật ở điều-kiện thật?</td><td>PMF rồi, lo giao-hàng/vận-hành ổn-định</td></tr>
+        <tr><td>GĐ4</td><td>lãi/đơn-vị, lặp được?</td><td>giao ổn, đang tối-ưu biên lãi từng đơn-vị</td></tr>
+        <tr><td>GĐ5</td><td>nhân không vỡ?</td><td>đang nhân-bản sang điểm/thị-trường mới</td></tr>
+        <tr><td>GĐ6</td><td>duy-trì + tái-tạo?</td><td>lõi chín, lời đều + cần gieo đường-cong kế</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub" style="--accent:var(--c5)">6.2 · Định-tuyến song-vòng (leo tầng + NEO BRAIN) <s></s></div>
+    <table class="tbl" style="--accent:var(--c5)">
+      <thead><tr><th>Tín-hiệu từ chạy-thật</th><th>Leo tầng</th><th>Neo + cập-nhật Brain file</th><th>Nhịp</th></tr></thead>
+      <tbody>
+        <tr><td>quy-trình tắc · vai quá-tải</td><td><b>Cấu-trúc</b></td><td><code>structure.md</code> + <code>headcount.md</code></td><td>nhanh</td></tr>
+        <tr><td>moat xói · kinh-tế-đơn-vị xấu</td><td><b>Cỗ-máy/moat</b></td><td><code>positioning.md</code>(moat) + <code>products.md</code>(unit-econ) + <code>budget.md</code></td><td>vừa</td></tr>
+        <tr><td>đầu-cầu cạn · sai ngách</td><td><b>Định-vị</b></td><td><code>positioning.md</code>(đầu-cầu) + <code>strategy.md</code>(ICP/thị-trường)</td><td>vừa–chậm</td></tr>
+        <tr><td>chạy đúng mọi thứ vẫn èo-uột</td><td><b>Telos</b></td><td><code>telos.md</code> (+ <code>curves.md</code> xét danh-mục)</td><td>rất chậm</td></tr>
+        <tr><td><i>luôn đọc để biết tầng nào vỡ</i></td><td>bằng-chứng nền</td><td><code>state.md</code> + <code>budget.md</code> (số thật)</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="tx">Ba cái lợi khi neo file: (1) re-debate có grounding — dùng đúng kỷ-luật "mọi số phải trích Brain" sẵn có; (2) biết <b>chính-xác file nào để cập-nhật</b> khi song-vòng nổ; (3) chống leo nhầm tầng (tín-hiệu ở <code>products/budget</code> → sửa moat, đừng vội đụng <code>telos</code>).</p>
+
+    <div class="sub" style="--accent:var(--c5)">6.3 · Sinh mục-tiêu theo 11 khía-cạnh (mẫu) <s></s></div>
+    <table class="tbl" style="--accent:var(--c5)">
+      <thead><tr><th>Khía-cạnh</th><th>Hỏi (cổng lọc)</th><th>Nếu CÓ → mục-tiêu (dạng trạng-thái)</th></tr></thead>
+      <tbody>
+        <tr><td>1 Sản-phẩm</td><td>GĐ này có lý-do lo sản-phẩm?</td><td>"Chất-lượng/định-nghĩa sản-phẩm <b>đạt chuẩn X</b>"</td></tr>
+        <tr><td>2 Thị-trường</td><td>...lo ngách/định-vị?</td><td>"Đầu-cầu &amp; thông-điệp <b>được xác-nhận</b>"</td></tr>
+        <tr><td>3 Khách-hàng</td><td>...lo khách?</td><td>"Tỷ-lệ khách quay-lại <b>≥ Y%</b>"</td></tr>
+        <tr><td>4 Tiền</td><td>...lo tiền/vốn?</td><td>"Hạ-tầng thu tiền <b>sẵn-sàng</b>" / "Biên lãi/đv <b>≥ Z%</b>"</td></tr>
+        <tr><td>5 Con-người</td><td>...lo năng-lực/đội-ngũ?</td><td>"Vai then-chốt <b>có người thay được founder</b>"</td></tr>
+        <tr><td>6 Hậu-cần</td><td>...lo chuỗi-cung/hạ-tầng đầu-vào?</td><td>"Nguồn-cung &amp; hạ-tầng <b>ổn giá, đủ, đúng hạn</b>"</td></tr>
+        <tr><td>7 Vận-hành</td><td>...lo quy-trình giao/chạy?</td><td>"Quy-trình lõi <b>chạy ổn-định, lặp được</b>"</td></tr>
+        <tr><td>8 Dữ-liệu</td><td>...lo đo-lường/thông-tin?</td><td>"Số then-chốt <b>được đo &amp; tin-cậy</b> (1 nguồn-sự-thật)"</td></tr>
+        <tr><td>9 Rủi-ro</td><td>...có gì có-thể giết DN?</td><td>"Rủi-ro pháp-lý/IP <b>được chặn</b> (cổng kiểm)"</td></tr>
+        <tr><td>10 Đối-tác <span class="tag nw">MỚI</span></td><td>...cần kênh/liên-minh/nền-tảng?</td><td>"Kênh/đối-tác then-chốt <b>đã chốt &amp; ràng-buộc rõ</b>"</td></tr>
+        <tr><td>11 Bền-vững <span class="tag nw">MỚI</span></td><td>...có nghĩa-vụ xã-hội/quản-chế đáng lo?</td><td>"Giấy-phép-xã-hội &amp; tuân-thủ ESG <b>được duy-trì</b>"</td></tr>
+      </tbody>
+    </table>
+    <p class="tx">Khía-cạnh "chưa có lý-do ở GĐ này" → <b>bỏ qua</b> (phòng tương-ứng ngủ). 10–11 thường ngủ ở GĐ0-2.</p>
+
+    <div class="sub" style="--accent:var(--c5)">6.4 · Lưới sinh nhiệm-vụ-chính không-sót (§1.4 dạng bảng) <s></s></div>
+    <table class="tbl" style="--accent:var(--c5)">
+      <thead><tr><th>Lớp</th><th>Câu hỏi sinh / soi</th><th>Cho ra / bắt được</th><th>Test</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 · Sinh</b></td><td>"State đúng khi NHỮNG điều-kiện nào đồng-thời thành-lập?"</td><td>mỗi điều-kiện chưa-đạt → 1 nhiệm-vụ-chính (động-từ)</td><td>gap hiện-trạng→đích</td></tr>
+        <tr><td><b>2 · Soi 3 chiều</b></td><td>🗡 LÀM gì tạo state? · 🛡 state hỏng kiểu gì? · 📦 cần CẤP gì để chạy?</td><td>bổ-sung việc thủ/hậu hay bị quên</td><td>đủ cả 3 chiều</td></tr>
+        <tr><td><b>3 · Quét ngang</b></td><td>"Đạt state này đụng khía-cạnh nào khác chưa có việc?"</td><td>việc sót xuyên 11 khía-cạnh</td><td>không sót khía-cạnh</td></tr>
+        <tr><td><b>Cổng nghiệm</b></td><td>mọi việc done → state tự-động đúng? · bỏ 1 việc còn đạt? · 2 việc chồng?</td><td>chốt tập nhiệm-vụ-chính</td><td>đủ · tối-thiểu · không-trùng</td></tr>
+        <tr><td><b>Neo đo</b></td><td>việc này đóng điều-kiện nào? đo bằng gì?</td><td>OKR (tấn) / KPI-ngưỡng (thủ·hậu)</td><td>không neo được = cắt</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub" style="--accent:var(--c5)">6.5 · Rubric reuse-decision (tra-kho từng tầng) <s></s></div>
+    <table class="tbl" style="--accent:var(--c5)">
+      <thead><tr><th>Khớp ngữ-cảnh (đầu-vào/ra · ràng-buộc · GĐ · khía-cạnh)</th><th>Quyết-định</th><th>Hành-động</th></tr></thead>
+      <tbody>
+        <tr><td>Khớp cao (reuse-grade A, hợp-đồng ngữ-cảnh trùng)</td><td><span class="tag g5">REUSE</span></td><td>dùng-luôn tài-sản KHO; <code>structure.md</code> ghi <code>reused_from</code></td></tr>
+        <tr><td>Gần đúng (lệch tham-số/quy-mô, reuse-grade B)</td><td><span class="tag g6">ADAPT</span></td><td>tinh-chỉnh cho khớp ngữ-cảnh; ghi delta để PROMOTE bản-mới sau</td></tr>
+        <tr><td>Không có / khác hẳn ngữ-cảnh</td><td><span class="tag nw">NEW</span></td><td>đẻ mới; nếu chạy tốt → ứng-viên PROMOTE (cổng §3 PHA 3)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub" style="--accent:var(--c5)">6.6 · Từ-điển tên-năng-lực chuẩn (khóa tra-kho) <s></s></div>
+    <p class="tx">Mỗi đơn-vị (khối/phòng/bộ-phận) PHẢI có <b>tên-năng-lực chuẩn</b> theo từ-điển canonical (đồng-bộ 7 khối / 12 phòng §4). Đây là khóa so-khớp xuyên-ngành: tra-kho, đối-chiếu calibration, gộp trùng khi dọn — tất cả dựa vào tên-chuẩn này, không dựa tên-ngành (vốn đổi theo skin). Khi onboard ngành mới, <code>pack-architect</code>/<code>vn-architect</code> ánh-xạ tên-ngành → tên-năng-lực-chuẩn trước khi ghi <code>_index.md</code>.</p>
+  </div></section>
+
+  <!-- ===================== 7 · VÍ DỤ PHỞ HÀ ===================== -->
+  <section class="seg" id="pho-ha"><div class="pad" style="--accent:var(--c4);--accent-bg:var(--c4b)">
+    <div class="seg-head"><div class="badge">7</div><div class="h">
+      <h2>Ví-dụ chạy xuyên suốt — "Phở Hà"</h2>
+      <span class="modpill">DN cũ · GĐ4 · F&amp;B</span>
+      <p class="role">Chuỗi <b>4 quán</b> phở Bắc ở TP.HCM, mở 2 năm, DT ~<b>1.2 tỷ/tháng</b>. CEO khai: <i>"sẵn-sàng GĐ5, muốn mở 10 quán/12 tháng, có nhà đầu-tư muốn rót vốn."</i> Chọn DN cũ, giữa vòng-đời để mô-phỏng đúng "stage = hiện-tại, không GĐ1".</p>
+    </div></div>
+
+    <div class="ex"><span class="lbl">PHA 0 · Brain + phát-hiện stage</span>
+      <b>telos.md</b> = "Cho người Sài-Gòn bận-rộn một bát phở Bắc <b>chuẩn-vị, nhanh, sạch</b>, giá bình-dân — ở đâu cũng đúng vị đó." Ranh-giới: không chạy theo món lai-tạp để câu khách. ·
+      <b>positioning.md</b>: đầu-cầu = dân văn-phòng quận trung-tâm; moat = công-thức nước-dùng + cẩm-nang bếp chuẩn-hoá + chuỗi-cung ổn giá. ·
+      <b>Reality-check:</b> CEO khai GĐ5 — nhưng <code>budget.md</code> cho thấy <b>quán-3 lẹt-đẹt (biên 6%)</b>, <b>quán-4 mở 3 tháng chưa hòa-vốn</b>; chỉ 2 quán đạt ~18%. ⟹ <b style="color:#A8423A">thực-tế GĐ4</b>, chưa qua cổng tối-ưu → <b>HOÃN vốn &amp; hoãn mở 10 quán</b> (clone quán-lỗi = nhân-lỗi cả-đàn).
+    </div>
+
+    <div class="ex"><span class="lbl">PHA 1 · Phân-rã GĐ4 — duyệt 11 khía-cạnh (mục-đích = "mỗi quán lãi ổn-định &amp; cẩm-nang lặp được")</span>
+      <b>Duyệt 11 khía-cạnh</b> (trích): <b>Tiền</b> (lõi GĐ4) ✓ → "Cả 4 quán biên ròng ≥ 15%"; <b>Hậu-cần</b> ✓ → "Nguồn bò &amp; NL ổn giá, đủ, đúng hạn"; <b>Vận-hành</b> ✓ → "SOP bếp chạy ổn không cần đầu-bếp-ngôi-sao"; <b>Dữ-liệu</b> ✓ → "Số COGS/hao-hụt từng quán đo realtime, 1 nguồn"; <b>Rủi-ro</b> ✓ → "VSATTP 4 quán đạt"; <b>Con-người</b> ✓ → "quản-lý-quán thay được founder"; <b>Đối-tác</b> ✓-nhẹ → "GrabFood/ShopeeFood &amp; NCC bò chốt điều-khoản" (vốn NĐT → <b>HOÃN</b>, cắt-tỉa); <b>Bền-vững</b> → <b>NGỦ</b> (GĐ4, chưa đại-chúng); Đào-tạo bài-bản → ngủ.<br>
+      <b>Khoan mục-tiêu "biên ròng ≥15%" → SINH nhiệm-vụ-chính (cơ-chế §1.4):</b> bẻ thành điều-kiện-đủ → ① <b>Kiểm-soát giá-vốn (COGS)</b> 🗡 · ② <b>Khoá nguồn-cung &amp; giá NCC bò</b> 🗡(↔Hậu-cần) · ③ <b>Chặn thất-thoát/hao-hụt bếp</b> 🛡 · ④ <b>Dựng đo COGS/biên realtime/quán</b> 📦(↔Dữ-liệu). <i>Back-test:</i> 4 việc done → giá-vốn kiểm-soát + nguồn ổn + không rò + đo được = biên ≥15% đạt &amp; giữ ✓ (bỏ ④ → không biết quán nào lỗ → giữ).<br>
+      <b>Khoan tiếp nhiệm-vụ-chính ①</b> → nhiệm-vụ-con: <b>🗡tấn</b> định-mức nguyên-liệu + đàm-phán NCC theo sản-lượng-gộp · <b>🛡thủ</b> KPI hao-hụt ≤4% (chống gian-lận bếp + giá bò biến-động) · <b>📦hậu</b> phần-mềm định-lượng kho + bếp trung-tâm.
+    </div>
+    <div class="pre"><div class="cap">PHA 1C · GOM NGƯỢC-LÊN + TRA-KHO (khối ▷ phòng ▷ bộ-phận) — khớp pack F&amp;B sẵn có</div><pre> nhiệm-vụ-con                          tra _index KHO fnb → quyết-định
+ ─────────────────────────────────────────────────────────────────────────
+ "định-mức · hao-hụt · sơ-chế"   → bộ-phận Bếp trung-tâm     → KHỚP A → REUSE  (pack:13-kitchen)
+ "đàm-phán NCC · chuỗi-cung bò"  → bộ-phận Thu-mua&amp;Cung-ứng  → KHỚP B → ADAPT  (inventory-manager-fnb)
+ "theo-dõi giá-vốn · biên lãi"   → bộ-phận Kiểm-soát giá-vốn → KHỚP A → REUSE  (cogs-tracker-fnb)
+ "đo COGS/hao-hụt realtime"      → bộ-phận BI/Báo-cáo quán   → trống  → NEW    (→ ứng-viên PROMOTE)
+ "VSATTP"                        → bộ-phận An-toàn thực-phẩm → KHỚP A → REUSE  (pack:14-food-safety)
+
+ GOM LÊN:
+   bộ-phận {Bếp TT, ATTP}  → phòng dept-09(+05)/dept-01(+05)
+   bộ-phận {Thu-mua}       → phòng dept-05         ─┐
+   bộ-phận {Kiểm-soát giá} → phòng dept-03          ├─ KHỐI:
+   bộ-phận {BI/Báo-cáo}    → phòng dept-11          │   K4 Sản-phẩm&amp;CN · K5 Vận-hành&amp;Chuỗi-cung
+                                                    │   K2 Tài-chính · K7 Dữ-liệu&amp;Đo-lường · K1(ATTP)
+ → Cấu-trúc ĐƯỢC SUY RA ngược-lên, 4/5 bộ-phận TÁI-DÙNG từ kho, chỉ 1 NEW. Phòng 10/12 vẫn NGỦ.</pre></div>
+
+    <div class="ex"><span class="lbl">PHA 2 · Thực-thi đệ-quy 1 hành-động</span>
+      Hành-động "đàm-phán giá thịt bò theo sản-lượng-gộp 4 quán" → router <b>COMPLEX</b> → debate ra <code>10-thuc-thi-dam-phan-thit-bo.md</code> → executor: tra giá thị-trường thật (WebSearch), soạn bảng so-sánh NCC, dựng kịch-bản. <b>Cổng cứng:</b> "ký hợp-đồng NCC" = NEED-APPROVAL → CEO duyệt mới ký.
+    </div>
+
+    <div class="ex"><span class="lbl">PHA 3 · Khép-vòng</span>
+      Quán-3 vẫn ế sau 2 vòng vá lịch-ca/khuyến-mãi (đơn-vòng) → <b>song-vòng</b>: đọc <code>positioning.md</code>+<code>strategy.md</code> → hoá ra <b>mặt-bằng sai đầu-cầu</b> (tầng định-vị), không phải lỗi vận-hành → quyết <b>đóng/dời quán-3</b> (sửa <code>positioning.md</code>, KHÔNG đụng telos). · Sau khi 3 quán còn lại đều ≥15% + cẩm-nang mở-quán hoàn-chỉnh → <b>PASS GĐ4</b> → <b>PROMOTE</b> "Cẩm-nang mở-quán chuẩn", "Bảng định-mức" &amp; bộ-phận "BI/Báo-cáo quán" (vừa NEW) vào kho + <b>ghi 3 dòng vào <code>_index.md</code></b> (id chuẩn, reuse-grade A) → <b>qua cổng tối-ưu → vào GĐ5</b>.
+    </div>
+
+    <div class="ex"><span class="lbl">PHA 4 · Mở-rộng (giờ đã thật-sự GĐ5) — 3-phép-thử + bootstrap KHO</span>
+      Mở quán 5–10 (HCM/HN): moat chuyển ✓ telos chung ✓ → <b>GĐ5 nới</b>; PHA 1C <b>tra <code>_index.md</code></b> → reuse thẳng cây bộ-phận + Cẩm-nang vừa PROMOTE → mở nhanh &amp; rẻ. · Phở-gói đông-lạnh siêu-thị: moat phải bồi mới (SX công-nghiệp) → <b>GĐ6 đẻ đường mới</b>, brand cũ. · Chuỗi cà-phê: telos khác → <b>brand mới</b>. → Cổng PROMOTE + index chuẩn "trả lãi": kho càng dày &amp; tra càng dễ, đẻ đường sau càng nhanh.
+    </div>
+  </div></section>
+
+  <!-- ===================== 8 · ARTIFACT ===================== -->
+  <section class="seg" id="artifact"><div class="pad" style="--accent:var(--c3);--accent-bg:var(--c3b)">
+    <div class="seg-head"><div class="badge">8</div><div class="h">
+      <h2>Bản-đồ artifact trong vault</h2>
+      <span class="modpill">cái gì nằm ở đâu</span>
+    </div></div>
+    <table class="tbl" style="--accent:var(--c3)">
+      <thead><tr><th>Lớp</th><th>File</th><th>Ghi-chú v3.3</th></tr></thead>
+      <tbody>
+        <tr><td>Telos</td><td><code>00-Brain/telos.md</code></td><td><span class="tag nw">MỚI</span></td></tr>
+        <tr><td>Định-vị</td><td><code>00-Brain/positioning.md</code></td><td><span class="tag nw">MỚI</span> · đầu-cầu, điểm-xuất-phát, moat</td></tr>
+        <tr><td>Đường-cong</td><td><code>00-Brain/curves.md</code></td><td><span class="tag nw">MỚI</span> · stage theo TỪNG đường</td></tr>
+        <tr><td>Hiện-trạng</td><td><code>state.md</code> + 4 file cũ</td><td>trường <code>stage</code> phát-hiện động, không mặc-định GĐ1</td></tr>
+        <tr><td>Cấu-trúc</td><td><code>00-Brain/structure.md</code></td><td><span class="tag nw">MỚI</span> · cây <b>khối→phòng→bộ-phận</b> + tên-kép + lịch GĐ + <code>reused_from</code></td></tr>
+        <tr><td>Kế-hoạch/giai-đoạn</td><td><code>02-Tasks/&lt;slug&gt;/08-execution-plan.md</code></td><td>cuộn-sóng (rolling-wave)</td></tr>
+        <tr><td>Cấu-trúc/task</td><td><code>02-Tasks/&lt;slug&gt;/06-structure.md</code></td><td>cây suy-ra + báo-cáo tra-kho (reuse/adapt/new)</td></tr>
+        <tr><td>Kế-hoạch/hành-động</td><td><code>02-Tasks/&lt;slug&gt;/10-thuc-thi-&lt;action&gt;.md</code></td><td>1 file/hành-động</td></tr>
+        <tr><td>Sổ thực-thi</td><td><code>10-run-state.md</code></td><td>nguồn-sự-thật để resume</td></tr>
+        <tr><td>Bộ-nhớ</td><td><code>decisions-log.md</code> · <code>calibration.md</code> · <code>lessons.md</code></td><td><code>lessons.md</code> <span class="tag nw">MỚI</span>; decisions-log gắn nhãn altitude</td></tr>
+        <tr><td>KHO chỉ-mục</td><td><code>knowledge/playbook/&lt;ngành&gt;/_index.md</code></td><td><span class="tag nw">MỚI</span> · bảng chuẩn khối→phòng→bộ-phận (§5)</td></tr>
+        <tr><td>KHO tài-sản</td><td><code>knowledge/playbook/&lt;ngành&gt;/&lt;Kx&gt;/&lt;dept&gt;/&lt;bộ-phận&gt;/</code></td><td><span class="tag nw">MỚI</span> · git-first, Drive tùy chọn</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <!-- ===================== 9 · ÁNH XẠ CODEBASE ===================== -->
+  <section class="seg" id="codebase"><div class="pad" style="--accent:var(--ink);--accent-bg:#EDEDEA">
+    <div class="seg-head"><div class="badge" style="background:var(--ink)">9</div><div class="h">
+      <h2>Ánh-xạ vào codebase hiện-tại</h2>
+      <span class="modpill" style="color:var(--ink);background:#EDEDEA">tái-dùng tối-đa · thêm tối-thiểu</span>
+      <p class="role">Triết-lý: <b>không đập đi xây lại</b>. Engine debate, router, executor, packs, grounding, HITL đều GIỮ. Trục dọc chủ-yếu là <b>thêm file Brain + thêm bước prompt + thêm thư-mục KHO</b>, không phải code nặng.</p>
+    </div></div>
+    <table class="tbl" style="--accent:var(--ink)">
+      <thead><tr><th>Hạng-mục</th><th>Cắm vào đâu</th><th>Loại</th></tr></thead>
+      <tbody>
+        <tr><td>3 file Brain mới + structure(3 tầng) + stage</td><td><code>knowledge/brain-schema.md</code> (mở-rộng)</td><td>thêm schema</td></tr>
+        <tr><td>11 khía-cạnh + 7 khối canonical</td><td><code>knowledge/brain-schema.md</code> + <code>skills/vn-orchestrator/SKILL.md</code></td><td>thêm bảng generic</td></tr>
+        <tr><td>Cơ-chế sinh nhiệm-vụ-chính 3 lớp (điều-kiện-đủ → 3 chiều → chéo khía-cạnh → back-test)</td><td><code>skills/vn-orchestrator/SKILL.md</code> Bước 7 (lập-kế-hoạch) + prompt vn-architect</td><td>thêm luật/prompt</td></tr>
+        <tr><td>Phát-hiện stage + bơm câu-sống-còn</td><td><code>skills/vn-orchestrator/SKILL.md</code> Bước 2-3</td><td>thêm prompt/luật</td></tr>
+        <tr><td>Phân-rã sinh-thành (aspect-walk → gom ngược-lên 3 tầng + tra-kho)</td><td>skill mới <code>vn-architect</code> HOẶC mở-rộng <code>pack-architect</code> (chế-độ function-first)</td><td>thêm agent/skill</td></tr>
+        <tr><td>KHO chỉ-mục <code>_index.md</code> + rubric reuse-decision</td><td><code>knowledge/playbook/</code> + luật trong <code>vn-architect</code></td><td>thêm thư-mục + luật</td></tr>
+        <tr><td>Cổng optimize-before-scale + phép-thử telos</td><td><code>workflows/debate.js</code> pha Red-team</td><td>thêm luật</td></tr>
+        <tr><td>Lăng-kính tấn/thủ/hậu khi lập-kế-hoạch</td><td><code>SKILL.md</code> Bước 7 + executor Bước 1 (cột <code>loại</code>)</td><td>thêm cột/prompt</td></tr>
+        <tr><td>Tên-kép 3 tầng (industry skin + canonical)</td><td><code>department.yaml</code> <code>aliases_vn</code> + pack <code>extends_departments</code></td><td>tái-dùng trường có sẵn</td></tr>
+        <tr><td>Khép-vòng đơn/song + neo Brain + PROMOTE→index</td><td><code>SKILL.md</code> Bước 11 + <code>calibration.md</code> + <code>knowledge/playbook/</code></td><td>thêm bước + thư-mục</td></tr>
+        <tr><td>Đệ-quy hành-động qua router</td><td>tái-dùng nguyên <code>debate.js</code> + escalation ladder</td><td>GIỮ NGUYÊN</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><h3>Ưu-tiên triển-khai</h3><p><b>Gói tối-thiểu:</b> M1 (telos + altitude) + M2 (debate nhận-thức-giai-đoạn) — rẻ, vá 2 điểm mù lớn nhất. Sau đó M4 (suy cấu-trúc ngược-lên 3 tầng + tra-kho, kèm <code>_index.md</code>) nếu muốn đi sâu trục dọc &amp; bật vòng tái-dùng. Còn lại (M3 đường-cong, M5 tấn/thủ/hậu, M6 khép-vòng + kho) đắp dần. <b>11 khía-cạnh + 7 khối</b> là bảng generic, đổi prompt là xong — nên gộp vào M2.</p></div>
+  </div></section>
+
+  <!-- ===================== GLOSSARY ===================== -->
+  <section class="seg" id="gloss"><div class="pad" style="--accent:var(--ink)">
+    <div class="seg-head"><div class="badge" style="background:var(--ink)">↯</div><div class="h"><h2>Bảng chú-giải thuật-ngữ</h2></div></div>
+    <p class="gloss">
+      <b>generic vs phân-rã</b> generic = khung/bảng-phân-loại/luật cố-định (viết 1 lần); phân-rã = nội-dung suy-ra mỗi DN &nbsp;·&nbsp;
+      <b>telos</b> lý-do-tồn-tại cốt-lõi; một hướng đuổi mãi, không phải đích đạt-rồi-xong &nbsp;·&nbsp;
+      <b>moat</b> cỗ-máy/hào — lợi-thế-bền khó-sao-chép (khác "chỉ nhanh hơn") &nbsp;·&nbsp;
+      <b>beachhead</b> đầu-cầu — lãnh-thổ hẹp chiếm &amp; thống-trị trước &nbsp;·&nbsp;
+      <b>wedge</b> mũi-nêm — nước-đi-đầu mỏng nhất (= điểm-xuất-phát) &nbsp;·&nbsp;
+      <b>S-curve</b> đường-cong — một dòng KD có quỹ-đạo sinh→lớn→bão-hoà &nbsp;·&nbsp;
+      <b>11 khía-cạnh</b> bảng MECE generic "cần đạt CÁI GÌ", 4 nhóm: GIÁ-TRỊ (sản-phẩm/thị-trường/khách) · NGUỒN-LỰC (tiền/người/hậu-cần) · VẬN-HÀNH&amp;TRI-THỨC (vận-hành/dữ-liệu) · BẢO-VỆ&amp;QUAN-HỆ (rủi-ro/đối-tác/bền-vững) &nbsp;·&nbsp;
+      <b>dữ-liệu (khía-cạnh)</b> tài-sản &amp; đo-lường: instrument, analytics, privacy, IP-dữ-liệu (tách khỏi hậu-cần) &nbsp;·&nbsp;
+      <b>hậu-cần (khía-cạnh)</b> chuỗi-cung &amp; hạ-tầng đầu-vào: mua, kho, vận-chuyển, cloud &nbsp;·&nbsp;
+      <b>đối-tác/hệ-sinh-thái</b> kênh, liên-minh, nền-tảng 2 phía, nhượng-quyền, dev/API, JV, NĐT-là-đối-tác &nbsp;·&nbsp;
+      <b>bền-vững/stakeholder</b> giấy-phép-xã-hội, niềm-tin quản-lý ngoài tuân-thủ, môi-trường/cộng-đồng/ESG &nbsp;·&nbsp;
+      <b>khối / phòng / bộ-phận</b> ba tầng cấu-trúc: 7 khối canonical ▷ 12 phòng canonical ▷ bộ-phận (lá, suy-ra-từ-việc) &nbsp;·&nbsp;
+      <b>gom ngược-lên</b> suy cấu-trúc từ dưới: nhiệm-vụ-con → bộ-phận → phòng → khối (cấu-trúc ở CUỐI) &nbsp;·&nbsp;
+      <b>điều-kiện-đủ</b> tập điều-kiện mà khi ĐỒNG-THỜI đúng thì trạng-thái-đích tự-động thành-hình; mỗi điều-kiện chưa-đạt = 1 nhiệm-vụ-chính &nbsp;·&nbsp;
+      <b>sinh nhiệm-vụ-chính 3 lớp</b> cơ-chế không-sót (§1.4): điều-kiện-đủ → lưới 3 chiều tấn/thủ/hậu → chéo 11 khía-cạnh → back-test đủ/tối-thiểu/không-trùng &nbsp;·&nbsp;
+      <b>back-test "đủ"</b> giả-định mọi nhiệm-vụ-chính done → mục-tiêu có TỰ-ĐỘNG đúng không; chưa → còn việc sót &nbsp;·&nbsp;
+      <b>pre-mortem</b> hỏi trước "state này hỏng kiểu gì?" để sinh việc phòng-thủ &nbsp;·&nbsp;
+      <b>tên-kép</b> 3 nhãn/đơn-vị: tên-ngành (hiển-thị) + tên-năng-lực-chuẩn (khóa tra) + ánh-xạ canonical &nbsp;·&nbsp;
+      <b>KHO / _index.md</b> kho tái-dùng theo ngành + chỉ-mục chuẩn-hoá (khối→phòng→bộ-phận) để tra/thêm/dọn &nbsp;·&nbsp;
+      <b>reuse / adapt / new</b> 3 kết-quả tra-kho mỗi tầng: dùng-luôn / tinh-chỉnh / đẻ-mới (theo khớp ngữ-cảnh) &nbsp;·&nbsp;
+      <b>reuse-grade</b> hạng tái-dùng: A dùng-luôn · B cần tinh-chỉnh · C tham-khảo &nbsp;·&nbsp;
+      <b>PMF</b> khớp sản-phẩm–thị-trường: khách chủ-động quay-lại &amp; trả tiền &nbsp;·&nbsp;
+      <b>lifecycle / GĐ1-6</b> vòng-đời mỗi đường-cong, mỗi GĐ = 1 câu-hỏi-sống-còn &nbsp;·&nbsp;
+      <b>optimize-before-scale</b> tối-ưu cho sạch RỒI mới nhân-bản; nhân thứ chưa-sạch = nhân-lỗi cả-đàn &nbsp;·&nbsp;
+      <b>cash cow</b> bò-sữa — dòng chín, lời đều, nuôi bet khác &nbsp;·&nbsp;
+      <b>second curve / điểm-A</b> gieo đường-cong kế khi lõi còn khỏe (điểm-A), không đợi suy (điểm-B) &nbsp;·&nbsp;
+      <b>ambidexterity</b> hai-tay — vừa vắt lõi vừa gieo dòng mới (GĐ6) &nbsp;·&nbsp;
+      <b>single/double-loop</b> đơn-vòng = vá trong khuôn cũ; song-vòng = sửa chính cái khuôn (tầng trên) &nbsp;·&nbsp;
+      <b>altitude / tempo</b> độ-cao/nhịp quyết-định: telos đổi chậm nhất, cấu-trúc nhanh nhất &nbsp;·&nbsp;
+      <b>attack/defense/logistics</b> tấn-công (việc phải LÀM) · phòng-thủ (việc phải GÁC, "hỏng kiểu gì?") · hậu-cần (chạy bằng tiền/máy/dữ-liệu/người) &nbsp;·&nbsp;
+      <b>re-founding</b> tái-lập-nền — đổi chính telos, ngoài vòng-đời &nbsp;·&nbsp;
+      <b>OKR / KPI</b> OKR cho việc tấn-công; KPI-ngưỡng cho phòng-thủ/hậu-cần &nbsp;·&nbsp;
+      <b>rolling-wave</b> cuộn-sóng — chỉ lập chi-tiết việc gần, việc xa để khung &nbsp;·&nbsp;
+      <b>waterfall</b> lập sạch toàn-bộ một lần từ đầu — hỏng khi tương-lai bất-định &nbsp;·&nbsp;
+      <b>bootstrap</b> mồi-khởi-động: dùng cái có-sẵn để chạy bước đầu (12 phòng để nghĩ; kho để đẻ đường mới) &nbsp;·&nbsp;
+      <b>reuse-grade / promote</b> đạt-chuẩn tái-dùng: đã khử-danh-tính + tham-số-hoá + gắn-nhãn + kèm rubric &nbsp;·&nbsp;
+      <b>cascade</b> sinh-lại: sửa tầng trên ⇒ nhánh việc dưới phải sinh lại &nbsp;·&nbsp;
+      <b>fractal</b> tự-đồng-dạng: 1 brand chạy nhiều đường-cong, mỗi đường chạy cùng vòng-đời &nbsp;·&nbsp;
+      <b>HITL</b> human-in-the-loop — cổng người duyệt giữa vòng tự-động &nbsp;·&nbsp;
+      <b>MECE</b> không-trùng-không-sót (mutually-exclusive, collectively-exhaustive) &nbsp;·&nbsp;
+      <b>G0</b> cổng-tỉnh-táo: kiểm telos mạch-lạc + cơ-hội có-vẻ-thật trước khi đổ công-sức.
+    </p>
+  </div></section>
+
+  <div class="foot">opc-san-pham-so · thiết-kế · Luồng Generic — Sinh-thành &amp; Khép-vòng · v3.3 · BẢN-THẢO 2026-06-29 · tổng-hợp 6 lượt thảo-luận + tinh-chỉnh 11 khía-cạnh / KHO chỉ-mục / gom ngược-lên / cơ-chế sinh nhiệm-vụ-chính không-sót · CHƯA implement</div>
+
+</main>
+</body>
+</html>

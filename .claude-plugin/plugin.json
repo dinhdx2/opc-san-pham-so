@@ -1,0 +1,6 @@
+{
+  "name": "opc-san-pham-so",
+  "version": "0.1.0",
+  "description": "AI OS cho DN Việt — 12 phòng ban debate → quyết định → kế hoạch → THỰC THI tự động (/vn-execute), chạy bằng Claude Code subscription (không API key).",
+  "author": { "name": "L'MAK Group" }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "opc-san-pham-so",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hệ điều hành DN bằng AI (12 phòng debate) — luồng generic v3: engine xác-định + truy-vết implement",
+  "scripts": {
+    "test": "node test/run.js",
+    "check-impl": "node tools/check-impl.js",
+    "check-coverage": "node docs/design/luong-generic-v3/specs/tools/check-coverage.js",
+    "compliance": "node tools/compliance-check.js"
+  }
+}

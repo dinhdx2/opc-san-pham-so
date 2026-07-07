@@ -1,0 +1,27 @@
+name: F&B Pack
+code: fnb
+version: 0.1.0
+description: "Cho quán ăn, cafe, nhà hàng VN"
+target_industries: ["restaurant", "cafe", "bar", "food-truck", "cloud-kitchen"]
+adds_departments:
+  - 13-kitchen
+  - 14-food-safety
+extends_departments:
+  - target: 05-operations
+    add_agents: ["inventory-manager-fnb", "vendor-fnb"]
+  - target: 08-customer
+    add_agents: ["service-quality-officer"]
+  - target: 06-sales
+    add_agents: ["revenue-manager-fnb"]
+  - target: 03-finance
+    add_agents: ["cogs-tracker-fnb"]
+brain_template: brain-template/
+compliance_refs:
+  - "VSATTP — Nghị định 15/2018/NĐ-CP"
+  - "PCCC — TCVN 5738:2021"
+  - "Luật An toàn thực phẩm 2010"
+
+# Tên-kép tầng phòng-ngành (luồng generic v3, spec 04 §4.3/§7): phòng pack thêm vẫn cần maps_to về K*/dept-* gần nhất.
+dept_maps_to:
+  13-kitchen: "K4/dept-09 (+K5/dept-05)"   # Sản-xuất & Chuẩn-hoá món
+  14-food-safety: "K1/dept-01"             # An-toàn thực-phẩm (rủi-ro)

@@ -1,0 +1,33 @@
+# STAGE_RUBRIC — rubric phát-hiện stage (spec 06 §3.1, SoT §6.1)
+# detect_stage(brain) đối-chiếu dấu-hiệu Brain với `keywords` để suy GĐ.
+# INV-6.3: stage theo dấu-hiệu Brain, KHÔNG theo lời khai (reality-check).
+- gd: GD1
+  cau_song_con: "khả-thi? có bài-toán đáng giải?"
+  dau_hieu: "chưa rõ vấn-đề / chưa có sản-phẩm"
+  keywords: ["chưa rõ vấn-đề", "chưa có sản-phẩm", "ý-tưởng", "chưa có gì", "khả-thi", "đáng giải"]
+  claim: LG-6.1-gd1
+- gd: GD2
+  cau_song_con: "kéo & trả? (PMF)"
+  dau_hieu: "có sản-phẩm, đang tìm khách tự quay-lại & trả tiền"
+  keywords: ["pmf", "khách quay-lại", "tìm khách", "product-market-fit", "trả tiền lặp-lại", "kéo & trả"]
+  claim: LG-6.1-gd2
+- gd: GD3
+  cau_song_con: "giao thật ở điều-kiện thật?"
+  dau_hieu: "PMF rồi, lo giao-hàng/vận-hành ổn-định"
+  keywords: ["giao-hàng", "vận-hành ổn-định", "giao thật", "ổn-định vận-hành", "fulfillment"]
+  claim: LG-6.1-gd3
+- gd: GD4
+  cau_song_con: "lãi/đơn-vị, lặp được?"
+  dau_hieu: "giao ổn, đang tối-ưu biên lãi từng đơn-vị"
+  keywords: ["tối-ưu biên", "biên lãi", "lãi/đơn-vị", "lãi đơn-vị", "đơn-vị", "unit economics", "biên ròng", "giao ổn", "cẩm-nang lặp"]
+  claim: LG-6.1-gd4
+- gd: GD5
+  cau_song_con: "nhân không vỡ?"
+  dau_hieu: "đang nhân-bản sang điểm/thị-trường mới"
+  keywords: ["nhân-bản", "mở thêm", "nhân rộng", "thị-trường mới", "mở chi-nhánh", "scale", "mở 10 quán", "nhân không vỡ"]
+  claim: LG-6.1-gd5
+- gd: GD6
+  cau_song_con: "duy-trì + tái-tạo?"
+  dau_hieu: "lõi chín, lời đều + cần gieo đường-cong kế"
+  keywords: ["lõi chín", "lời đều", "đường-cong kế", "second-curve", "bò-sữa", "cash-cow", "gieo đường mới", "duy-trì + tái-tạo"]
+  claim: LG-6.1-gd6

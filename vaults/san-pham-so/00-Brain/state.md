@@ -11,13 +11,14 @@ section: state
   - Reality-check: nếu CEO đã có audience/doanh-thu sẵn từ trước → nâng stage khi có số.
 
 ## Tài sản hiện có
-- Audience/email list: `[cần CEO xác minh]`
+- Audience/email list: **0 — chưa có, bắt-đầu từ con số không** `[số thật DN — CEO xác nhận 2026-07-07]`
 - SP đã hoàn-thiện: chưa có `[số thật DN]`
-- Kênh sở-hữu (web/fanpage/kênh): `[cần CEO xác minh]`
+- Kênh sở-hữu (web/fanpage/kênh): **chưa có** `[số thật DN — CEO xác nhận 2026-07-07]`
+- Chuyên-môn/ngách founder: **chưa chốt — chờ hội-đồng đề-xuất ngách khả-thi để CEO chọn**
 
 ## KPI hiện tại
 - Doanh thu: 0 `[số thật DN — giai-đoạn ý-tưởng]`
-- Người theo-dõi / email: `[cần CEO xác minh]`
+- Người theo-dõi / email: **0** `[số thật DN — CEO xác nhận 2026-07-07]`
 
 ## Rủi ro nổi cộm
 - **Bản-quyền & tải lậu:** SP số dễ bị sao-chép/chia-sẻ trái-phép — cần chống-copy + điều-khoản license (rủi-ro CAO).

@@ -3,14 +3,16 @@ type: brain
 section: telos
 altitude: telos
 proposed_by: AI
-approved_by: "[chờ CEO duyệt]"
+approved_by: "CEO — duyệt 2026-07-07"
 ---
 # Telos — lẽ tồn-tại (bất-biến)
 
 > **AI đề-xuất, CEO quyết.** Cổng G0 chặn xuống PHA 1 tới khi `approved_by` mở-đầu "CEO".
 
-## telos (1 câu — ĐỀ-XUẤT, chờ CEO chỉnh/duyệt)
-Giúp người Việt học được kỹ-năng / giải-quyết được một nỗi-đau cụ-thể bằng sản-phẩm số chất-lượng, đúng bản-quyền, giá hợp-lý — để họ tiến-bộ thật, không phải hứa-hẹn "giàu nhanh".
+## telos (1 câu — CEO ĐÃ DUYỆT 2026-07-07)
+Giúp người Việt **học kỹ-năng, làm được việc và giải-quyết vấn-đề thực-tế đạt hiệu-quả cao nhất** trong công-việc lẫn cuộc-sống bằng sản-phẩm số chất-lượng, đúng bản-quyền, giá hợp-lý — để họ **tiến-bộ và tạo ra kết-quả thật**, không phải hứa-hẹn "giàu nhanh".
+
+> Bao-quát cả 3 tầng giá-trị: **HỌC** (kỹ-năng/kiến-thức) · **LÀM** (công-cụ/template/asset giúp hoàn-thành việc) · **GIẢI** (giải-quyết một vấn-đề/nỗi-đau cụ-thể). Không giới-hạn ở khóa học — mở cho ebook, template, preset, asset, mini-tool, membership.
 
 ## values (giá-trị cốt-lõi)
 - Chính-trực về bản-quyền: chỉ bán thứ mình có quyền; tôn-trọng IP người khác.
@@ -25,4 +27,4 @@ Giúp người Việt học được kỹ-năng / giải-quyết được một 
 - KHÔNG mua-bán / lạm-dụng dữ-liệu cá-nhân khách.
 
 ---
-**Ghi chú:** đây là bản AI ĐỀ-XUẤT dựa trên mô-tả "bán sản phẩm số tại thị-trường Việt Nam". CEO cần chỉnh cho đúng lẽ-tồn-tại thật rồi đổi `approved_by: "CEO — duyệt YYYY-MM-DD"` để mở cổng G0.
+**Ghi chú:** telos do AI đề-xuất, **CEO đã chỉnh** (thêm "đạt hiệu-quả cao nhất") **và duyệt 2026-07-07** → cổng G0 MỞ. Đổi telos về sau → ghi `decisions-log.md` nhãn `altitude: telos` + `superseded`, KHÔNG xóa lịch-sử.

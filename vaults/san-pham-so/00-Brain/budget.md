@@ -5,8 +5,8 @@ section: budget
 # Ngân sách & Dòng tiền — Sản phẩm số
 
 ## Vốn khởi-động
-- Vốn tự-có: `[cần CEO xác minh]`
-- Trần chi tối-đa/tháng: `[cần CEO xác minh]`
+- Vốn tự-có cho giai-đoạn đầu (làm SP + chạy thử marketing): **20–100 triệu VND** `[số thật DN — CEO cấp 2026-07-07]`
+- Trần chi tối-đa/tháng: `[cần CEO xác minh]` (phân-bổ từ vốn trên — hội-đồng đề-xuất cách chia)
 
 ## Doanh thu (dự-phóng)
 - Chưa có doanh-thu thật `[số thật DN — giai-đoạn ý-tưởng]`.

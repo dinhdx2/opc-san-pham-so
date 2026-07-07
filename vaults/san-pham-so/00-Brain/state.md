@@ -14,7 +14,12 @@ section: state
 - Audience/email list: **0 — chưa có, bắt-đầu từ con số không** `[số thật DN — CEO xác nhận 2026-07-07]`
 - SP đã hoàn-thiện: chưa có `[số thật DN]`
 - Kênh sở-hữu (web/fanpage/kênh): **chưa có** `[số thật DN — CEO xác nhận 2026-07-07]`
-- Chuyên-môn/ngách founder: **chưa chốt — chờ hội-đồng đề-xuất ngách khả-thi để CEO chọn**
+- Chuyên-môn/ngách founder: **Ngách A — AI-năng-suất cho hộ KD & freelancer VN (CEO chốt 2026-07-07).** Founder chỉ cần thạo AI (không cần bằng cấp) — credibility từ trải-nghiệm thật; cần thu-hẹp beachhead xuống 1 nghề khi validate.
+
+## Kế-hoạch đang chạy (sau debate 2026-07-07)
+- Khung: 1 ngách (A) + 1 hero nhẹ + phễu 3 tầng + **vốn stage-gated 2 đợt** (Đợt-1 validate ~20–30% → go/no-go → Đợt-2 CapEx hero thắng).
+- **Bước kế:** Đợt-1 VALIDATE — dựng landing + lead-magnet + presell/tripwire + đo WTP; **chưa sản-xuất hero đầy-đủ** trước khi có tín-hiệu cầu thật.
+- 3 ranh-giới CỨNG (Red-team): (1) không dùng số thuế cũ tính tiền khả-dụng; (2) SOP refund + mốc giao hàng sẵn TỪ bước presell; (3) tránh vùng cần chứng-chỉ (thuế/kế-toán).
 
 ## KPI hiện tại
 - Doanh thu: 0 `[số thật DN — giai-đoạn ý-tưởng]`

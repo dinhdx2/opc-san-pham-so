@@ -4,12 +4,15 @@ section: products
 ---
 # Sản phẩm & Unit economics — Sản phẩm số
 
-## Catalog (danh mục SP số)
-| SP | Loại | Giá | Mô hình bán | Trạng thái |
+## Catalog (danh mục SP số) — Ngách A (CEO chốt 2026-07-07)
+Phễu 3 tầng (1 ngách / 1 hero tới PMF — chống BLOCK_MO_RONG_SOM):
+| Tầng | SP | Loại | Giá | Vai trò |
 |---|---|---|---|---|
-| `[cần CEO xác minh]` | khóa/ebook/template/asset/membership | `[cần CEO xác minh]` | 1 lần / MRR | ý-tưởng |
+| Lead-magnet | Bộ prompt/mini-template AI miễn-phí | free | 0 | đổi email, kéo audience từ 0 |
+| Tripwire | Mini-bộ công-cụ AI (mồi) | template + prompt | 49–99k `[benchmark — cần đo WTP]` | đo ý-định trả tiền |
+| **Hero** | **Bộ prompt-library + template Notion/Sheet + video ngắn** giải 1 nỗi-đau nghề beachhead | template/asset + video async | **≥299k** `[benchmark — chốt sau presell/WTP]` | SP chính tới PMF |
 
-> Chưa có SP thật. Điền sau khi CEO chốt hero product ở `strategy.md`.
+> Tên + giá chốt sau khi **presell/đo WTP** (Red-team: không khóa giá cứng theo benchmark). SP#2 (membership/khóa sâu) chỉ mở SAU PMF hero.
 
 ## Unit economics (mỗi SP)
 - Giá bán (P): `[cần CEO xác minh]`

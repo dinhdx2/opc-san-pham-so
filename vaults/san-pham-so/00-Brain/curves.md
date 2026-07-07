@@ -9,7 +9,7 @@ altitude: dinh-vi
 
 | name (đường-cong) | positioning | engine (cỗ-máy tăng-trưởng) | stage | health |
 |---|---|---|---|---|
-| Hero product (SP số đầu) | `[cần CEO xác minh]` | content-led + email `[cần CEO xác minh]` | GĐ1 | chưa chạy |
+| Hero AI-năng-suất (Ngách A) | công-cụ AI cho hộ KD/freelancer VN | content-led (TikTok/Shorts/Reels) → email/Zalo → phễu 3 tầng | GĐ1 | chưa chạy — đang validate Đợt-1 |
 
 ## Ghi chú
 - Giai-đoạn ý-tưởng: chỉ nên có 1 đường-cong (hero product) tới khi có PMF, tránh mở-rộng sớm (`BLOCK_MO_RONG_SOM`).

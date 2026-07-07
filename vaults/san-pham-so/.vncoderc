@@ -1,0 +1,20 @@
+company_name: "Sản phẩm số VN"
+industry: "digital-products / sản-phẩm-số (B2C — khóa học, ebook, template, asset, membership, mini-tool)"
+market: "Việt Nam"
+onboarded_at: "2026-07-07"
+active_packs:
+  - digital-products
+active_departments:
+  - dept-01-governance
+  - dept-02-strategy
+  - dept-03-finance
+  - dept-04-people
+  - dept-05-operations
+  - dept-06-sales
+  - dept-07-marketing
+  - dept-08-customer
+  - dept-09-product-tech
+  - dept-10-training
+  - dept-11-reporting
+  - dept-12-growth
+  - dept-13-content-ip        # phòng pack ngành sản-phẩm-số (Sản xuất Nội dung số & Bản quyền)

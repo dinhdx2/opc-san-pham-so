@@ -1,0 +1,35 @@
+code: 02-strategy
+name_vn: Chiến lược & Kế hoạch
+tier: 1
+description: Phòng Chiến lược & Kế hoạch — định vị ngách info-product, beachhead/wedge, moat audience & thương hiệu, PMF sản phẩm số.
+agents:
+- strategy-lead
+- market-researcher
+default_speaker: strategy-lead
+refs_folder: refs/
+depends_on: []
+debate_role:
+  default: pro
+routing_rules:
+- keywords:
+  - định vị
+  - beachhead
+  - wedge
+  - hero product
+  - moat
+  agent: strategy-lead
+- keywords:
+  - đối thủ
+  - thị trường
+  - unica
+  - kyna
+  - gitiho
+  agent: market-researcher
+aliases_vn:
+- Phòng Chiến lược
+- Chiến lược
+- Strategy
+- Chiến lược Sản phẩm số
+# Tên-kép tầng phòng (luồng generic v3, spec 04 §4.3): aliases_vn = tên-ngành; capability_name = tên-năng-lực-chuẩn (khóa tra KHO); maps_to = neo canonical 7 khối.
+capability_name: chien-luoc
+maps_to: K1

@@ -1,0 +1,24 @@
+code: 10-training
+name_vn: Đào tạo & Phát triển
+tier: 4
+description: Phòng Đào tạo & Phát triển.
+agents:
+- training-lead
+- mentor
+- knowledge-curator
+default_speaker: training-lead
+refs_folder: refs/
+depends_on: []
+debate_role:
+  default: pro
+aliases_vn:
+- Phòng Đào tạo
+- Đào tạo
+- Training
+- L&D
+- Đào tạo nội bộ
+- Năng lực sản xuất SP số
+- Kèm cặp CTV/freelancer
+# Tên-kép tầng phòng (luồng generic v3, spec 04 §4.3): aliases_vn = tên-ngành; capability_name = tên-năng-lực-chuẩn (khóa tra KHO); maps_to = neo canonical 7 khối.
+capability_name: dao-tao
+maps_to: K6

@@ -1,0 +1,55 @@
+code: 07-marketing
+name_vn: Marketing & Thương hiệu
+tier: 3
+description: Phòng Marketing & Thương hiệu.
+agents:
+- brand-manager
+- content-creator
+- ads-specialist
+- seo-specialist
+default_speaker: brand-manager
+refs_folder: refs/
+depends_on: []
+debate_role:
+  default: pro
+routing_rules:
+- keywords:
+  - ads
+  - quảng cáo
+  - fb
+  - google
+  - campaign
+  - meta ads
+  - tiktok ads
+  - landing page
+  - funnel
+  - phễu bán hàng
+  - launch campaign
+  agent: ads-specialist
+- keywords:
+  - seo
+  - rank
+  - organic
+  - seo nội dung
+  - từ khóa
+  - blog
+  agent: seo-specialist
+- keywords:
+  - content
+  - viết bài
+  - editorial
+  - lead magnet
+  - email list
+  - kịch bản video
+  - content-led
+  - phễu nội dung
+  agent: content-creator
+aliases_vn:
+- Phòng Marketing
+- Marketing
+- MKT
+- Marketing Sản phẩm số
+- Content & Growth
+# Tên-kép tầng phòng (luồng generic v3, spec 04 §4.3): aliases_vn = tên-ngành; capability_name = tên-năng-lực-chuẩn (khóa tra KHO); maps_to = neo canonical 7 khối.
+capability_name: marketing
+maps_to: K3

@@ -1,0 +1,22 @@
+code: 12-growth
+name_vn: Tăng trưởng & Đầu tư
+tier: 5
+description: Phòng Tăng trưởng & Đầu tư.
+agents:
+- growth-strategist
+- fundraising-lead
+default_speaker: growth-strategist
+refs_folder: refs/
+depends_on: []
+debate_role:
+  default: pro
+aliases_vn:
+- Phòng Tăng trưởng
+- Tăng trưởng
+- Growth
+- Mở rộng danh mục SP số
+- Growth SP số
+- Tăng trưởng & Đầu tư
+# Tên-kép tầng phòng (luồng generic v3, spec 04 §4.3): aliases_vn = tên-ngành; capability_name = tên-năng-lực-chuẩn (khóa tra KHO); maps_to = neo canonical 7 khối.
+capability_name: tang-truong
+maps_to: K1

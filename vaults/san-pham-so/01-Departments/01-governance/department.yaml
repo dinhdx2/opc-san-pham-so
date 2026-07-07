@@ -1,0 +1,37 @@
+code: 01-governance
+name_vn: Quản trị & Pháp lý
+tier: 1
+description: Phòng Quản trị & Pháp lý — bản quyền/license sản phẩm số, thuế TMĐT, bảo vệ dữ liệu khách hàng, quảng cáo trung thực.
+agents:
+- legal-officer
+- compliance-checker
+default_speaker: legal-officer
+refs_folder: refs/
+depends_on: []
+debate_role:
+  default: pro
+routing_rules:
+- keywords:
+  - bản quyền
+  - sở hữu trí tuệ
+  - shtt
+  - license
+  - eula
+  - tải lậu
+  - re-sell
+  agent: legal-officer
+- keywords:
+  - hóa đơn điện tử
+  - thuế tmđt
+  - dữ liệu cá nhân
+  - quảng cáo
+  agent: compliance-checker
+aliases_vn:
+- Phòng Pháp chế
+- Quản trị
+- Pháp lý
+- Governance
+- Bản quyền & Tuân thủ số
+# Tên-kép tầng phòng (luồng generic v3, spec 04 §4.3): aliases_vn = tên-ngành; capability_name = tên-năng-lực-chuẩn (khóa tra KHO); maps_to = neo canonical 7 khối.
+capability_name: quan-tri-phap-ly
+maps_to: K1

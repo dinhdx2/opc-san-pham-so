@@ -1,0 +1,6 @@
+tuan,ngay_bat_dau,ngay_ket_thuc,impressions,clicks,ctr_pct,opt_ins,lead_conv_pct,tripwire_orders,purchase_conv_pct,hero_orders,aov_vnd,spend_vnd,cac_vnd,refund_pct,organic_vs_paid,note_signal_quality
+VÍ DỤ minh-họa - Tuần 1 (KHÔNG dùng số này),2026-07-13,2026-07-19,15000,450,3.0,68,15.1,2,0.44,0,79000,500000,250000,0,90/10,"VÍ DỤ minh-họa - XÓA dòng này trước khi dùng thật. 2 đơn tripwire đều từ người lạ (không quen founder); 1 khách để lại review tốt qua Zalo OA; 0 refund."
+VÍ DỤ minh-họa - Tuần 2 (KHÔNG dùng số này),2026-07-20,2026-07-26,22000,610,2.8,95,15.6,5,0.82,0,79000,800000,160000,0,85/15,"VÍ DỤ minh-họa - XÓA dòng này trước khi dùng thật. 3/5 đơn từ organic TikTok, 2/5 từ ads test creative; 1 khách chủ-động hỏi mua bản hero sớm (tín-hiệu WTP dương); 0 refund."
+Tuần 1 (điền số thật),(điền yyyy-mm-dd),(điền yyyy-mm-dd),,,,,,,,,,,,,,"(điền: người quen hay lạ? có refund không? có ai hỏi mua hero không? organic hay paid?)"
+Tuần 2 (điền số thật),,,,,,,,,,,,,,,,
+Tuần 3 (điền số thật),,,,,,,,,,,,,,,,

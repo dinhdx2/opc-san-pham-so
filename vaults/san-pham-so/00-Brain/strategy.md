@@ -36,5 +36,5 @@ template: digital-products
 
 ## Ràng buộc BẮT BUỘC
 - Bản-quyền: chỉ bán SP do mình tạo / có license; tài-sản đầu-vào (nhạc/ảnh/font/code) phải sạch quyền.
-- Thuế: SP số là dịch-vụ (thuế khoán GTGT 5% + TNCN 2%). ⚠️ **Ngưỡng miễn LỖI-THỜI cần cập-nhật:** ghi cũ 200tr/năm (TT 40/2021) nhưng lộ-trình đã nâng dần (100tr→200tr→500tr→~1 tỷ, NĐ 141/2026 áp-dụng 01/01/2026) `[cần kế-toán xác minh — KHÔNG dùng số cũ tính tiền khả-dụng]`.
+- Thuế: SP số là dịch-vụ (thuế khoán GTGT 5% + TNCN 2%). **Ngưỡng miễn hiện-hành ~1 tỷ/năm** (NĐ 141/2026, hiệu-lực 01/01/2026) `[research P0-06a — cần kế-toán xác minh]`. GĐ1 doanh-thu ≈ 0 → chưa phát-sinh nghĩa-vụ.
 - Dữ-liệu cá-nhân (NĐ 13/2023) + quảng-cáo trung-thực (không "giàu nhanh").

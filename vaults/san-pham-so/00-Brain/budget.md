@@ -25,10 +25,10 @@ section: budget
 | Thuê ngoài (dựng phim, thiết-kế) | `[cần CEO xác minh]` | |
 
 ## Thuế (ước — SP số là dịch-vụ)
-- Hộ/cá-nhân kinh-doanh: thuế khoán GTGT 5% + TNCN 2% khi vượt ngưỡng doanh-thu.
-- ⚠️ **Ngưỡng miễn LỖI-THỜI (Red-team cờ đỏ):** số cũ ghi 200tr/năm (TT 40/2021) nhưng lộ-trình đã nâng dần (→500tr→~1 tỷ, NĐ 141/2026 áp-dụng 01/01/2026). **KHÔNG dùng số này tính tiền khả-dụng/runway** — cần kế-toán xác-minh rồi cập-nhật `[cần kế-toán xác minh]`.
+- Hộ/cá-nhân kinh-doanh: thuế khoán GTGT 5% + TNCN 2% (nhóm dịch-vụ) **khi vượt ngưỡng doanh-thu**.
+- **Ngưỡng miễn hiện-hành: ~1 TỶ ĐỒNG/năm** (NĐ 141/2026/NĐ-CP, hiệu-lực hồi-tố 01/01/2026; lộ-trình 200tr→500tr→1 tỷ trong ~1 năm) — nguồn: xaydungchinhsach.chinhphu.vn `[research P0-06a — cần kế-toán/đại-lý thuế xác-minh tại thời-điểm kê-khai]`. Thay số cũ "200tr" (đã lỗi-thời). Ở GĐ1 doanh-thu ≈ 0 → chưa phát-sinh nghĩa-vụ; **KHÔNG dùng ngưỡng này tính runway**.
 - Nếu lập công-ty: TNDN 20%.
-- NĐ 70/2025: hóa-đơn điện-tử cho TMĐT; NĐ 117/2025: sàn khấu-trừ nộp thay (nếu bán qua sàn).
+- NĐ 70/2025: hóa-đơn điện-tử máy tính tiền (doanh-thu ≥1 tỷ); NĐ 117/2025: sàn TMĐT khấu-trừ nộp thay (CHỈ khi bán qua sàn — tự-host không áp).
 
 ## Dòng tiền
 - Runway: `[cần CEO xác minh]` = vốn tự-có / burn tháng.

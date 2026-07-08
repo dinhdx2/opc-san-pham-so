@@ -39,6 +39,7 @@
 | 1-03b | Playbook outreach trực-tiếp chủ shop (kênh validate nhanh nhất) | AI | file | beachhead | none | 0-01 | DONE | D1-03-outreach-playbook.md |
 | 1-04a | Soạn trang presell/founding-member copy | AI | file | beachhead | none | 0-01 | DONE | D1-04a-presell-copy.md |
 | 1-04c | Soạn kế-hoạch ads test (chờ sau validate) | AI | file | — | none | 0-01 | DONE | 10-thuc-thi-ads-test-plan.md |
+| 1-07 | Soạn cẩm-nang vận-hành ĐỢT-1 từng bước (khám-phá/outreach/thủ-tục cá-nhân/khi-nào-ads) | AI | file | — | none | 0-01 | DONE | 10-thuc-thi-huong-dan-van-hanh-dot-1.md |
 | 1-04b | Mở presell thu tiền thật | Human | — | live | NEED-APPROVAL | 0-04e | TODO | — |
 | 1-05 | Dựng bảng đo KPI (CSV tracker funnel) | AI | file | — | none | 0-03 | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/D1-05-kpi-tracker.csv |
 | 1-06 | Cổng GO/NO-GO (chấm chất-lượng tín-hiệu) | Human | — | số thật | NEED-APPROVAL | 1-05 | TODO | — |

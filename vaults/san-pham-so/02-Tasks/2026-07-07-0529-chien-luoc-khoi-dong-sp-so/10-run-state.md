@@ -30,10 +30,15 @@
 
 | id | hành động | owner | tool | cần (input) | cổng | phụ thuộc | trạng thái | bằng chứng |
 |---|---|---|---|---|---|---|---|---|
-| 1-01 | Làm lead-magnet miễn-phí (bộ prompt/mini-template AI, sạch bản-quyền) | AI | file | beachhead | none | 0-01 | TODO | — |
-| 1-02 | Viết landing page + chuỗi email (3–5) | AI | file | beachhead | none | 0-01 | TODO | — |
-| 1-03 | Soạn 8–12 kịch-bản nội-dung content-led (TikTok/Shorts/Reels) | AI | file | beachhead | none | 0-01 | TODO | — |
-| 1-04a | Draft trang presell/tripwire copy (49–99k) | AI | file | beachhead | none | 0-01 | TODO | — |
+| 1-00 | Soạn guide phỏng-vấn khám-phá khách (Mom Test, 10 câu) | AI | file | — | none | 0-01 | DONE | 10-thuc-thi-khampha-khach.md |
+| 1-00b | Phỏng-vấn 5–10 chủ shop online (founder tự làm) | Human | — | founder | none | 1-00 | HUMAN | — |
+| 1-01 | Làm lead-magnet miễn-phí (bộ 20 prompt AI chủ shop) | AI | file | beachhead | none | 0-01 | DONE | D1-01-lead-magnet-prompt-pack-chu-shop.md |
+| 1-01b | Soạn spec hero MVP (để founder tự làm) | AI | file | beachhead | none | 0-01 | DONE | 10-thuc-thi-hero-mvp-spec.md |
+| 1-02 | Viết landing page + chuỗi 5 email | AI | file | beachhead | none | 0-01 | DONE | D1-02-landing-copy.md |
+| 1-03 | Soạn 10 kịch-bản nội-dung ngắn (kênh phụ) | AI | file | beachhead | none | 0-01 | DONE | D1-03-content-scripts.md |
+| 1-03b | Playbook outreach trực-tiếp chủ shop (kênh validate nhanh nhất) | AI | file | beachhead | none | 0-01 | DONE | D1-03-outreach-playbook.md |
+| 1-04a | Soạn trang presell/founding-member copy | AI | file | beachhead | none | 0-01 | DONE | D1-04a-presell-copy.md |
+| 1-04c | Soạn kế-hoạch ads test (chờ sau validate) | AI | file | — | none | 0-01 | DONE | 10-thuc-thi-ads-test-plan.md |
 | 1-04b | Mở presell thu tiền thật | Human | — | live | NEED-APPROVAL | 0-04e | TODO | — |
 | 1-05 | Dựng bảng đo KPI (CSV tracker funnel) | AI | file | — | none | 0-03 | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/D1-05-kpi-tracker.csv |
 | 1-06 | Cổng GO/NO-GO (chấm chất-lượng tín-hiệu) | Human | — | số thật | NEED-APPROVAL | 1-05 | TODO | — |
@@ -50,8 +55,10 @@
 | 2-06 | Xác-nhận PMF → /vn-loop | AI | file | số thật | none | 2-04 | TODO | — |
 
 ---
-## Tiến độ lượt này
-- **DONE (9):** 0-03, 0-04a–e, 0-05a, 0-06a, 1-05 — bằng-chứng file thật (engine compliance PASS, E1 ✓).
-- **Cổng đang chờ CEO (gom 1 lượt):** 0-01 beachhead · 0-02 runway · 0-05b platform/domain (NEED-INFO).
-- **Chờ sau:** 0-04f luật-sư rà · 0-06b kế-toán · 1-04b/1-06 cổng tiền/công-bố · ĐỢT-2 (sau GO).
-- **Tự chạy tiếp khi CEO chốt beachhead:** 1-01 lead-magnet · 1-02 landing+email · 1-03 kịch-bản nội-dung · 1-04a presell copy.
+## Tiến độ (cập-nhật 2026-07-07)
+- **DONE (18):** toàn-bộ AI-AUTO PHA 0 + ĐỢT-1 — 5 compliance MẪU · spec đo + KPI CSV · hạ-tầng · thuế · lead-magnet 20 prompt · spec hero MVP · landing+5 email · presell copy · 10 kịch-bản video · playbook outreach · guide phỏng-vấn · kế-hoạch ads. Engine compliance **PASS 32 bước 0 vi-phạm** (E1 ✓ bằng-chứng file thật).
+- **→ Bộ kit ĐỢT-1 validate đã SẴN-SÀNG.** Việc còn lại là NGƯỜI làm (không máy thay được):
+  - **HUMAN:** 1-00b phỏng-vấn 5–10 chủ shop · 0-05c đăng-ký platform/domain/thanh-toán (KYC) · 0-06b kế-toán · quay 3 video hero.
+  - **NEED-INFO:** 0-05b chốt Ladipage/Sapo + domain · đăng-ký hộ KD hay cá-nhân.
+  - **NEED-APPROVAL:** 0-04f luật-sư rà 5 văn-bản · 1-04b mở presell thu tiền · 1-06 cổng GO/NO-GO · ĐỢT-2 (sau GO).
+- **Chiến-lược lean:** kênh validate nhanh nhất = outreach trực-tiếp + presell trong cộng-đồng seller (≈0đ, tín-hiệu 2–3 tuần); content video = kênh phụ; ads chỉ bật NHỎ sau khi có WTP dương.

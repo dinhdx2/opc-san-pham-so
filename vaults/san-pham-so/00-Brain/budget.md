@@ -5,7 +5,7 @@ section: budget
 # Ngân sách & Dòng tiền — Sản phẩm số
 
 ## Vốn khởi-động  (stage-gated 2 đợt — CEO chốt 2026-07-07)
-- Vốn tự-có cho giai-đoạn đầu (làm SP + chạy thử marketing): **20–100 triệu VND** `[số thật DN — CEO cấp 2026-07-07]`
+- Vốn tự-có rót cho DN: **~50 triệu VND** (có thể huy-động thêm nếu tín-hiệu tốt) `[số thật DN — CEO cấp 2026-07-07]`. Founder full-time không thu-nhập khác → **burn tối-thiểu, ưu-tiên doanh-thu sớm**.
 - **Đợt-1 VALIDATE (~20–30% war-chest):** landing + lead-magnet + presell/tripwire + đo WTP → cổng go/no-go. KHÔNG rót CapEx sản-xuất hero trước cổng.
 - **Đợt-2 CapEx (sau go):** sản-xuất hero thắng + scale ads trên kênh dương-biên. Giữ Đợt-2 reversible.
 - ⚠️ **Runway sinh-hoạt founder (cổng G0 vận-hành):** `[cần CEO xác minh]` — phải TÁCH khỏi war-chest DN; xác-minh phủ 60–90 ngày organic pre-revenue trước khi khởi-động.

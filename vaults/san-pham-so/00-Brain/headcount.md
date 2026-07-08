@@ -5,8 +5,9 @@ section: headcount
 # Nhân sự — Sản phẩm số
 
 ## Cơ cấu hiện tại
-- CEO/founder: 1 (đa-vai) `[cần CEO xác minh]`
-- Đội hiện có: `[cần CEO xác minh]` — giai-đoạn ý-tưởng thường solo hoặc 1–2 người.
+- CEO/founder: **1, full-time, KHÔNG có thu-nhập khác** `[số thật CEO 2026-07-07]` → runway sinh-hoạt là ràng-buộc chính, cần doanh-thu sớm.
+- Năng-lực: **thạo AI** (tự sản-xuất hero prompt/template); **chưa thạo ngách chủ shop** (cần khám-phá khách); **cần hỗ-trợ ads/chiến-lược quảng-cáo**.
+- Đội hiện có: solo `[số thật CEO]`.
 
 ## Vai trò cần cho SP số (giai-đoạn đầu — có thể 1 người kiêm)
 - Sản-xuất nội-dung (quay/viết/thiết-kế) — CHÍNH LÀ sản-phẩm

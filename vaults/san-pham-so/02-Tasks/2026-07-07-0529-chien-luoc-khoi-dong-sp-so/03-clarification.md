@@ -12,3 +12,9 @@
 - **Vốn:** **~50tr** rót cho DN, có thể huy-động thêm nếu tín-hiệu tốt `[số thật CEO]`.
 
 **→ Go/No-Go cấp dự-án:** GO có điều-kiện — chạy **đường lean fast-validate** (khám-phá + presell trực-tiếp chủ shop → doanh-thu thật sớm), burn tối-thiểu, mốc kill rõ. Ads chỉ bật NHỎ sau khi có tín-hiệu WTP.
+
+## 2026-07-07 (lượt 3 — sau khi trình kit ĐỢT-1)
+- **Tư-cách:** founder làm **cá-nhân** (chưa đăng-ký hộ KD) → cần hướng-dẫn thủ-tục thanh-toán/thuế cho cá-nhân bán SP số.
+- **Đã có:** **sản-phẩm + landing page cơ-bản** (tự làm) → không cần AI dựng landing; validate nhanh được. (Cần CEO nói rõ sản-phẩm hiện có là gì để khớp Ngách A.)
+- **0-04f luật-sư rà:** CEO **duyệt** tiến-hành (vẫn khuyến-nghị luật-sư rà EULA/refund trước khi thu tiền quy-mô).
+- **Yêu-cầu:** hướng-dẫn CHI-TIẾT từng bước: (1) khám-phá nỗi-đau + WTP trước khi làm hero; (2) thủ-tục cá-nhân; (3) outreach là gì + khi nào chạy ads FB; (5) quy-trình tổng-thể.

@@ -6,8 +6,8 @@ altitude: dinh-vi
 # Định vị — beachhead · wedge · moat (CEO chốt 2026-07-07 — Ngách A)
 
 ## beachhead (đầu-cầu — nhóm khách hẹp đánh trước)
-**Hộ kinh-doanh nhỏ & freelancer VN cần dùng AI để làm nội-dung/vận-hành nhanh hơn** `[quyết-định CEO 2026-07-07]`.
-Cần thu-hẹp thêm khi validate (chọn 1 nghề cụ-thể: vd người bán hàng online / chủ shop / freelancer viết-content) để thông-điệp sắc.
+**Chủ shop bán hàng online VN** — dùng AI viết mô-tả sản-phẩm, content bán hàng, chăm khách, trả-lời tin nhắn `[quyết-định CEO 2026-07-07]`.
+Nỗi-đau: tốn nhiều giờ viết content/trả tin, không biết dùng AI bài-bản → hero giải "làm content bán hàng trong 15 phút thay vì cả buổi".
 
 ## wedge (điểm-xuất-phát — SP đầu tiên chèn vào)
 Hero nhẹ: **bộ prompt-library + template Notion/Sheet + video hướng-dẫn ngắn** giải đúng 1 nỗi-đau nghề của beachhead (làm xong việc trong 1 buổi thay vì cả tuần) `[quyết-định CEO]`.

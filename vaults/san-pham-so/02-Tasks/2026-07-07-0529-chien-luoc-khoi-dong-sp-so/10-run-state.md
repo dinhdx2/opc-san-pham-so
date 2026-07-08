@@ -11,8 +11,8 @@
 
 | id | hành động | owner | tool | cần (input) | cổng | phụ thuộc | trạng thái | bằng chứng |
 |---|---|---|---|---|---|---|---|---|
-| 0-01 | Thu-hẹp beachhead xuống 1 nghề cụ-thể (AI đề-xuất 4 options → CEO chọn) | AI+Human | — | CEO chọn | NEED-INFO | — | BLOCKED-INFO | — |
-| 0-02 | Xác-minh runway sinh-hoạt founder (tách war-chest, ≥60–90 ngày) | Human | — | số của CEO | NEED-INFO | — | BLOCKED-INFO | — |
+| 0-01 | Thu-hẹp beachhead xuống 1 nghề cụ-thể (AI đề-xuất 4 options → CEO chọn) | AI+Human | — | CEO chọn | NEED-INFO | — | DONE | 03-clarification.md (beachhead = chủ shop bán online) |
+| 0-02 | Xác-minh runway sinh-hoạt founder (tách war-chest, ≥60–90 ngày) | Human | — | số của CEO | NEED-INFO | — | BLOCKED-INFO | CEO: <3 tháng — RỦI-RO G0, chờ quyết mitigation |
 | 0-03 | Soạn spec tiêu-chí + ngưỡng go/no-go (3 kịch-bản vốn 20/50/100tr) | AI | file | — | none | — | DONE | 10-thuc-thi-protocol-do-luong.md |
 | 0-04a | Draft EULA/License SP số (MẪU) | AI | file | — | none | — | DONE | 10-thuc-thi-compliance-1-eula.md |
 | 0-04b | Draft Content Rights Clearance checklist (MẪU) | AI | file | — | none | — | DONE | 10-thuc-thi-compliance-2-content-rights.md |
@@ -21,7 +21,7 @@
 | 0-04e | Draft SOP Refund + mốc giao hàng (Luật BVQLNTD 19/2023) (MẪU) | AI | file | — | none | — | DONE | 10-thuc-thi-compliance-5-refund-sop.md |
 | 0-04f | Luật-sư rà + CEO duyệt 5 văn-bản trước publish | Human | — | luật-sư | NEED-APPROVAL | 0-04a | HUMAN | — |
 | 0-05a | Kế-hoạch hạ-tầng bán self-host (so-sánh LMS/cổng thanh-toán VN + phí thật) | AI | web | — | none | — | DONE | 10-thuc-thi-ha-tang-ban.md |
-| 0-05b | Chọn platform + domain | Human | — | CEO chọn | NEED-INFO | 0-05a | BLOCKED-INFO | — |
+| 0-05b | Chọn platform + domain | Human | — | CEO chọn | NEED-INFO | 0-05a | BLOCKED-INFO | CEO: landing chuyên VN (Ladipage/Sapo) — chờ chốt cái nào + domain |
 | 0-05c | Đăng-ký platform/domain/cổng thanh-toán (KYC) | Human | — | KYC | HUMAN | 0-05b | HUMAN | — |
 | 0-06a | Research ngưỡng thuế hộ KD hiện-hành (WebSearch) | AI | web | — | none | — | DONE | 10-thuc-thi-thue-research.md · nguồn https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-dinh-so-141-2026-nd-cp-nang-nguong-doanh-thu-khong-phai-chiu-thue-len-1-ty-dong-119260504154326455.htm |
 | 0-06b | Kế-toán xác-minh + cập-nhật Brain thuế (đã cập-nhật sơ-bộ 1 tỷ) | Human | — | kế-toán | NEED-INFO | 0-06a | HUMAN | — |

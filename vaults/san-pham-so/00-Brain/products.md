@@ -4,7 +4,15 @@ section: products
 ---
 # Sản phẩm & Unit economics — Sản phẩm số
 
-## Catalog (danh mục SP số) — Ngách A (CEO chốt 2026-07-07)
+## SẢN-PHẨM THẬT ĐÃ CÓ (CEO cung-cấp 2026-07-07) — "Kit Lên Đơn Đầu Tiên"
+- **Tên:** Kit Lên Đơn Đầu Tiên — TikTok Shop & Shopee (thương-hiệu "ĐơnThật"). Giá **179.000đ** (1 lần, giao ngay qua email).
+- **Loại:** bộ template/checklist/script thực-chiến (KHÔNG phải khóa học lý-thuyết) — 5 phần: (1) Checklist khởi-động shop, (2) Template listing chuẩn sàn, (3) Script video bán hàng TikTok, (4) Checklist chốt đơn & tránh hoàn, (5) Lịch content 30 ngày.
+- **Beachhead thật (SẮC):** người **mới mở shop TikTok Shop/Shopee (<6 tháng), 0 đơn hoặc rất ít đơn** — "mở shop rồi mà vẫn im lìm".
+- **Hạ-tầng đã có:** landing (donthat.vercel.app, tự làm) + thanh-toán SePay/VietQR tự-đối-soát (TK cá-nhân DO XUAN DINH VietinBank) + auto giao file + pixel FB/TikTok + form opt-in consent NĐ 13 + lead-magnet (caption miễn phí).
+- **Định-vị:** rẻ (179k) + nhanh (4 giờ) + không cần học — đối-lập khóa học dài 500k–5tr.
+- **Grounding:** đây là tier LÀM (công-cụ cho người bán) → KHỚP tinh-thần Ngách A, chỉ nhắm người MỚI (0 đơn) thay vì shop đang chạy.
+
+## (Bản đề-xuất cũ — Ngách A AI-tools, GIỮ tham-chiếu) Catalog
 Phễu 3 tầng (1 ngách / 1 hero tới PMF — chống BLOCK_MO_RONG_SOM):
 | Tầng | SP | Loại | Giá | Vai trò |
 |---|---|---|---|---|

@@ -20,3 +20,10 @@ section: decisions-log
 - nội-dung: <1-2 câu>
 - căn-cứ: <task / số thật>
 -->
+
+## 2026-07-07 — Refine beachhead + hero theo SẢN-PHẨM THẬT đã có
+- status: locked
+- altitude: dinh-vi
+- nội-dung: Founder ĐÃ có SP + landing + thanh-toán: **"Kit Lên Đơn Đầu Tiên — TikTok Shop & Shopee" 179k** (bộ template/checklist thực-chiến). Beachhead refine sang **người mới mở shop 0 đơn** (thay "chủ shop đang bán" + AI-tools). Vẫn tier LÀM → khớp tinh-thần Ngách A. DN ở mức validate-ready (xa hơn kế-hoạch giả-định).
+- căn-cứ: landing donthat.vercel.app (CEO gửi zip 2026-07-07), review AI.
+- lưu-ý: KHÔNG đảo telos; đây là refine định-vị theo thực-tế SP, không phải đổi hướng.

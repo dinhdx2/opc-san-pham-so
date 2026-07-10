@@ -48,13 +48,13 @@
 
 | id | hành động | owner | tool | cần (input) | cổng | phụ thuộc | trạng thái | bằng chứng |
 |---|---|---|---|---|---|---|---|---|
-| G-01 | Soạn 3 trang pháp-lý (hoàn tiền/privacy/điều-khoản) ready-to-paste | AI | file | — | none | — | DONE | legal-chinh-sach-hoan-tien.md |
-| G-01b | Soạn trang privacy + điều-khoản (NĐ 13 + disclaimer nhãn-hiệu) | AI | file | — | none | — | DONE | legal-chinh-sach-rieng-tu.md |
-| G-02 | Soạn checklist go-live (pixel/email/domain, vá Purchase event, test) | AI | file | — | none | — | DONE | 10-thuc-thi-checklist-go-live.md |
-| G-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
-| G-04 | Điền placeholder + up 3 trang pháp-lý + vá Purchase event + kiểm SEPAY_API_TOKEN | Human | — | founder | NEED-APPROVAL | G-01 | HUMAN | — |
-| G-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | G-04 | HUMAN | — |
-| G-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | G-05 | HUMAN | — |
+| 3-01 | Soạn 3 trang pháp-lý (hoàn tiền/privacy/điều-khoản) ready-to-paste | AI | file | — | none | — | DONE | legal-chinh-sach-hoan-tien.md |
+| 3-01b | Soạn trang privacy + điều-khoản (NĐ 13 + disclaimer nhãn-hiệu) | AI | file | — | none | — | DONE | legal-chinh-sach-rieng-tu.md |
+| 3-02 | Soạn checklist go-live (pixel/email/domain, vá Purchase event, test) | AI | file | — | none | — | DONE | 10-thuc-thi-checklist-go-live.md |
+| 3-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
+| 3-04 | Điền placeholder + up 3 trang pháp-lý + vá Purchase event + kiểm SEPAY_API_TOKEN | Human | — | founder | NEED-APPROVAL | 3-01 | HUMAN | — |
+| 3-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | 3-04 | HUMAN | — |
+| 3-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | 3-05 | HUMAN | — |
 
 ## ĐỢT-2 — Sản-xuất + scale (dep GO 1-06) — chưa mở
 

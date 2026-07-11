@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1024px; height:1024px; }
+  body {
+    font-family:'Liberation Sans','DejaVu Sans',sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(680px 680px at 38% 30%, #ff7a34 0%, #e8450a 52%, #c43a08 100%);
+    overflow:hidden;
+  }
+  /* vòng an-toàn cho crop tròn của FB: giữ mọi thứ trong tâm ~78% */
+  .box { display:flex; flex-direction:column; align-items:center; gap:34px; }
+  .check { width:430px; height:430px; filter:drop-shadow(0 14px 30px rgba(0,0,0,.28)); }
+  .name { color:#fff; font-size:118px; font-weight:800; letter-spacing:-1px;
+    text-shadow:0 3px 14px rgba(0,0,0,.22); }
+  .name .t2 { color:#fff2ea; }
+</style></head>
+<body>
+  <div class="box">
+    <svg class="check" viewBox="0 0 100 100" fill="none">
+      <path d="M20 52 L42 74 L82 30" stroke="#ffffff" stroke-width="12"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="name">Đơn<span class="t2">Thật</span></div>
+  </div>
+</body></html>

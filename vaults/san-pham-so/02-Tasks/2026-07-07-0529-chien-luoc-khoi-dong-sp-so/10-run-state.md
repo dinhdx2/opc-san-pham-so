@@ -52,7 +52,9 @@
 | 3-01b | Soạn trang privacy + điều-khoản (NĐ 13 + disclaimer nhãn-hiệu) | AI | file | — | none | — | DONE | legal-chinh-sach-rieng-tu.md |
 | 3-02 | Soạn checklist go-live (pixel/email/domain, vá Purchase event, test) | AI | file | — | none | — | DONE | 10-thuc-thi-checklist-go-live.md |
 | 3-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
+| 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |
 | 3-04 | Điền placeholder + up 3 trang pháp-lý + vá Purchase event + kiểm SEPAY_API_TOKEN | Human | — | founder | NEED-APPROVAL | 3-01 | HUMAN | — |
+| 3-04b | Tạo fanpage + Business Suite + Ad Account + gắn Pixel + thẻ (founder tự làm) | Human | — | founder | NEED-APPROVAL | 3-03b | HUMAN | — |
 | 3-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | 3-04 | HUMAN | — |
 | 3-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | 3-05 | HUMAN | — |
 

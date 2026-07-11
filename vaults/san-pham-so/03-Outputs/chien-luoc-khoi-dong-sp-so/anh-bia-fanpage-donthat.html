@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1640px; height:624px; }
+  body {
+    font-family:'Liberation Sans','DejaVu Sans',sans-serif;
+    background:
+      radial-gradient(1000px 560px at 80% 30%, rgba(232,69,10,0.24), transparent 60%),
+      linear-gradient(135deg,#1c1712 0%, #14110d 55%, #0f0d0a 100%);
+    color:#fff; overflow:hidden; position:relative;
+  }
+  /* safe zone: nội-dung trong khoảng giữa (tránh desktop cắt trên/dưới + mobile cắt cạnh + avatar góc dưới-trái) */
+  .wrap { position:absolute; inset:0; padding:56px 150px; display:flex; align-items:center; }
+  .left { width:57%; display:flex; flex-direction:column; }
+  .brand { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+  .tick { width:46px; height:46px; border-radius:12px; background:#e8450a;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 5px 15px rgba(232,69,10,.45); }
+  .tick svg { width:27px; height:27px; }
+  .bname { font-size:27px; font-weight:800; letter-spacing:.4px; }
+  .bname small { color:#9a938c; font-weight:600; font-size:18px; margin-left:9px; }
+  h1 { font-size:64px; line-height:1.07; font-weight:800; letter-spacing:-.5px; margin-bottom:22px; }
+  h1 .hl { color:#ff6a2b; }
+  .sub { font-size:26px; line-height:1.4; color:#dcd5ce; font-weight:500; max-width:760px; margin-bottom:30px; }
+  .sub b { color:#fff; }
+  .price { display:inline-flex; align-items:center; gap:15px; }
+  .pill { background:#e8450a; color:#fff; font-size:31px; font-weight:800; padding:13px 27px; border-radius:13px;
+    box-shadow:0 7px 20px rgba(232,69,10,.4); }
+  .pnote { font-size:20px; color:#b9b1a9; font-weight:600; }
+  /* right: kit card */
+  .right { flex:1; display:flex; align-items:center; justify-content:flex-end; }
+  .card { width:388px; background:#fbf7f3; color:#1a1a1a; border-radius:20px; padding:28px 30px 24px;
+    transform:rotate(3deg); box-shadow:0 26px 52px rgba(0,0,0,.45); position:relative; }
+  .card h3 { font-size:23px; font-weight:800; margin-bottom:4px; }
+  .card .k { font-size:14px; color:#8a8177; font-weight:700; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px; }
+  .row { display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid #ece5dd; font-size:18px; font-weight:600; }
+  .row:first-of-type { border-top:none; }
+  .rt { width:23px; height:23px; border-radius:50%; background:#1a7a3b; flex:0 0 23px;
+    display:flex; align-items:center; justify-content:center; }
+  .rt svg { width:13px; height:13px; }
+  .tag { position:absolute; top:-15px; right:22px; background:#e8450a; color:#fff; font-size:14px; font-weight:800;
+    padding:6px 14px; border-radius:28px; transform:rotate(3deg); box-shadow:0 5px 14px rgba(232,69,10,.4); }
+</style></head>
+<body>
+  <div class="wrap">
+    <div class="left">
+      <div class="brand">
+        <span class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="bname">ĐơnThật<small>donthat.vercel.app</small></span>
+      </div>
+      <h1>Mở shop rồi mà<br>vẫn <span class="hl">0 đơn?</span></h1>
+      <div class="sub">Kit Lên Đơn Đầu Tiên cho nhà bán mới <b>TikTok Shop &amp; Shopee</b> — điền vào chỗ trống, đăng lên sàn là xong.</div>
+      <div class="price">
+        <span class="pill">Chỉ 179.000đ</span>
+        <span class="pnote">· dùng được ngay</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="card">
+        <span class="tag">5 phần · dùng ngay</span>
+        <h3>Bên trong Kit</h3>
+        <div class="k">Lên đơn đầu tiên</div>
+        <div class="row"><span class="rt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Checklist khởi động shop</div>
+        <div class="row"><span class="rt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Template listing chuẩn sàn</div>
+        <div class="row"><span class="rt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Script video bán hàng TikTok</div>
+        <div class="row"><span class="rt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Checklist chốt đơn &amp; tránh hoàn</div>
+        <div class="row"><span class="rt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Lịch content 30 ngày (tặng)</div>
+      </div>
+    </div>
+  </div>
+</body></html>

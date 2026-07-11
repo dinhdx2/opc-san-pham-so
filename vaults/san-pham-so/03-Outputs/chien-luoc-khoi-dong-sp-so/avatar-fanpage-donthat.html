@@ -1,28 +1,20 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html,body { width:1024px; height:1024px; }
-  body {
-    font-family:'Liberation Sans','DejaVu Sans',sans-serif;
-    display:flex; align-items:center; justify-content:center;
-    background:
-      radial-gradient(680px 680px at 38% 30%, #ff7a34 0%, #e8450a 52%, #c43a08 100%);
-    overflow:hidden;
-  }
-  /* vòng an-toàn cho crop tròn của FB: giữ mọi thứ trong tâm ~78% */
-  .box { display:flex; flex-direction:column; align-items:center; gap:34px; }
-  .check { width:430px; height:430px; filter:drop-shadow(0 14px 30px rgba(0,0,0,.28)); }
-  .name { color:#fff; font-size:118px; font-weight:800; letter-spacing:-1px;
-    text-shadow:0 3px 14px rgba(0,0,0,.22); }
-  .name .t2 { color:#fff2ea; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1024px;height:1024px;}
+  body{display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(700px 700px at 38% 30%,#ff7a34 0%,#e8450a 52%,#c43a08 100%);
+    overflow:hidden;}
+  svg{width:560px;height:560px;filter:drop-shadow(0 16px 34px rgba(0,0,0,.26));}
 </style></head>
 <body>
-  <div class="box">
-    <svg class="check" viewBox="0 0 100 100" fill="none">
-      <path d="M20 52 L42 74 L82 30" stroke="#ffffff" stroke-width="12"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div class="name">Đơn<span class="t2">Thật</span></div>
-  </div>
+  <svg viewBox="0 0 100 100" fill="none">
+    <!-- quai túi -->
+    <path d="M36 39 C36 25 64 25 64 39" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <!-- thân túi -->
+    <path d="M25 39 h50 a5.5 5.5 0 0 1 5.5 6 l-3 35 a7.5 7.5 0 0 1 -7.5 6.5 H30 a7.5 7.5 0 0 1 -7.5 -6.5 l-3 -35 a5.5 5.5 0 0 1 5.5 -6 Z" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+    <!-- tick trong túi -->
+    <path d="M37 60 l8 9 17 -18" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
 </body></html>

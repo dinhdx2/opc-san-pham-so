@@ -57,10 +57,11 @@
 | 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |
 | 3-03d | Ghép Pixel THẬT (1039882955245470) + Purchase/ViewContent/InitiateCheckout + điền pháp-lý/email vào 2 bản landing (A=bản gốc có thanh-toán · B=thiết-kế Stitch + ghép module thanh-toán) — deploy-ready | AI | file | Pixel ID | none | 3-03b | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/donthat-A-goc-final.zip · donthat-B-stitch-final.zip · landing-A-goc-index.html · landing-B-stitch-index.html |
 | 3-03e | Hợp-nhất 1 bản CHUẨN duy-nhất (thiết-kế Stitch + thanh-toán A): recolor modal xanh→cam brand · font Inter · wire form lead (+Lead event, /api/lead) · SEO/OG + og-image 1200×630 render · favicon · preconnect. Render kiểm modal cam. deploy-ready | AI | file | — | none | 3-03d | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/donthat-final.zip · landing-final-index.html · landing-final-og-image.png · landing-final-api-lead.js |
-| 3-04 | Deploy bản final + set SEPAY_API_TOKEN trên Vercel + kiểm Pixel bằng Meta Pixel Helper | Human | — | founder | NEED-APPROVAL | 3-03e | HUMAN | — |
-| 3-04b | Tạo fanpage + Business Suite + Ad Account + gắn Pixel + thẻ (founder tự làm) | Human | — | founder | NEED-APPROVAL | 3-03b | HUMAN | — |
-| 3-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | 3-04 | HUMAN | — |
-| 3-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | 3-05 | HUMAN | — |
+| 3-04 | Deploy bản final + set SEPAY_API_TOKEN trên Vercel | Human | — | founder | NEED-APPROVAL | 3-03e | DONE | https://donthat.vercel.app (LIVE — Vercel status Ready) · SEPAY_API_TOKEN đã set (bằng-chứng: thanh-toán tự đối-soát chạy được, xem 3-05) |
+| 3-04b | Tạo fanpage + Business Suite + Ad Account + gắn Pixel + thẻ (founder tự làm) | Human | — | founder | NEED-APPROVAL | 3-03b | HUMAN | Pixel LIVE (xem 3-04c); Ad Account/thẻ chờ CEO xác-nhận |
+| 3-04c | Xác-minh Pixel LIVE (Events Manager thật-sự nhận sự-kiện) | Human | — | CEO | none | 3-04 | DONE | CEO screenshot Events Manager 2026-07-15: dataset 1039882955245470 nhận PageView + ViewContent, trạng-thái "Đang hoạt động", nguồn Trình duyệt |
+| 3-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | 3-04 | DONE | CEO xác-nhận 2026-07-15: chuyển 179k → trang tự nhận → nhận được file Kit (vòng thanh-toán+giao-hàng chạy thật) |
+| 3-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | 3-05 | TODO | — |
 
 ## ĐỢT-2 — Sản-xuất + scale (dep GO 1-06) — chưa mở
 
@@ -81,3 +82,9 @@
   - **NEED-INFO:** 0-05b chốt Ladipage/Sapo + domain · đăng-ký hộ KD hay cá-nhân.
   - **NEED-APPROVAL:** 0-04f luật-sư rà 5 văn-bản · 1-04b mở presell thu tiền · 1-06 cổng GO/NO-GO · ĐỢT-2 (sau GO).
 - **Chiến-lược lean:** kênh validate nhanh nhất = outreach trực-tiếp + presell trong cộng-đồng seller (≈0đ, tín-hiệu 2–3 tuần); content video = kênh phụ; ads chỉ bật NHỎ sau khi có WTP dương.
+
+### GO-LIVE xác-minh (2026-07-15)
+- ✅ **Landing LIVE:** donthat.vercel.app deploy Vercel (Ready), bản final (Stitch + thanh-toán + Pixel + pháp-lý).
+- ✅ **Pixel xác-minh THẬT:** Events Manager dataset 1039882955245470 nhận **PageView + ViewContent** ("Đang hoạt động", nguồn Trình duyệt) — CEO screenshot. Không phải chỉ có code, mà Facebook đã nhận tín-hiệu.
+- ✅ **Thanh-toán end-to-end THẬT:** CEO test chuyển 179k → trang tự đối-soát (SePay) → nhận được file Kit. Vòng tiền + giao-hàng chạy.
+- **Còn lại trước khi chạy ads:** (1) **Purchase event** sẽ tích-luỹ theo đơn thật — không cần làm gì thêm, code đã đúng; (2) **Xác-minh miền (Domain Verification)** nên làm ngay trước cổng 3-06 (đo đơn chuẩn trên iOS, AEM); (3) kế-hoạch ads Tranche 1 (3-06).

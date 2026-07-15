@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1200px;height:1200px;}
+  body{font-family:'Liberation Sans','DejaVu Sans',sans-serif;color:#fff;overflow:hidden;
+    background:radial-gradient(900px 620px at 80% 14%,rgba(232,69,10,.22),transparent 60%),
+      linear-gradient(160deg,#1c1712 0%,#14110d 55%,#0f0d0a 100%);}
+  .wrap{position:absolute;inset:0;padding:70px 74px;display:flex;flex-direction:column;justify-content:center;}
+  .brand{display:flex;align-items:center;gap:13px;margin-bottom:28px;}
+  .tick{width:50px;height:50px;border-radius:14px;background:#e8450a;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(232,69,10,.45);}
+  .tick svg{width:33px;height:33px;}
+  .bname{font-size:31px;font-weight:800;}
+  .hook{font-size:44px;font-weight:800;line-height:1.15;letter-spacing:-.5px;margin-bottom:34px;}
+  .hook .hl{color:#ff8a4d;}
+  .card{border-radius:22px;padding:30px 34px;margin-bottom:22px;box-shadow:0 16px 34px rgba(0,0,0,.35);}
+  .c1{background:#f0ece8;color:#3a352f;}
+  .c2{background:#fff;color:#1a1a1a;border:3px solid #e8450a;}
+  .lbl{display:inline-flex;align-items:center;gap:9px;font-size:21px;font-weight:800;padding:7px 16px;border-radius:30px;margin-bottom:16px;}
+  .l1{background:#e2d9d1;color:#9a4a3a;}
+  .l2{background:#e8450a;color:#fff;}
+  .lbl .b{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .b1{background:#c0442e;} .b2{background:#fff;}
+  .b svg{width:15px;height:15px;}
+  .desc{font-size:29px;line-height:1.45;font-weight:600;}
+  .c1 .desc{color:#7a726a;}
+  .c2 .desc b{color:#e8450a;}
+  .foot{margin-top:30px;display:flex;align-items:center;justify-content:space-between;font-size:27px;font-weight:700;color:#d9d2cb;}
+  .foot b{color:#fff;}
+  .foot .u{font-weight:800;color:#fff;}
+  .foot .u span{color:#ff8a4d;}
+</style></head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <span class="tick"><svg viewBox="0 0 100 100" fill="none"><path d="M36 39 C36 25 64 25 64 39" stroke="#fff" stroke-width="7" stroke-linecap="round"/><path d="M25 39 h50 a5.5 5.5 0 0 1 5.5 6 l-3 35 a7.5 7.5 0 0 1 -7.5 6.5 H30 a7.5 7.5 0 0 1 -7.5 -6.5 l-3 -35 a5.5 5.5 0 0 1 5.5 -6 Z" stroke="#fff" stroke-width="7" stroke-linejoin="round"/><path d="M37 60 l8 9 17 -18" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="bname">ĐơnThật</span>
+    </div>
+    <div class="hook">Đăng 20 sản-phẩm mà mô-tả<br><span class="hl">y-chang nhau</span>, khách lướt qua luôn?</div>
+
+    <div class="card c1">
+      <span class="lbl l1"><span class="b b1"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg></span> TỰ VIẾT — nhạt, ai cũng giống</span>
+      <div class="desc">"Áo thun nam. Chất cotton. Có nhiều màu. Giá rẻ, mua ngay."</div>
+    </div>
+
+    <div class="card c2">
+      <span class="lbl l2"><span class="b b2"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#e8450a" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span> DÙNG TEMPLATE TRONG KIT</span>
+      <div class="desc">Áo thun nam cotton <b>co giãn, mặc mát cả ngày</b> — 5 màu dễ phối, form chuẩn dáng. <b>Freeship</b> đơn từ 2 cái. Đặt ngay kẻo hết size!</div>
+    </div>
+
+    <div class="foot">
+      <span>Điền tên SP là ra mô-tả <b>có hook</b> — 2 phút/sản-phẩm</span>
+      <span class="u">donthat<span>.vercel.app</span></span>
+    </div>
+  </div>
+</body></html>

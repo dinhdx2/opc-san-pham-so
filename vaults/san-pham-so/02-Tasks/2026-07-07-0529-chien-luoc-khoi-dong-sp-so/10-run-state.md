@@ -52,7 +52,7 @@
 | 3-01b | Soạn trang privacy + điều-khoản (NĐ 13 + disclaimer nhãn-hiệu) | AI | file | — | none | — | DONE | legal-chinh-sach-rieng-tu.md |
 | 3-02 | Soạn checklist go-live (pixel/email/domain, vá Purchase event, test) | AI | file | — | none | — | DONE | 10-thuc-thi-checklist-go-live.md |
 | 3-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
-| 3-03f | Soạn SOP sản-xuất video ads bằng AI (pipeline 2 vòng + tool stack + 6 bước dựng + 3 kịch-bản mẫu + thư-viện 10 hook + guardrails luật/policy) | AI | file | — | none | — | DONE | 10-thuc-thi-video-ads-ai.md |
+| 3-03f | Soạn tài-liệu hướng-dẫn quy-trình + công-cụ AI cho video quảng-cáo (pipeline 2 vòng · tool stack · 6 bước · 3 kịch-bản mẫu · 10 hook · guardrails luật/policy) | AI | file | — | none | — | DONE | 10-thuc-thi-video-ads-ai.md |
 | 3-02c | Thiết-kế + render ảnh bìa fanpage (1640×624 chuẩn FB, brand tối+cam) | AI | file | — | none | — | DONE | anh-bia-fanpage-donthat.png |
 | 3-03c | Thiết-kế 5 ảnh bài đăng seed + avatar/cover/logo (render Chromium, đồng-bộ brand) | AI | file | — | none | — | DONE | post1-gioi-thieu-kit.png |
 | 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |

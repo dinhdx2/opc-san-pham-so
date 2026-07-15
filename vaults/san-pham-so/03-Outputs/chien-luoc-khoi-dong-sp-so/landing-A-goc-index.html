@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<!-- TL;DR: Landing page self-contained, responsive, build-ready cho Kit Lên Đơn Đầu Tiên 149-199k.
+     Copy đã rà Luật QC: không cam kết kết quả, không từ cấm nhóm 1; có consent NĐ 13, form opt-in nhúng.
+     Thay tất cả placeholder [IN_HOA_VUONG] trước khi go-live — xem 4.1a-landing-README.md. -->
+<!-- [CẦN]: Thay ĐơnThật bằng tên thương hiệu thật -->
+<!-- [CẦN]: Thay [CHECKOUT_URL] bằng URL thanh toán thật (PayOS / Sepay / Gumroad) -->
+<!-- [CẦN]: Thay 1039882955245470 và [TIKTOK_PIXEL_ID] bằng pixel thật (xem 8.2a-tracking-pixel-utm-spec.md) -->
+<!-- [CẦN]: Thay chinh-sach-rieng-tu.html bằng URL trang chính sách quyền riêng tư thật (9.2a) -->
+<!-- [CẦN]: Thay [DOMAIN] bằng domain thật sau khi deploy -->
+<!-- [CẦN]: Thay donthat.support@gmail.com bằng email hỗ trợ thật -->
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kit thực-chiến giúp nhà bán mới TikTok Shop & Shopee có listing chuẩn và video bán hàng đầu tiên trong 4 giờ — dưới 200k, không cần học trước." />
+  <title>Kit Lên Đơn Đầu Tiên — TikTok Shop & Shopee | ĐơnThật</title>
+
+  <!-- Meta Pixel (Facebook/Meta) — ĐANG BẬT · ID 1039882955245470 -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1039882955245470');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1039882955245470&ev=PageView&noscript=1"/></noscript>
+
+  <!-- TikTok Pixel — CHƯA BẬT (chưa có TikTok Pixel ID; để trống, bật sau nếu chạy TikTok Ads) -->
+  <!-- [CẦN]: TikTok Pixel — thay [TIKTOK_PIXEL_ID] (xem 8.2a) -->
+  <!--
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+      for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};
+      ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=i;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._p=ttq._p||{};ttq._p[e]=n||{};
+      var o=document.createElement("script");o.type="text/javascript";o.async=!0;o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+      ttq.load('[TIKTOK_PIXEL_ID]');ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  -->
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: #1a1a1a;
+      background: #ffffff;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section { padding: 56px 0; }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.2; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; line-height: 1.3; margin-bottom: 24px; }
+    h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    p  { margin-bottom: 14px; }
+
+    /* ===== COLORS ===== */
+    :root {
+      --primary:   #e8450a;   /* cam đỏ thực-chiến */
+      --primary-d: #c43a08;
+      --dark:      #1a1a1a;
+      --gray:      #6b6b6b;
+      --light:     #f7f7f7;
+      --border:    #e0e0e0;
+      --green:     #1a7a3b;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    .top-bar strong { color: #ffd54f; }
+
+    /* ===== HERO ===== */
+    #hero {
+      background: linear-gradient(135deg, #fff7f4 0%, #fff 100%);
+      border-bottom: 1px solid #ffe0d6;
+      padding: 64px 0 48px;
+    }
+    .badge {
+      display: inline-block;
+      background: #fff3e0;
+      color: #bf360c;
+      border: 1px solid #ffccbc;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    #hero h1 { color: var(--dark); margin-bottom: 20px; }
+    #hero h1 span { color: var(--primary); }
+    .subhead {
+      font-size: 1.05rem;
+      color: #444;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+    .price-hero {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .price-now {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .price-desc {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+    .btn-cta {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    .btn-cta:hover { background: var(--primary-d); }
+    .btn-cta-sub {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      font-weight: 400;
+      display: block;
+      margin-top: 4px;
+    }
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .trust-item {
+      font-size: 0.85rem;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-item::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* ===== PAIN → SOLUTION ===== */
+    #pain { background: #fff; }
+    .pain-box {
+      background: #fff8f6;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .pain-box p { margin: 0; font-size: 0.95rem; color: #333; }
+    .pain-box p::before {
+      content: '— ';
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .solution-intro {
+      background: #f0faf4;
+      border: 1px solid #b2dfdb;
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin-top: 28px;
+    }
+    .solution-intro strong { color: var(--green); }
+
+    /* ===== KIT CONTENTS ===== */
+    #kit { background: var(--light); }
+    .kit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media(min-width:560px){
+      .kit-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .kit-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .kit-card .kit-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .kit-card h3 { font-size: 1rem; margin-bottom: 8px; }
+    .kit-card p  { font-size: 0.88rem; color: #555; margin: 0; }
+    .kit-bonus {
+      background: #fff9e6;
+      border: 1px dashed #f9a825;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-top: 16px;
+      grid-column: 1/-1;
+    }
+    .kit-bonus .kit-num { color: #e65100; }
+
+    /* ===== POSITIONING ===== */
+    #position { background: #fff; }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .compare-table th {
+      background: var(--dark);
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .compare-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare-table tr:nth-child(even) td { background: var(--light); }
+    .compare-table .highlight td { background: #fff3e0 !important; font-weight: 600; }
+    .tag-kit {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* ===== PRICING ===== */
+    #pricing { background: var(--light); }
+    .pricing-box {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .pricing-box .price-big {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin: 12px 0 6px;
+    }
+    .pricing-box .price-note {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 22px;
+    }
+    .pricing-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .pricing-list li {
+      padding: 6px 0;
+      font-size: 0.9rem;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .pricing-list li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .refund-note {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ===== OPT-IN FORM ===== */
+    #optin { background: #fff; }
+    .form-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .form-card h2 { font-size: 1.3rem; margin-bottom: 8px; }
+    .form-desc { font-size: 0.88rem; color: #555; margin-bottom: 22px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .form-group label span.optional {
+      font-weight: 400;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #1a1a1a;
+      background: #fff;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(232,69,10,0.12);
+    }
+    /* Consent checkbox */
+    .consent-block {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .consent-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .consent-text {
+      font-size: 0.8rem;
+      color: #444;
+      line-height: 1.55;
+    }
+    .consent-text a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--primary-d); }
+    .form-privacy {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .form-privacy a { color: var(--primary); text-decoration: underline; }
+
+    /* ===== FAQ ===== */
+    #faq { background: var(--light); }
+    .faq-list { list-style: none; }
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--dark);
+    }
+    .faq-q::after { content: '+'; font-size: 1.3rem; color: var(--primary); flex-shrink: 0; }
+    .faq-q[aria-expanded="true"]::after { content: '−'; }
+    .faq-a {
+      display: none;
+      padding: 0 20px 16px;
+      font-size: 0.88rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    .faq-q[aria-expanded="true"] + .faq-a { display: block; }
+
+    /* ===== FINAL CTA ===== */
+    #final-cta { background: var(--dark); color: #fff; text-align: center; padding: 56px 20px; }
+    #final-cta h2 { color: #fff; }
+    #final-cta .subhead { color: #ccc; }
+    #final-cta .btn-cta {
+      background: var(--primary);
+      margin: 24px auto 0;
+    }
+    #final-cta .btn-cta:hover { background: var(--primary-d); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+    footer a { color: #aaa; text-decoration: underline; }
+    footer a:hover { color: #fff; }
+
+    /* ===== UTILITY ===== */
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .disclaimer {
+      font-size: 0.78rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .sep { height: 1px; background: var(--border); margin: 0; }
+    .text-center { text-align: center; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+    .mb-0 { margin-bottom: 0 !important; }
+
+    @media(max-width:480px){
+      .form-card { padding: 24px 16px; }
+      .pricing-box { padding: 28px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  Ra mắt — <strong>giá 179.000đ</strong>, giao ngay sau thanh toán. Dùng được ngay, không cần học trước.
+</div>
+
+<!-- ================================================================
+     HERO SECTION
+     ================================================================ -->
+<section id="hero">
+  <div class="container">
+    <p class="badge">Kit thực-chiến cho nhà bán mới TikTok Shop &amp; Shopee</p>
+
+    <h1>
+      Mở shop rồi nhưng<br/>
+      <span>vẫn 0 đơn?</span><br/>
+      Kit này giúp bạn có listing chuẩn và video bán hàng đầu tiên <span>trong 4 giờ.</span>
+    </h1>
+
+    <p class="subhead">
+      Bộ template điền-sẵn dành riêng cho TikTok Shop &amp; Shopee VN — điền vào chỗ trống, đăng lên sàn là xong. Dưới 200k. Không cần học thêm.
+    </p>
+
+    <div class="price-hero">
+      <span class="price-now">179.000đ</span>
+      <span class="price-desc">
+        Thanh toán 1 lần<br/>
+        Giao ngay qua email
+      </span>
+    </div>
+
+    <!-- [CẦN]: Thay [CHECKOUT_URL] bằng URL thanh toán thật (PayOS / Sepay / Gumroad) -->
+    <a href="[CHECKOUT_URL]" class="btn-cta"
+       onclick="trackPurchaseClick()"
+       id="cta-hero">
+      Mua Ngay — 179.000đ
+      <span class="btn-cta-sub">Giao file qua email trong vài phút</span>
+    </a>
+
+    <div class="trust-row mt-16">
+      <span class="trust-item">Giao file ngay sau thanh toán</span>
+      <span class="trust-item">Không cần cài app</span>
+      <span class="trust-item">Có cho cả Shopee &amp; TikTok Shop</span>
+      <span class="trust-item">Dùng được ngay — không cần đọc hướng dẫn dài</span>
+    </div>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     NỖI ĐAU → GIẢI PHÁP
+     ================================================================ -->
+<section id="pain">
+  <div class="container">
+    <p class="section-label">Bạn có đang gặp...</p>
+    <h2>Đã đăng sản phẩm rồi mà shop vẫn im lìm?</h2>
+
+    <div class="pain-box">
+      <p>Mở shop 2–4 tuần, đăng 5–20 sản phẩm, nhưng 0 đơn — không hiểu tại sao</p>
+    </div>
+    <div class="pain-box">
+      <p>Chụp ảnh xong rồi nhưng không biết viết tiêu đề, mô tả chuẩn sàn như thế nào</p>
+    </div>
+    <div class="pain-box">
+      <p>Muốn làm video TikTok Shop nhưng không biết nói gì, cấu trúc ra sao</p>
+    </div>
+    <div class="pain-box">
+      <p>Xem đủ video YouTube, xem khóa học rồi nhưng vẫn không biết bắt đầu từ đâu</p>
+    </div>
+    <div class="pain-box">
+      <p>Không có thời gian học thêm mấy tuần — cần bắt đầu ngay hôm nay</p>
+    </div>
+
+    <div class="solution-intro mt-32">
+      <h3><strong>Vấn đề không phải ở sản phẩm của bạn</strong></h3>
+      <p>Hầu hết nhà bán mới thất bại ở bước trình bày — listing viết sai cách sàn lọc, video không có cấu trúc hook nên thuật toán không đẩy. Đây là kỹ thuật có thể học và làm đúng ngay lần đầu — nếu có công cụ đúng.</p>
+      <p class="mb-0"><strong>Kit Lên Đơn Đầu Tiên</strong> cho bạn đúng những công cụ đó: template điền-sẵn, script mẫu, checklist theo từng bước. Không lý thuyết, không mày mò từ đầu.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     KIT GỒM GÌ
+     ================================================================ -->
+<section id="kit">
+  <div class="container">
+    <p class="section-label">Bên trong kit</p>
+    <h2>5 phần — dùng được ngay, không cần đọc hướng dẫn dài</h2>
+
+    <div class="kit-grid">
+
+      <div class="kit-card">
+        <p class="kit-num">Phần 1</p>
+        <h3>Checklist Khởi Động Shop</h3>
+        <p>20 mục thiết lập TikTok Shop + Shopee đúng chuẩn từ ngày đầu. Timeline 7 ngày đầu — làm gì, theo thứ tự nào. Danh sách lỗi phổ biến cần tránh.</p>
+      </div>
+
+      <div class="kit-card">
+        <p class="kit-num">Phần 2</p>
+        <h3>Bộ Template Listing Sản Phẩm</h3>
+        <p>Công thức tiêu đề chuẩn Shopee, 10 ví dụ mẫu theo 5 ngành. 3 block mô tả điền-sẵn. Bộ hashtag TikTok Shop theo ngành. Checklist hình ảnh đạt chuẩn sàn.</p>
+      </div>
+
+      <div class="kit-card">
+        <p class="kit-num">Phần 3</p>
+        <h3>Bộ Script Video Bán Hàng TikTok</h3>
+        <p>3 loại script điền-sẵn (giới thiệu SP / unboxing / problem-solution). 10 mẫu câu hook mở đầu. 5 mẫu CTA cuối video. Checklist quay video cơ bản.</p>
+      </div>
+
+      <div class="kit-card">
+        <p class="kit-num">Phần 4</p>
+        <h3>Checklist Chốt Đơn &amp; Tránh Hoàn Hàng</h3>
+        <p>12 bước xử lý đơn hàng tuần tự. Mẫu tin nhắn chăm sóc khách copy-paste. Bảng theo dõi đơn Google Sheets đơn giản. Checklist giảm tỷ lệ hoàn hàng.</p>
+      </div>
+
+      <div class="kit-bonus">
+        <p class="kit-num">Phần Thưởng — Tặng Kèm</p>
+        <h3>Lịch Content 30 Ngày Đầu</h3>
+        <p>Lịch từng ngày: loại content nên đăng (video giới thiệu / review / hỏi đáp). Tần suất đề xuất cho TikTok + Shopee. 10 ý tưởng video không cần quay mới.</p>
+      </div>
+
+    </div>
+
+    <p class="disclaimer mt-24">
+      Toàn bộ template và script trong kit do ĐơnThật biên soạn để dùng được ngay trên thị trường VN.
+      Kết quả kinh doanh phụ thuộc vào nỗ lực, sản phẩm và điều kiện thị trường của từng cá nhân.
+    </p>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     ĐỊNH VỊ / SO SÁNH
+     ================================================================ -->
+<section id="position">
+  <div class="container">
+    <p class="section-label">Tại sao kit này</p>
+    <h2>Khóa học tốn nhiều tuần. Kit này tốn 4 giờ.</h2>
+
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Tiêu chí</th>
+            <th>Khóa học online phổ biến</th>
+            <th><span class="tag-kit">Kit này</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Giá</td>
+            <td>500k – 5 triệu+</td>
+            <td><strong>179.000đ</strong></td>
+          </tr>
+          <tr>
+            <td>Thời gian để dùng được</td>
+            <td>Nhiều tuần học</td>
+            <td><strong>4 giờ setup</strong></td>
+          </tr>
+          <tr>
+            <td>Định dạng</td>
+            <td>Video bài giảng dài</td>
+            <td><strong>Template điền-sẵn — làm ngay</strong></td>
+          </tr>
+          <tr>
+            <td>Phù hợp ai</td>
+            <td>Nhà bán muốn scale, có sẵn kinh nghiệm</td>
+            <td><strong>Nhà bán mới, chưa có đơn đầu</strong></td>
+          </tr>
+          <tr>
+            <td>Sàn được cover</td>
+            <td>Thường 1 sàn</td>
+            <td><strong>TikTok Shop VN + Shopee VN</strong></td>
+          </tr>
+          <tr>
+            <td>Phải học trước không</td>
+            <td>Có — xem hết mới làm được</td>
+            <td><strong>Không — điền vào là xong</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="disclaimer mt-16">
+      So sánh mang tính tham khảo, dựa trên đặc điểm định dạng sản phẩm — không phải đánh giá chất lượng từng khóa học cụ thể.
+    </p>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     BẢNG GIÁ
+     ================================================================ -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label text-center">Giá</p>
+    <h2 class="text-center">Đơn giản — 1 lần, dùng mãi</h2>
+
+    <div class="pricing-box">
+      <p style="color:var(--gray);font-size:0.85rem;">Kit Lên Đơn Đầu Tiên</p>
+      <p class="price-big">179.000đ</p>
+      <p class="price-note">Thanh toán 1 lần · Giao file ngay qua email</p>
+
+      <ul class="pricing-list">
+        <li>Phần 1 — Checklist Khởi Động Shop (PDF)</li>
+        <li>Phần 2 — Bộ Template Listing Sản Phẩm (PDF + Google Sheets)</li>
+        <li>Phần 3 — Bộ Script Video Bán Hàng TikTok (PDF + Word)</li>
+        <li>Phần 4 — Checklist Chốt Đơn &amp; Tránh Hoàn Hàng (PDF + Sheets)</li>
+        <li>Tặng kèm — Lịch Content 30 Ngày Đầu (PDF)</li>
+        <li>Template cho cả TikTok Shop VN &amp; Shopee VN</li>
+        <li>Dùng được ngay — không cần phần mềm đặc biệt</li>
+      </ul>
+
+      <!-- [CẦN]: Thay [CHECKOUT_URL] bằng URL thanh toán thật -->
+      <a href="[CHECKOUT_URL]" class="btn-cta"
+         onclick="trackPurchaseClick()"
+         id="cta-pricing">
+        Mua Ngay — 179.000đ
+        <span class="btn-cta-sub">Thanh toán an toàn qua PayOS / Sepay</span>
+      </a>
+
+      <!-- [CẦN CEO xác minh]: Có chính sách refund không? Điều khoản cụ thể? Xem 7.2a-chinh-sach-refund.md -->
+      <p class="refund-note">
+        Mọi thắc mắc sau mua, liên hệ donthat.support@gmail.com.
+        <!-- Nếu có chính sách refund: "Hoàn tiền trong X ngày nếu không hài lòng — xem điều khoản tại [URL]" -->
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     FORM OPT-IN (Thu email + Zalo)
+     Nhúng form từ email tool hoặc dùng form HTML dưới đây
+     ================================================================ -->
+<section id="optin">
+  <div class="container">
+    <p class="section-label text-center">Nhận tài liệu miễn phí</p>
+    <h2 class="text-center" style="margin-bottom:8px;">Chưa sẵn sàng mua ngay?</h2>
+    <p class="text-center" style="color:#555;margin-bottom:28px;font-size:0.95rem;">
+      Để lại email — nhận ngay 1 mẫu caption bán hàng TikTok miễn phí + bản tin hữu ích cho nhà bán mới.
+    </p>
+
+    <!-- [CẦN]: Thay form này bằng embed code từ email tool (Mailchimp / MailerLite / Brevo)
+               SAU KHI có tài khoản email tool. Form dưới đây là placeholder HTML.
+               Xem 3.1a-form-optin-spec.md để biết cấu hình chi tiết. -->
+    <div class="form-card">
+      <h2 style="font-size:1.1rem;">Nhận template miễn phí</h2>
+      <p class="form-desc">Không spam. Hủy đăng ký bất kỳ lúc nào.</p>
+
+      <!-- [CẦN EMAIL TOOL]: Thay action="#" bằng endpoint từ email tool của bạn -->
+      <form id="optin-form" action="#" method="POST" onsubmit="return handleOptinSubmit(event)">
+
+        <div class="form-group">
+          <label for="f-name">Tên bạn *</label>
+          <input type="text" id="f-name" name="name" placeholder="Ví dụ: Minh Anh" required maxlength="60" autocomplete="given-name"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-email">Email *</label>
+          <input type="email" id="f-email" name="email" placeholder="email@cua-ban.com" required autocomplete="email"/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-phone">
+            Số điện thoại / Zalo
+            <span class="optional">(không bắt buộc — để nhận thêm qua Zalo)</span>
+          </label>
+          <input type="tel" id="f-phone" name="phone" placeholder="09xxxxxxxx" minlength="10" maxlength="11" autocomplete="tel" inputmode="numeric"/>
+        </div>
+
+        <!-- CONSENT NĐ 13/2023 — KHÔNG được tích sẵn, KHÔNG submit được nếu chưa tích -->
+        <div class="consent-block">
+          <label class="consent-label">
+            <input type="checkbox" id="f-consent" name="consent" required/>
+            <span class="consent-text">
+              Tôi đồng ý cho <strong>ĐơnThật</strong> thu thập và xử lý thông tin cá nhân của tôi
+              (tên, email, số điện thoại) để gửi tài liệu miễn phí, bản tin hữu ích
+              và thông tin sản phẩm. Tôi có thể rút đồng ý và hủy đăng ký bất kỳ lúc nào.
+              <!-- [CẦN]: Thay chinh-sach-rieng-tu.html bằng URL trang Privacy Policy thật (9.2a) -->
+              Xem <a href="chinh-sach-rieng-tu.html" target="_blank" rel="noopener">Chính sách Quyền riêng tư</a>.
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-optin-submit">
+          Nhận Template Miễn Phí Ngay
+        </button>
+
+        <p class="form-privacy">
+          Thông tin của bạn được bảo mật.
+          Xem <a href="chinh-sach-rieng-tu.html" target="_blank" rel="noopener">Chính sách Quyền riêng tư</a>.
+          <!-- Consent version: v1.0-2026-07-01 — cập nhật khi đổi text consent -->
+        </p>
+      </form>
+
+      <!-- Thông báo thành công (ẩn mặc định) -->
+      <div id="optin-success" style="display:none;text-align:center;padding:20px 0;">
+        <p style="font-size:1.1rem;font-weight:700;color:var(--green);">Đã gửi! Kiểm email của bạn.</p>
+        <p style="font-size:0.88rem;color:#555;margin-top:8px;">
+          Kiểm tra hộp thư (kể cả thư mục Spam) — bạn sẽ nhận email trong vài phút.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     FAQ
+     ================================================================ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label">Câu hỏi thường gặp</p>
+    <h2>Giải đáp nhanh</h2>
+
+    <ul class="faq-list">
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Kit này phù hợp với ai?
+        </button>
+        <div class="faq-a">
+          Phù hợp với người mới mở shop TikTok Shop hoặc Shopee (dưới 6 tháng), chưa có đơn đầu tiên hoặc mới có rất ít đơn. Không cần kinh nghiệm bán hàng online trước đó.
+          Nếu bạn đã có shop chạy tốt và đang muốn scale, kit này có thể không phải thứ bạn cần.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Tôi nhận được gì sau khi mua?
+        </button>
+        <div class="faq-a">
+          Bạn nhận email giao hàng trong vài phút sau thanh toán — email chứa link tải 5 file:
+          Checklist Khởi Động, Template Listing (PDF + Google Sheets), Script Video (PDF + Word),
+          Checklist Chốt Đơn (PDF + Sheets), và Lịch Content 30 Ngày (PDF).
+          Lưu về thiết bị để dùng bất cứ lúc nào.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Dùng kit này tôi có thể có đơn không?
+        </button>
+        <div class="faq-a">
+          Kit cung cấp công cụ để tạo listing chuẩn và video bán hàng — bước kỹ thuật mà phần lớn nhà bán mới đang làm sai.
+          Nhiều nhà bán mới cho biết đã có đơn đầu tiên trong tuần đầu sau khi áp dụng.
+          Tuy nhiên, kết quả kinh doanh phụ thuộc vào nỗ lực, chất lượng sản phẩm và điều kiện thị trường của từng cá nhân —
+          chúng tôi không cam kết kết quả cụ thể.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Kit này cho Shopee hay TikTok Shop?
+        </button>
+        <div class="faq-a">
+          Cả hai. Bộ template listing được thiết kế chuẩn Shopee VN. Script video được thiết kế cho TikTok Shop VN.
+          Bạn có thể dùng cả 2 cùng lúc hoặc chỉ dùng phần phù hợp với sàn bạn đang tập trung.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Tôi cần cài phần mềm gì không?
+        </button>
+        <div class="faq-a">
+          Không cần phần mềm đặc biệt. File PDF mở trên điện thoại hoặc máy tính đều được.
+          Google Sheets mở trực tiếp trong trình duyệt. File Word dùng Google Docs (miễn phí) hoặc Microsoft Word.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Thanh toán bằng gì?
+        </button>
+        <div class="faq-a">
+          <!-- [CẦN]: Cập nhật theo cổng thanh toán thật sau khi đăng ký (PayOS / Sepay / Gumroad) -->
+          Thanh toán qua [CẦN: điền tên cổng thanh toán sau khi đăng ký] — chuyển khoản ngân hàng hoặc ví điện tử.
+          Giao dịch an toàn, mã hóa. Có vấn đề thanh toán, liên hệ donthat.support@gmail.com.
+        </div>
+      </li>
+
+      <li class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          Tôi có thể dùng kit cho ngành nào?
+        </button>
+        <div class="faq-a">
+          Template listing có ví dụ mẫu cho 5 ngành phổ biến: thời trang, đồ gia dụng, mỹ phẩm, phụ kiện, thực phẩm.
+          Bạn điền thông tin sản phẩm cụ thể của mình vào chỗ trống — phù hợp với hầu hết ngành hàng tiêu dùng.
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<hr class="sep"/>
+
+<!-- ================================================================
+     FINAL CTA
+     ================================================================ -->
+<section id="final-cta">
+  <div class="container">
+    <h2>Bắt đầu ngay hôm nay</h2>
+    <p class="subhead">
+      Kit thực-chiến giúp nhà bán mới TikTok Shop &amp; Shopee có listing chuẩn và video bán hàng đầu tiên trong 4 giờ — dưới 200k, không cần học trước.
+    </p>
+    <!-- [CẦN]: Thay [CHECKOUT_URL] -->
+    <a href="[CHECKOUT_URL]" class="btn-cta"
+       onclick="trackPurchaseClick()"
+       id="cta-final">
+      Mua Kit — 179.000đ
+      <span class="btn-cta-sub">Giao file ngay sau thanh toán</span>
+    </a>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <p>
+    &copy; 2026 <strong>ĐơnThật</strong>.
+    <!-- [CẦN]: Thay chinh-sach-rieng-tu.html -->
+    <a href="chinh-sach-rieng-tu.html" target="_blank" rel="noopener">Chính sách Quyền riêng tư</a> ·
+    <!-- [CẦN]: Tạo trang điều khoản sử dụng nếu cần -->
+    <a href="dieu-khoan-su-dung.html" target="_blank" rel="noopener">Điều khoản Sử dụng</a>
+  </p>
+  <p style="margin-top:8px;">
+    <!-- [CẦN]: Thay [DOMAIN] -->
+    [DOMAIN] · Liên hệ: donthat.support@gmail.com
+  </p>
+  <p style="margin-top:8px;font-size:0.75rem;color:#666;">
+    Kết quả kinh doanh phụ thuộc vào nỗ lực, sản phẩm và điều kiện thị trường của từng cá nhân.
+    Thông tin trên trang này không phải tư vấn tài chính hay cam kết thu nhập.
+  </p>
+</footer>
+
+<!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
+<script>
+  /* ---- FAQ toggle ---- */
+  function toggleFaq(btn) {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    // Đóng tất cả
+    document.querySelectorAll('.faq-q').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+    // Mở cái được click nếu trước đó đóng
+    if (!expanded) btn.setAttribute('aria-expanded', 'true');
+  }
+
+  /* ---- Opt-in form submit (placeholder — kết nối email tool sau) ---- */
+  function handleOptinSubmit(e) {
+    e.preventDefault();
+    var consent = document.getElementById('f-consent');
+    if (!consent.checked) {
+      alert('Vui lòng tích vào ô đồng ý trước khi đăng ký.');
+      return false;
+    }
+    /* [CẦN EMAIL TOOL]: Thay đoạn dưới bằng fetch() đến endpoint email tool của bạn.
+       Ví dụ MailerLite:
+       fetch('https://assets.mailerlite.com/jsonp/...', { method:'POST', body: new FormData(e.target) })
+    */
+    // Placeholder thành công:
+    document.getElementById('optin-form').style.display = 'none';
+    document.getElementById('optin-success').style.display = 'block';
+
+    /* Bắn event Lead lên pixel (sau khi có pixel thật) */
+    if (typeof fbq !== 'undefined') fbq('track','Lead');
+    if (typeof ttq !== 'undefined') ttq.track('SubmitForm');
+    return false;
+  }
+
+  /* ---- CTA click tracking ---- */
+  function trackPurchaseClick() {
+    /* [CẦN PIXEL]: Bắn event khi click nút mua — trước khi pixel thật live thì comment out */
+    if (typeof fbq !== 'undefined') fbq('track','InitiateCheckout');
+    // if (typeof ttq !== 'undefined') ttq.track('InitiateCheckout');
+  }
+
+  /* ---- ViewContent event khi trang load xong ---- */
+  window.addEventListener('load', function() {
+    if (typeof fbq !== 'undefined') fbq('track','ViewContent', {content_name:'Kit Len Don Dau Tien', value:179000, currency:'VND'});
+    // if (typeof ttq !== 'undefined') ttq.track('ViewContent');
+  });
+</script>
+
+<!-- ===== DonThat · Checkout VietQR (SePay) — chen tu dong, dung sua tay ===== -->
+<div id="dt-checkout" aria-hidden="true">
+  <div class="dt-co-backdrop" data-dt-close></div>
+  <div class="dt-co-card" role="dialog" aria-modal="true" aria-labelledby="dt-co-title">
+    <button class="dt-co-x" data-dt-close aria-label="Đóng">&times;</button>
+
+    <div class="dt-co-step" data-step="pay">
+      <div class="dt-co-eyebrow">Thanh toán 1 lần &middot; giao ngay sau khi chuyển khoản</div>
+      <h3 id="dt-co-title">Quét mã để thanh toán <b>179.000đ</b></h3>
+
+      <div class="dt-co-grid">
+        <div class="dt-co-qr">
+          <img id="dt-co-qrimg" alt="Mã VietQR thanh toán ĐơnThật" width="220" height="220"/>
+          <div class="dt-co-qrhint">Mở app ngân hàng &rarr; quét mã &rarr; <b>giữ nguyên nội dung</b></div>
+        </div>
+        <div class="dt-co-manual">
+          <div class="dt-co-row"><span>Ngân hàng</span><b>VietinBank</b></div>
+          <div class="dt-co-row"><span>Số tài khoản</span><b class="dt-co-copy" data-copy="81908666">81908666 <i>sao chép</i></b></div>
+          <div class="dt-co-row"><span>Chủ tài khoản</span><b>DO XUAN DINH</b></div>
+          <div class="dt-co-row"><span>Số tiền</span><b>179.000đ</b></div>
+          <div class="dt-co-row"><span>Nội dung <em>(bắt buộc đúng)</em></span><b class="dt-co-copy" id="dt-co-code" data-copy="">&mdash;</b></div>
+        </div>
+      </div>
+
+      <div class="dt-co-status" id="dt-co-status">
+        <span class="dt-co-spin"></span> Đang chờ bạn chuyển khoản… trang sẽ tự mở link tải khi nhận được tiền.
+      </div>
+      <button class="dt-co-check" id="dt-co-check">Tôi đã chuyển khoản &mdash; kiểm tra ngay</button>
+      <div class="dt-co-fine">Đúng <b>số tiền</b> và <b>nội dung</b> ở trên thì hệ thống tự đối soát. Giữ tab này mở.</div>
+    </div>
+
+    <div class="dt-co-step" data-step="done" hidden>
+      <div class="dt-co-check-badge">&check;</div>
+      <h3>Đã nhận thanh toán &mdash; cảm ơn bạn!</h3>
+      <p class="dt-co-doneinfo">Mã đơn: <b id="dt-co-doneref">&mdash;</b></p>
+      <a id="dt-co-download" class="dt-co-dl" href="#" download>Tải Kit “Lên đơn” ngay</a>
+      <div class="dt-co-fine">Link cũng đã sẵn ở đây &mdash; lưu lại phòng khi cần tải lại.</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #dt-checkout{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  #dt-checkout.dt-open{display:flex}
+  .dt-co-backdrop{position:absolute;inset:0;background:rgba(12,20,15,.62)}
+  .dt-co-card{position:relative;background:#fff;color:#12201b;width:min(560px,92vw);max-height:92vh;overflow:auto;border-radius:20px;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  .dt-co-x{position:absolute;top:12px;right:14px;border:0;background:transparent;font-size:26px;line-height:1;color:#8a978f;cursor:pointer}
+  .dt-co-eyebrow{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:#0e8e63;font-weight:700}
+  .dt-co-card h3{margin:.35em 0 .7em;font-size:1.3rem;line-height:1.25}
+  .dt-co-card h3 b{color:#0e8e63}
+  .dt-co-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+  .dt-co-qr{flex:0 0 auto;text-align:center}
+  .dt-co-qr img{border:1px solid #e4e9e2;border-radius:14px;background:#fff;width:220px;height:220px;object-fit:contain}
+  .dt-co-qrhint{font-size:.76rem;color:#5c6b63;margin-top:8px;max-width:220px}
+  .dt-co-manual{flex:1 1 200px;display:grid;gap:9px;min-width:200px}
+  .dt-co-row{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;border-bottom:1px dashed #e4e9e2;padding-bottom:7px}
+  .dt-co-row span{color:#5c6b63}
+  .dt-co-row span em{color:#c0392b;font-style:normal}
+  .dt-co-row b{text-align:right}
+  .dt-co-row b i{font-style:normal;font-size:.7rem;color:#0e8e63;font-weight:600}
+  .dt-co-copy{cursor:pointer}
+  .dt-co-status{margin:18px 0 12px;font-size:.9rem;color:#12201b;background:#f0faf5;border:1px solid #cfeadd;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:9px}
+  .dt-co-spin{width:15px;height:15px;border:2px solid #bfeada;border-top-color:#0e8e63;border-radius:50%;display:inline-block;animation:dtspin 1s linear infinite;flex:none}
+  @keyframes dtspin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.dt-co-spin{animation:none}}
+  .dt-co-check{width:100%;background:#0e8e63;color:#fff;border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer}
+  .dt-co-check:hover{background:#0b7452}
+  .dt-co-fine{font-size:.76rem;color:#7a887f;margin-top:10px;text-align:center}
+  .dt-co-check-badge{width:56px;height:56px;border-radius:50%;background:#0e8e63;color:#fff;font-size:30px;display:grid;place-items:center;margin:4px auto 10px}
+  .dt-co-step[data-step="done"]{text-align:center}
+  .dt-co-dl{display:inline-block;margin-top:6px;background:#f5a524;color:#12201b;font-weight:800;text-decoration:none;padding:14px 22px;border-radius:12px}
+  .dt-co-dl:hover{filter:brightness(.96)}
+</style>
+
+<script>
+(function(){
+  var CFG = { bank:"VietinBank", acc:"81908666", holder:"DO XUAN DINH", amount:179000, statusApi:"/api/order-status" };
+  var el = document.getElementById("dt-checkout");
+  if(!el) return;
+  var codeEl = document.getElementById("dt-co-code");
+  var qrEl = document.getElementById("dt-co-qrimg");
+  var statusEl = document.getElementById("dt-co-status");
+  var checkBtn = document.getElementById("dt-co-check");
+  var stepPay = el.querySelector('[data-step="pay"]');
+  var stepDone = el.querySelector('[data-step="done"]');
+  var pollTimer = null, tries = 0, currentCode = null;
+
+  function genCode(){ return "DT" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,5).toUpperCase(); }
+  // VietinBank + SePay: noi dung BAT BUOC bat dau bang "SEVQR" thi SePay moi nhan bien dong so du.
+  function payContent(code){ return "SEVQR " + code; }
+  function qrUrl(code){ return "https://qr.sepay.vn/img?acc="+encodeURIComponent(CFG.acc)+"&bank="+encodeURIComponent(CFG.bank)+"&amount="+CFG.amount+"&des="+encodeURIComponent(payContent(code)); }
+
+  function open(){
+    currentCode = genCode(); tries = 0;
+    var content = payContent(currentCode);
+    codeEl.setAttribute("data-copy", content);
+    codeEl.textContent = content;
+    qrEl.src = qrUrl(currentCode);
+    stepDone.hidden = true; stepPay.hidden = false;
+    statusEl.innerHTML = '<span class="dt-co-spin"></span> Đang chờ bạn chuyển khoản… trang sẽ tự mở link tải khi nhận được tiền.';
+    el.classList.add("dt-open"); el.setAttribute("aria-hidden","false");
+    startPoll();
+  }
+  function close(){ el.classList.remove("dt-open"); el.setAttribute("aria-hidden","true"); stopPoll(); }
+  function startPoll(){ stopPoll(); pollTimer = setInterval(check, 5000); }
+  function stopPoll(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=null; } }
+
+  function check(){
+    if(!currentCode) return;
+    tries++;
+    if(tries > 72){ stopPoll(); statusEl.innerHTML = "Chưa thấy giao dịch. Nếu đã chuyển, đợi 1–2 phút rồi bấm “kiểm tra ngay”."; return; }
+    fetch(CFG.statusApi + "?code=" + encodeURIComponent(currentCode) + "&amount=" + CFG.amount, {cache:"no-store"})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.paid){
+          stopPoll();
+          document.getElementById("dt-co-doneref").textContent = d.ref || currentCode;
+          document.getElementById("dt-co-download").href = d.download || "#";
+          stepPay.hidden = true; stepDone.hidden = false;
+          if(typeof fbq!=='undefined') fbq('track','Purchase',{value:CFG.amount,currency:'VND'});
+        }
+      })
+      .catch(function(){});
+  }
+
+  el.addEventListener("click", function(e){
+    var c = e.target.closest(".dt-co-copy");
+    if(c){
+      var v = c.getAttribute("data-copy") || "";
+      if(navigator.clipboard) navigator.clipboard.writeText(v);
+      var b = c.querySelector("i"); var old = b ? b.textContent : null;
+      if(b){ b.textContent = "đã chép"; setTimeout(function(){ b.textContent = old; }, 1200); }
+    }
+    if(e.target.closest("[data-dt-close]")) close();
+  });
+  checkBtn.addEventListener("click", check);
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") close(); });
+
+  function wire(){
+    document.querySelectorAll('a.btn-cta, a[href="[CHECKOUT_URL]"]').forEach(function(a){
+      a.addEventListener("click", function(ev){ ev.preventDefault(); open(); });
+    });
+  }
+  if(document.readyState !== "loading") wire(); else document.addEventListener("DOMContentLoaded", wire);
+})();
+</script>
+<!-- ===== het module checkout ===== -->
+
+</body>
+</html>

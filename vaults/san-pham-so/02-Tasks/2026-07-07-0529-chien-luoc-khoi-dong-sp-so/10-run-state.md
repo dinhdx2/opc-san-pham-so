@@ -55,7 +55,8 @@
 | 3-02c | Thiết-kế + render ảnh bìa fanpage (1640×624 chuẩn FB, brand tối+cam) | AI | file | — | none | — | DONE | anh-bia-fanpage-donthat.png |
 | 3-03c | Thiết-kế 5 ảnh bài đăng seed + avatar/cover/logo (render Chromium, đồng-bộ brand) | AI | file | — | none | — | DONE | post1-gioi-thieu-kit.png |
 | 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |
-| 3-04 | Điền placeholder + up 3 trang pháp-lý + vá Purchase event + kiểm SEPAY_API_TOKEN | Human | — | founder | NEED-APPROVAL | 3-01 | HUMAN | — |
+| 3-03d | Ghép Pixel THẬT (1039882955245470) + Purchase/ViewContent/InitiateCheckout + điền pháp-lý/email vào 2 bản landing (A=bản gốc có thanh-toán · B=thiết-kế Stitch + ghép module thanh-toán) — deploy-ready | AI | file | Pixel ID | none | 3-03b | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/donthat-A-goc-final.zip · donthat-B-stitch-final.zip · landing-A-goc-index.html · landing-B-stitch-index.html |
+| 3-04 | Deploy 1 bản (A hoặc B) + set SEPAY_API_TOKEN trên Vercel + kiểm Pixel bằng Meta Pixel Helper | Human | — | founder | NEED-APPROVAL | 3-03d | HUMAN | — |
 | 3-04b | Tạo fanpage + Business Suite + Ad Account + gắn Pixel + thẻ (founder tự làm) | Human | — | founder | NEED-APPROVAL | 3-03b | HUMAN | — |
 | 3-05 | Test 1 giao-dịch thật 179k end-to-end (chi tiền thật) | Human | — | founder | NEED-APPROVAL | 3-04 | HUMAN | — |
 | 3-06 | Chạy ads test Tranche 1 (~1.5–2.5tr) + đọc CAC vs 179k | Human | — | founder | NEED-APPROVAL | 3-05 | HUMAN | — |

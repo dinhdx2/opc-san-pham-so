@@ -53,6 +53,7 @@
 | 3-02 | Soạn checklist go-live (pixel/email/domain, vá Purchase event, test) | AI | file | — | none | — | DONE | 10-thuc-thi-checklist-go-live.md |
 | 3-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
 | 3-02c | Thiết-kế + render ảnh bìa fanpage (1640×624 chuẩn FB, brand tối+cam) | AI | file | — | none | — | DONE | anh-bia-fanpage-donthat.png |
+| 3-03c | Thiết-kế 5 ảnh bài đăng seed + avatar/cover/logo (render Chromium, đồng-bộ brand) | AI | file | — | none | — | DONE | post1-gioi-thieu-kit.png |
 | 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |
 | 3-04 | Điền placeholder + up 3 trang pháp-lý + vá Purchase event + kiểm SEPAY_API_TOKEN | Human | — | founder | NEED-APPROVAL | 3-01 | HUMAN | — |
 | 3-04b | Tạo fanpage + Business Suite + Ad Account + gắn Pixel + thẻ (founder tự làm) | Human | — | founder | NEED-APPROVAL | 3-03b | HUMAN | — |

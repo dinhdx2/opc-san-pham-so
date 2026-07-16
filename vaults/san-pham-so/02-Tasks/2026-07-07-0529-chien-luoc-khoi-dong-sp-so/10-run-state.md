@@ -54,6 +54,8 @@
 | 3-03 | Soạn kế-hoạch ads launch kỷ-luật (Meta trước, ngân-sách + ngưỡng) | AI | file | — | none | — | DONE | 10-thuc-thi-ads-launch-plan.md |
 | 3-03f | Soạn tài-liệu hướng-dẫn quy-trình + công-cụ AI cho video quảng-cáo (pipeline 2 vòng · tool stack · 6 bước · 3 kịch-bản mẫu · 10 hook · guardrails luật/policy) | AI | file | — | none | — | DONE | 10-thuc-thi-video-ads-ai.md |
 | 3-03g | Soạn cẩm-nang video 100% AI né-lộ-AI (doctrine né mặt-người + thời-lượng tối-ưu + 4 concept đầy-đủ shot-list từng-giây + prompt tạo video/mascot/nhạc + tool 2026 tốt-rẻ) | AI | file | — | none | 3-03f | DONE | 10-thuc-thi-video-ai-100-kich-ban.md |
+| 3-03h | Thiết-kế + render mascot thương-hiệu "Bé Túi" (túi-cam có tick, vector→PNG 1080) | AI | file | — | none | — | DONE | 03-Outputs/chien-luoc-khoi-dong-sp-so/mascot-donthat.png |
+| 3-03i | Soạn kit tạo video Concept #1 ready-to-generate (8 hook · VO từng câu · nguồn/prompt từng cảnh · giọng/nhạc/SFX · bước CapCut) + prompt nâng mascot 3D/động | AI | file | — | none | 3-03g | DONE | 10-thuc-thi-video-kit-va-mascot.md |
 | 3-02c | Thiết-kế + render ảnh bìa fanpage (1640×624 chuẩn FB, brand tối+cam) | AI | file | — | none | — | DONE | anh-bia-fanpage-donthat.png |
 | 3-03c | Thiết-kế 5 ảnh bài đăng seed + avatar/cover/logo (render Chromium, đồng-bộ brand) | AI | file | — | none | — | DONE | post1-gioi-thieu-kit.png |
 | 3-03b | Soạn hướng-dẫn tạo fanpage + Business Suite + nội-dung sẵn + 5 bài seed | AI | file | — | none | — | DONE | 10-thuc-thi-tao-fanpage.md |

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1080px;overflow:hidden;}
+  body{display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(700px 700px at 50% 42%,#fff 0%,#fff4ef 70%,#ffe9df 100%);}
+  svg{width:940px;height:940px;}
+</style></head>
+<body>
+<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bag" x1="200" y1="118" x2="200" y2="348" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff6a2b"/>
+      <stop offset="1" stop-color="#e8450a"/>
+    </linearGradient>
+    <linearGradient id="arm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6a2b"/><stop offset="1" stop-color="#ee4d10"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffb38a" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#ffb38a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- shadow -->
+  <ellipse cx="200" cy="360" rx="118" ry="20" fill="#e8450a" opacity=".16"/>
+
+  <!-- LEFT arm (waving up) -->
+  <g>
+    <path d="M114 205 L70 150" stroke="url(#arm)" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="68" cy="147" r="20" fill="#ff7a3d"/>
+  </g>
+  <!-- RIGHT arm (down) -->
+  <g>
+    <path d="M288 224 L332 280" stroke="url(#arm)" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="334" cy="282" r="20" fill="#ff7a3d"/>
+  </g>
+
+  <!-- handles -->
+  <path d="M138 130 C138 84 186 84 190 122" stroke="#d63e08" stroke-width="13" stroke-linecap="round"/>
+  <path d="M262 130 C262 84 214 84 210 122" stroke="#d63e08" stroke-width="13" stroke-linecap="round"/>
+
+  <!-- bag body -->
+  <path d="M104 122 h192 a16 16 0 0 1 15.8 18.6 l-20 186 a26 26 0 0 1 -25.8 22.4 H134 a26 26 0 0 1 -25.8 -22.4 l-20 -186 A16 16 0 0 1 104 122 Z" fill="url(#bag)"/>
+  <!-- top rim highlight -->
+  <path d="M104 122 h192 a16 16 0 0 1 15.8 18.6 l-1.6 15 H89.8 l-1.6 -15 A16 16 0 0 1 104 122 Z" fill="#ff8551" opacity=".55"/>
+
+  <!-- cheeks -->
+  <circle cx="150" cy="238" r="26" fill="url(#cheek)"/>
+  <circle cx="250" cy="238" r="26" fill="url(#cheek)"/>
+
+  <!-- eyes -->
+  <g>
+    <circle cx="166" cy="212" r="27" fill="#fff"/>
+    <circle cx="234" cy="212" r="27" fill="#fff"/>
+    <circle cx="172" cy="216" r="12.5" fill="#241a12"/>
+    <circle cx="240" cy="216" r="12.5" fill="#241a12"/>
+    <circle cx="176" cy="211" r="4.2" fill="#fff"/>
+    <circle cx="244" cy="211" r="4.2" fill="#fff"/>
+  </g>
+
+  <!-- smile -->
+  <path d="M170 258 q30 30 60 0" stroke="#241a12" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+  <!-- tick badge (brand mark) -->
+  <g transform="translate(200 312)">
+    <circle r="30" fill="#fff"/>
+    <path d="M-13 1 l9 10 18 -20" stroke="#ff4d00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
+</body></html>
